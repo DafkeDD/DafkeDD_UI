@@ -32,6 +32,11 @@ function maakRepo(versie: string) {
   );
   packages["node_modules/react"] = { version: "19.0.0" };
   writeFileSync(join(dir, "package-lock.json"), JSON.stringify({ version: versie, packages }, null, 2) + "\n");
+  mkdirSync(join(dir, "registry"));
+  writeFileSync(
+    join(dir, "registry/index.json"),
+    JSON.stringify({ name: "dafke-ui", version: versie, components: [{ name: "button" }] }, null, 2) + "\n"
+  );
   return dir;
 }
 const lees = (dir: string, pad: string) => JSON.parse(readFileSync(join(dir, pad), "utf8"));
@@ -51,6 +56,9 @@ describe("bump-version", () => {
     expect(lock.version).toBe(verwacht);
     expect(lock.packages["packages/cli"].version).toBe(verwacht);
     expect(lock.packages["node_modules/react"].version).toBe("19.0.0"); // dependencies blijven ongemoeid
+    const registry = lees(dir, "registry/index.json");
+    expect(registry.version).toBe(verwacht); // anders faalt de registry-check in CI
+    expect(registry.components).toEqual([{ name: "button" }]);
   });
 
   it("weigert een ongeldig argument", () => {

@@ -5,7 +5,7 @@
  * Daarna: committen op developer en mergen naar main → de release-workflow
  * maakt automatisch release vX.Y.Z.
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const files = ["package.json", "packages/ui/package.json", "packages/cli/package.json", "apps/docs/package.json"];
 const arg = process.argv[2];
@@ -35,4 +35,12 @@ for (const key of ["", "packages/ui", "packages/cli", "apps/docs"]) {
   if (lock.packages?.[key]) lock.packages[key].version = next;
 }
 writeFileSync("package-lock.json", JSON.stringify(lock, null, 2) + "\n");
+
+// De registry draagt de versie ook (scripts/build-registry.mjs leest ze uit
+// packages/ui/package.json). Meteen meenemen, anders faalt de registry-check in CI.
+if (existsSync("registry/index.json")) {
+  const registry = JSON.parse(readFileSync("registry/index.json", "utf8"));
+  registry.version = next;
+  writeFileSync("registry/index.json", JSON.stringify(registry, null, 2) + "\n");
+}
 console.log(`Versie ${root.version} → ${next}`);
