@@ -70,7 +70,7 @@ jobs:
           TAG=${{ steps.version.outputs.tag }}
           gh release create "$TAG" \
             --target "$GITHUB_SHA" \
-            --title "Dafke UI $TAG" \
+            --title "DafkeDD UI $TAG" \
             --generate-notes \
             dafke-ui-registry-$TAG.tar.gz \
             dafke-ui-*.tgz

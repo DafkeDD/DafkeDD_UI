@@ -1,4 +1,4 @@
-# CLAUDE.md — Dafke UI
+# CLAUDE.md — DafkeDD UI
 
 Instructies voor Claude (en andere AI-assistenten) die in deze repo werken.
 
@@ -15,10 +15,14 @@ Instructies voor Claude (en andere AI-assistenten) die in deze repo werken.
 ## Release maken
 
 1. Op `developer`: `npm run version:patch` (of `version:minor` / `version:major`).
-   Dit verhoogt de versie in alle package.json's + package-lock.json.
+   Dit verhoogt de versie in alle package.json's, package-lock.json en registry/index.json.
 2. `git commit -am "chore: release vX.Y.Z"` en `git push` (naar developer).
 3. Pull request `developer → main` openen en mergen (`gh pr create --base main --head developer --fill`).
 4. De workflow maakt tag `vX.Y.Z` + release. Bestaat de tag al, dan wordt er niets gereleased.
+5. Daarna `developer` gelijkzetten met `main` (fast-forward, geen extra merge-commit):
+   `git switch developer && git pull --ff-only origin main && git push`.
+   De GitHub-melding "main had recent pushes → Compare & pull request" negeren:
+   nooit een pull request `main → developer` openen.
 
 Maak nooit zelf tags of releases met de hand; dat doet de workflow.
 
@@ -68,3 +72,6 @@ en maakt geen release als er één faalt.
 - Nieuwe vertaalsleutels altijd in alle vier `apps/docs/messages/*.json`.
 - Regeleindes: LF (zie `.gitattributes`).
 - Taal van code-commentaar en docs: Nederlands.
+- De README bestaat in twee talen: `README.md` (Engels) en `README.nl.md` (Nederlands).
+  Pas ze altijd **allebei** aan, met dezelfde hoofdstukken; `tests/ui/structuur.test.ts` bewaakt dat.
+- Productnaam in teksten: **DafkeDD UI**. Packagenamen blijven `@dafke/ui` en `dafke-ui`.
