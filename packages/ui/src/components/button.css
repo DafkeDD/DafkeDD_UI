@@ -1,0 +1,89 @@
+/* ============================ Button ============================ */
+.lui-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: calc(40px * var(--density)); padding: 0 16px; border-radius: var(--r-sm);
+  font-size: var(--fs-base); font-weight: 600; letter-spacing: -0.01em;
+  border: 1px solid transparent; cursor: pointer; white-space: nowrap;
+  text-decoration: none;
+  transition: background var(--dur-fast), border-color var(--dur-fast),
+              color var(--dur-fast), box-shadow var(--dur-fast), transform .22s var(--ease-pop);
+  user-select: none;
+}
+.lui-btn:active:not(:disabled):not([aria-disabled="true"]) { transform: scale(.97); transition-duration: var(--dur-fast), var(--dur-fast), var(--dur-fast), var(--dur-fast), .06s; }
+.lui-btn:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-btn svg { width: 16px; height: 16px; flex: none; }
+.lui-btn:disabled, .lui-btn[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
+.lui-btn[data-loading] { cursor: progress; }
+
+.lui-btn-primary { background: var(--accent); color: var(--accent-fg); box-shadow: var(--sh-xs); }
+.lui-btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+.lui-btn-primary:active:not(:disabled) { background: var(--accent-active); }
+
+.lui-btn-secondary {
+  background: var(--surface); color: var(--text);
+  border-color: var(--border-strong); box-shadow: var(--sh-xs);
+}
+.lui-btn-secondary:hover:not(:disabled) { background: var(--surface-hover); border-color: var(--text-3); }
+
+.lui-btn-ghost { background: transparent; color: var(--text-2); }
+.lui-btn-ghost:hover:not(:disabled) { background: var(--surface-3); color: var(--text); }
+
+.lui-btn-danger { background: var(--red); color: var(--text-inv); }
+.lui-btn-danger:hover:not(:disabled) { filter: brightness(.94); }
+
+.lui-btn-danger-soft { background: var(--red-tint); color: var(--red); border-color: var(--red-border); }
+.lui-btn-danger-soft:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--red) 14%, transparent); border-color: var(--red);
+}
+
+.lui-btn-link {
+  background: transparent; color: var(--accent); height: auto; padding: 0;
+  text-underline-offset: 3px;
+}
+.lui-btn-link:hover:not(:disabled) { text-decoration: underline; }
+
+.lui-btn-lg { height: calc(46px * var(--density)); padding: 0 22px; font-size: var(--fs-md); border-radius: var(--r-md); }
+.lui-btn-lg svg { width: 18px; height: 18px; }
+.lui-btn-sm { height: calc(32px * var(--density)); padding: 0 11px; font-size: 13px; border-radius: var(--r-xs); }
+.lui-btn-sm svg { width: 15px; height: 15px; }
+
+.lui-btn-block { width: 100%; }
+.lui-btn-icon { width: calc(40px * var(--density)); padding: 0; }
+.lui-btn-icon.lui-btn-sm { width: calc(32px * var(--density)); }
+.lui-btn-icon.lui-btn-lg { width: calc(46px * var(--density)); }
+
+/* ---------- Button group ---------- */
+.lui-btn-group { display: inline-flex; gap: 8px; }
+.lui-btn-group-vertical { flex-direction: column; align-items: stretch; }
+.lui-btn-group-block { display: flex; width: 100%; }
+.lui-btn-group-block > * { flex: 1; }
+
+/* Aan elkaar: gedeelde randen, alleen de buitenhoeken rond. */
+.lui-btn-group-joined { gap: 0; }
+.lui-btn-group-joined.lui-btn-group-vertical > .lui-btn { border-radius: 0; margin-left: 0; margin-top: -1px; }
+.lui-btn-group-joined.lui-btn-group-vertical > .lui-btn:first-child {
+  border-radius: var(--r-sm) var(--r-sm) 0 0; margin-top: 0;
+}
+.lui-btn-group-joined.lui-btn-group-vertical > .lui-btn:last-child {
+  border-radius: 0 0 var(--r-sm) var(--r-sm);
+}
+/* Ook toggles mogen in de groep staan. */
+.lui-btn-group-joined > .lui-toggle { border-radius: 0; margin-left: -1px; border-color: var(--border); }
+.lui-btn-group-joined > .lui-toggle:first-child { border-radius: var(--r-sm) 0 0 var(--r-sm); margin-left: 0; }
+.lui-btn-group-joined > .lui-toggle:last-child { border-radius: 0 var(--r-sm) var(--r-sm) 0; }
+.lui-btn-group-joined > .lui-toggle:hover,
+.lui-btn-group-joined > .lui-toggle:focus-visible,
+.lui-btn-group-joined > .lui-toggle[data-state="on"] { position: relative; z-index: 1; }
+/* Horizontaal aan elkaar. Bewust gescoped op -joined: met joined={false} horen
+   de knoppen los te staan, dus met hun eigen ronde hoeken en zonder overlap. */
+.lui-btn-group-joined:not(.lui-btn-group-vertical) > .lui-btn {
+  border-radius: 0; margin-left: -1px;
+}
+.lui-btn-group-joined:not(.lui-btn-group-vertical) > .lui-btn:first-child {
+  border-radius: var(--r-sm) 0 0 var(--r-sm); margin-left: 0;
+}
+.lui-btn-group-joined:not(.lui-btn-group-vertical) > .lui-btn:last-child {
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+.lui-btn-group-joined > .lui-btn:only-child { border-radius: var(--r-sm); }
+.lui-btn-group > .lui-btn:hover, .lui-btn-group > .lui-btn:focus-visible { z-index: 1; }

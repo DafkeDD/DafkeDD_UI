@@ -1,0 +1,30 @@
+/* ============================ QrCode ============================ */
+.lui-qr {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.lui-qr svg { display: block; border-radius: var(--r-sm); }
+
+.lui-qr-bg { fill: #fff; }
+.lui-qr-fg { fill: #000; }
+
+.lui-qr-framed {
+  padding: 14px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  box-shadow: var(--sh-sm);
+}
+/* Een QR blijft zwart-wit, ook in donkere modus: scanners verwachten dat contrast. */
+.lui-qr-framed svg { background: #fff; }
+
+.lui-qr-caption {
+  font-size: 12.5px; color: var(--text-3); text-align: center;
+  max-width: 100%; overflow-wrap: anywhere;
+}
+
+.lui-qr-error {
+  display: grid; place-items: center;
+  border: 1px dashed var(--red-border); border-radius: var(--r-md);
+  background: var(--red-tint);
+}
+.lui-qr-error::after {
+  content: "!"; font-weight: 700; font-size: 20px; color: var(--red);
+}

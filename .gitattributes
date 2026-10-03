@@ -1,0 +1,20 @@
+# Regeleindes vastzetten op LF. Zonder dit checkt git op Windows met CRLF uit,
+# en dan raken de registry-JSON's (die de broncode letterlijk bevatten) uit de
+# pas met de bestanden op schijf — plus de eindeloze "LF will be replaced by
+# CRLF"-waarschuwingen bij elke `git add`.
+* text=auto eol=lf
+
+# Binair: nooit aanraken.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
+
+# Gegenereerd: houdt de diff van een release leesbaar.
+registry/** linguist-generated=true
+apps/docs/content/props.generated.json linguist-generated=true
+apps/docs/demos/index.ts linguist-generated=true

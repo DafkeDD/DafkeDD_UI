@@ -1,0 +1,19 @@
+/* ============================ RadarChart ============================ */
+.lui-radar { display: inline-flex; flex-direction: column; align-items: center; gap: 12px; }
+.lui-radar svg { display: block; overflow: visible; }
+
+.lui-radar-ring { fill: none; stroke: var(--border); stroke-width: 1; }
+.lui-radar-spoke { stroke: var(--border); stroke-width: 1; }
+.lui-radar-shape { fill-opacity: .16; stroke-width: 2; stroke-linejoin: round; }
+.lui-radar-shape-open { fill: none; }
+
+/* ---------- Mount: het web groeit vanuit het midden ---------- */
+.lui-radar-ring { animation: lui-overlay-in .4s var(--ease) both; }
+.lui-radar-series {
+  transform-box: view-box;
+  animation: lui-radar-grow .8s var(--ease-pop) both;
+  animation-delay: calc(var(--i, 0) * 140ms + 100ms);
+}
+@keyframes lui-radar-grow { from { transform: scale(0); opacity: 0; } to { transform: none; opacity: 1; } }
+.lui-radar-shape { transition: fill-opacity var(--dur); }
+.lui-radar-series:hover .lui-radar-shape { fill-opacity: .32; }

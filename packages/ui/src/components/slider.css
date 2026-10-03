@@ -1,0 +1,54 @@
+/* ============================ Slider ============================ */
+.lui-slider { --lui-slider-color: var(--accent); display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.lui-slider-green { --lui-slider-color: var(--green); }
+.lui-slider-amber { --lui-slider-color: var(--amber); }
+.lui-slider-red { --lui-slider-color: var(--red); }
+
+.lui-slider-value {
+  align-self: flex-end; font-size: var(--fs-sm); font-weight: 650;
+  color: var(--text); font-family: var(--mono);
+}
+
+.lui-slider-input {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 20px; background: transparent; cursor: pointer; margin: 0;
+}
+.lui-slider-input:focus { outline: none; }
+
+.lui-slider-input::-webkit-slider-runnable-track {
+  height: 6px; border-radius: var(--r-full);
+  background: linear-gradient(
+    to right,
+    var(--lui-slider-color) 0 var(--lui-slider-fill),
+    var(--surface-3) var(--lui-slider-fill) 100%
+  );
+  border: 1px solid var(--border);
+}
+.lui-slider-input::-moz-range-track {
+  height: 6px; border-radius: var(--r-full);
+  background: linear-gradient(
+    to right,
+    var(--lui-slider-color) 0 var(--lui-slider-fill),
+    var(--surface-3) var(--lui-slider-fill) 100%
+  );
+  border: 1px solid var(--border);
+}
+
+.lui-slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 18px; height: 18px; margin-top: -7px;
+  border-radius: var(--r-full); background: var(--surface);
+  border: 2px solid var(--lui-slider-color); box-shadow: var(--sh-sm);
+  transition: box-shadow var(--dur-fast), transform var(--dur-fast);
+}
+.lui-slider-input::-moz-range-thumb {
+  width: 18px; height: 18px; border-radius: var(--r-full);
+  background: var(--surface); border: 2px solid var(--lui-slider-color);
+  box-shadow: var(--sh-sm);
+}
+.lui-slider-input:hover::-webkit-slider-thumb { transform: scale(1.08); }
+.lui-slider-input:focus-visible::-webkit-slider-thumb { box-shadow: var(--ring); }
+.lui-slider-input:focus-visible::-moz-range-thumb { box-shadow: var(--ring); }
+
+.lui-slider-disabled { opacity: .55; }
+.lui-slider-disabled .lui-slider-input { cursor: not-allowed; }

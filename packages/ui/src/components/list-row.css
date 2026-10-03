@@ -1,0 +1,78 @@
+/* ============================ RowList / ListRow ============================ */
+.lui-rowlist { display: flex; flex-direction: column; min-width: 0; }
+.lui-rowlist-bordered {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); box-shadow: var(--sh-sm); overflow: hidden;
+}
+.lui-rowlist:not(.lui-rowlist-separated) > .lui-row + .lui-row {
+  border-top: 1px solid var(--border);
+}
+.lui-rowlist-separated { gap: 10px; }
+.lui-rowlist-separated > .lui-row {
+  border: 1px solid var(--border); border-radius: var(--r-md); background: var(--surface);
+}
+
+/* ---------- Rij ---------- */
+.lui-row {
+  --lui-row-accent: transparent;
+  position: relative;
+  display: flex; align-items: center; gap: 13px;
+  padding: calc(13px * var(--density)) 16px; min-width: 0;
+  color: var(--text); text-decoration: none;
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-rowlist-dense .lui-row { padding: 9px 12px; gap: 10px; }
+
+.lui-row-clickable { cursor: pointer; }
+.lui-row-clickable:hover { background: var(--surface-hover); }
+.lui-row-clickable:focus-visible { outline: none; box-shadow: inset var(--ring); }
+.lui-row[data-selected] { background: var(--accent-tint); }
+.lui-rowlist-separated > .lui-row[data-selected] { border-color: var(--accent); }
+.lui-row[data-disabled] { opacity: .55; pointer-events: none; }
+
+.lui-row-accent {
+  position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px;
+  border-radius: 0 3px 3px 0; background: var(--lui-row-accent);
+}
+
+.lui-row-lead {
+  flex: none; min-width: 54px;
+  font-size: 13px; font-weight: 650; color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.lui-row-leading { flex: none; display: flex; align-items: center; }
+
+.lui-row-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.lui-row-title {
+  font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.35;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.lui-row-subtitle {
+  font-size: 12.5px; color: var(--text-3); line-height: 1.4;
+  overflow: hidden; text-overflow: ellipsis;
+}
+
+.lui-row-trailing {
+  flex: none; display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text-2);
+}
+.lui-row-actions { flex: none; display: flex; align-items: center; gap: 7px; }
+
+/* ---------- Icoontegel ---------- */
+.lui-row-icon {
+  display: grid; place-items: center; flex: none;
+  border-radius: var(--r-md);
+  background: var(--surface-3); color: var(--text-3);
+}
+.lui-row-icon svg { width: 45%; height: 45%; }
+.lui-row-icon-accent { background: var(--accent-tint); color: var(--accent); }
+.lui-row-icon-green { background: var(--green-tint); color: var(--green); }
+.lui-row-icon-amber { background: var(--amber-tint); color: var(--amber); }
+.lui-row-icon-red { background: var(--red-tint); color: var(--red); }
+.lui-row-icon-blue { background: var(--blue-tint); color: var(--blue); }
+.lui-row-icon-violet { background: var(--violet-tint); color: var(--violet); }
+
+@media (max-width: 640px) {
+  .lui-row { flex-wrap: wrap; }
+  .lui-row-actions { margin-left: auto; }
+}

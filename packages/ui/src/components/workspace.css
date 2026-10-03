@@ -1,0 +1,28 @@
+/* ============================ Workspace ============================ */
+.lui-workspace-container { width: 100%; min-width: 0; }
+
+.lui-workspace {
+  display: grid;
+  align-items: start;
+  width: 100%;
+  min-width: 0;
+}
+
+.lui-workspace-main { min-width: 0; }
+
+.lui-workspace-rail {
+  min-width: 0;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.lui-workspace-sticky { position: sticky; align-self: start; }
+
+/* Blok binnen een rail. */
+.lui-workspace-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  padding: 16px 18px;
+  min-width: 0;
+}
+.lui-workspace-panel > .lui-section-header:last-child { margin-bottom: 0; }

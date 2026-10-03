@@ -1,0 +1,22 @@
+/* ============================ Popover ============================ */
+.lui-popover {
+  z-index: var(--z-popover);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-lg);
+  padding: 14px;
+  overflow-y: auto; overscroll-behavior: contain;
+  animation: lui-menu-in var(--dur-fast) var(--ease) both;
+  color: var(--text);
+  font-size: var(--fs-base);
+}
+.lui-popover-flush { padding: 0; }
+.lui-popover[data-side="top"] { transform-origin: bottom; }
+
+/* ---------- Sluiten ---------- */
+.lui-popover[data-state="closed"] { animation: lui-menu-out var(--dur-fast) var(--ease) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-popover, .lui-popover[data-state="closed"] { animation-duration: .01ms; }
+}

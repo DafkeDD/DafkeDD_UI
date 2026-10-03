@@ -1,0 +1,53 @@
+/* ============================ EntityHeader ============================ */
+.lui-entity {
+  display: flex; flex-wrap: wrap; align-items: flex-start; gap: 18px;
+  margin-bottom: 20px; min-width: 0;
+}
+.lui-entity-divider { padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+
+.lui-entity-media { flex: none; }
+
+.lui-entity-identity { min-width: 220px; }
+.lui-entity-title {
+  font-size: 25px; font-weight: 650; letter-spacing: -0.025em;
+  line-height: 1.15; color: var(--text);
+}
+.lui-entity-suffix {
+  margin-left: 8px; font-size: var(--fs-base); font-weight: 500; color: var(--text-3);
+  letter-spacing: 0;
+}
+.lui-entity-meta { margin-top: 5px; font-size: 13px; color: var(--text-3); }
+
+.lui-entity-tags { display: flex; flex-wrap: wrap; gap: 7px; max-width: 460px; padding-top: 3px; }
+
+.lui-entity-details { display: flex; flex-direction: column; gap: 6px; }
+.lui-entity-detail {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 10px; border: 1px solid var(--border); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text-2);
+  font: inherit; font-size: 13px; text-align: left; text-decoration: none;
+  cursor: pointer; transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-entity-detail:hover { background: var(--surface-hover); border-color: var(--border-strong); }
+.lui-entity-detail:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-entity-detail-static { cursor: default; }
+.lui-entity-detail-static:hover { background: var(--surface); border-color: var(--border); }
+.lui-entity-detail-icon { display: inline-flex; color: var(--text-3); }
+.lui-entity-detail-icon svg { width: 15px; height: 15px; }
+
+.lui-entity-actions {
+  margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+}
+
+/* ---------- Klein formaat ---------- */
+.lui-entity-sm { gap: 14px; margin-bottom: 16px; }
+.lui-entity-sm .lui-entity-title { font-size: 19px; }
+.lui-entity-sm .lui-entity-identity { min-width: 160px; }
+.lui-entity-sm .lui-entity-divider { padding-bottom: 14px; }
+
+@media (max-width: 720px) {
+  .lui-entity { gap: 14px; }
+  .lui-entity-actions { margin-left: 0; width: 100%; }
+  .lui-entity-actions > * { flex: 1; justify-content: center; }
+  .lui-entity-details { flex-direction: row; flex-wrap: wrap; }
+}

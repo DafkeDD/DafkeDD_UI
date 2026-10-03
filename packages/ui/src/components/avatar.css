@@ -1,0 +1,31 @@
+/* ============================ Avatar ============================ */
+.lui-avatar {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--r-full); background: var(--accent); color: var(--accent-fg);
+  font-weight: 650; letter-spacing: -0.01em; flex: none; overflow: visible;
+  user-select: none;
+}
+.lui-avatar-square { border-radius: var(--r-sm); }
+.lui-avatar-img {
+  width: 100%; height: 100%; object-fit: cover;
+  border-radius: inherit; display: block;
+}
+.lui-avatar-status {
+  position: absolute; right: 0; bottom: 0;
+  border-radius: var(--r-full); border: 2px solid var(--surface);
+}
+.lui-avatar-status-online { background: var(--green); }
+.lui-avatar-status-busy { background: var(--amber); }
+.lui-avatar-status-offline { background: var(--text-3); }
+
+.lui-avatar-group { display: inline-flex; align-items: center; }
+.lui-avatar-group > .lui-avatar { margin-left: -8px; box-shadow: 0 0 0 2px var(--surface); }
+.lui-avatar-group > .lui-avatar:first-child { margin-left: 0; }
+.lui-avatar-more { background: var(--surface-3); color: var(--text-2); }
+
+/* ---------- Motion: groep waaiert open bij hover ---------- */
+.lui-avatar-group > .lui-avatar { transition: margin var(--dur-slow) var(--ease-pop), transform var(--dur) var(--ease-pop); }
+.lui-avatar-group:hover > .lui-avatar:not(:first-child) { margin-left: -2px; }
+.lui-avatar-group > .lui-avatar:hover { transform: translateY(-3px); z-index: 1; }
+.lui-avatar-img { animation: lui-overlay-in .3s var(--ease) both; }

@@ -1,0 +1,53 @@
+/* ============================ Countdown ============================ */
+.lui-countdown { display: inline-flex; align-items: flex-end; gap: 12px; }
+
+.lui-countdown-deel { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; }
+.lui-countdown-getal {
+  font-family: var(--mono); font-size: 26px; font-weight: 700; line-height: 1;
+  color: var(--text); font-variant-numeric: tabular-nums;
+}
+.lui-countdown-label {
+  font-size: 10.5px; font-weight: 650; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--text-3);
+}
+
+.lui-countdown-compact { gap: 3px; align-items: center; }
+.lui-countdown-compact .lui-countdown-getal { font-size: 20px; }
+.lui-countdown-dubbelepunt { font-family: var(--mono); font-size: 20px; color: var(--text-3); }
+
+.lui-countdown[data-done] .lui-countdown-getal { color: var(--text-3); }
+
+/* ---------- Cijfers rollen binnen ---------- */
+.lui-countdown-getal { display: inline-flex; overflow: hidden; padding-block: 2px; }
+.lui-countdown-cijfer { display: inline-block; animation: lui-countdown-roll .42s var(--ease-pop) both; }
+@keyframes lui-countdown-roll {
+  from { transform: translateY(-70%); opacity: 0; filter: blur(2px); }
+  to { transform: none; opacity: 1; filter: none; }
+}
+.lui-countdown-compact .lui-countdown-dubbelepunt { animation: lui-countdown-blink 1s steps(1) infinite; }
+@keyframes lui-countdown-blink { 50% { opacity: .35; } }
+.lui-countdown[data-done] .lui-countdown-dubbelepunt { animation: none; }
+.lui-countdown[data-done] .lui-countdown-deel { animation: lui-pop .5s var(--ease-pop) both; }
+
+/* ---------- Variant: tegels die klappen ---------- */
+.lui-countdown[data-variant="cards"] { gap: 10px; }
+.lui-countdown[data-variant="cards"] .lui-countdown-getal {
+  position: relative; padding: 10px 10px; min-width: 2.6ch; justify-content: center;
+  border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border);
+  box-shadow: var(--sh-sm), inset 0 -1px 0 rgb(0 0 0 / .04);
+  font-size: 30px; perspective: 300px;
+}
+.lui-countdown[data-variant="cards"] .lui-countdown-getal::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px;
+  background: color-mix(in srgb, var(--border) 80%, transparent);
+}
+.lui-countdown[data-variant="cards"] .lui-countdown-cijfer {
+  transform-origin: 50% 55%; backface-visibility: hidden;
+  animation: lui-countdown-flip .5s var(--ease-out) both;
+}
+@keyframes lui-countdown-flip {
+  from { transform: rotateX(-95deg); opacity: .2; }
+  60% { transform: rotateX(12deg); opacity: 1; }
+  to { transform: none; opacity: 1; }
+}
+.lui-countdown[data-variant="cards"].lui-countdown-compact .lui-countdown-getal { font-size: 22px; padding: 7px 8px; }

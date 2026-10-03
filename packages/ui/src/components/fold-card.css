@@ -1,0 +1,60 @@
+/* ============================ FoldCard ============================ */
+.lui-foldcard {
+  --lui-fold-angle: 105deg;
+  --lui-fold-perspective: 1400px;
+  position: relative; width: 100%; max-width: 340px;
+  perspective: var(--lui-fold-perspective);
+  border-radius: var(--r-lg);
+}
+
+.lui-foldcard-inside {
+  position: absolute; inset: 0; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;
+  padding: 20px; border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--sh-md);
+}
+
+.lui-foldcard-cover {
+  position: absolute; inset: 0; z-index: 1; padding: 0;
+  border: 0; border-radius: var(--r-lg); overflow: hidden;
+  background: var(--surface-3); color: var(--text); cursor: pointer;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform var(--dur-slow) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out);
+  box-shadow: var(--sh-md);
+}
+.lui-foldcard[data-side="right"] .lui-foldcard-cover { transform-origin: right center; }
+.lui-foldcard[data-side="top"] .lui-foldcard-cover { transform-origin: center top; }
+
+.lui-foldcard[data-open] .lui-foldcard-cover {
+  transform: rotateY(calc(var(--lui-fold-angle) * -1));
+  box-shadow: 18px 0 40px rgba(2, 6, 23, .22);
+}
+.lui-foldcard[data-side="right"][data-open] .lui-foldcard-cover {
+  transform: rotateY(var(--lui-fold-angle));
+  box-shadow: -18px 0 40px rgba(2, 6, 23, .22);
+}
+.lui-foldcard[data-side="top"][data-open] .lui-foldcard-cover {
+  transform: rotateX(var(--lui-fold-angle));
+  box-shadow: 0 18px 40px rgba(2, 6, 23, .22);
+}
+
+.lui-foldcard-cover:focus-visible { outline: none; box-shadow: var(--ring), var(--sh-md); }
+
+.lui-foldcard-cover-inner {
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 8px;
+  width: 100%; height: 100%; padding: 20px; text-align: start;
+  /* De achterkant van de klep hoeft niet mee te draaien in beeld. */
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-foldcard-cover { transition: opacity var(--dur) var(--ease); }
+  .lui-foldcard[data-open] .lui-foldcard-cover,
+  .lui-foldcard[data-side="right"][data-open] .lui-foldcard-cover,
+  .lui-foldcard[data-side="top"][data-open] .lui-foldcard-cover {
+    transform: none; opacity: 0; pointer-events: none;
+  }
+}

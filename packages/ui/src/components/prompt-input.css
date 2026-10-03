@@ -1,0 +1,71 @@
+/* ============================ PromptInput ============================ */
+.lui-prompt { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+
+.lui-prompt-suggestions { display: flex; flex-wrap: wrap; gap: 6px; }
+.lui-prompt-suggestion {
+  padding: 5px 11px; border: 1px solid var(--border); border-radius: var(--r-full);
+  background: var(--surface); color: var(--text-2);
+  font: inherit; font-size: 12.5px; cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-prompt-suggestion:hover { background: var(--surface-2); color: var(--text); border-color: var(--border-strong); }
+.lui-prompt-suggestion:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-prompt-box {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 10px 10px 8px; border: 1px solid var(--border-strong); border-radius: var(--r-md);
+  background: var(--surface);
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-prompt-box:focus-within { border-color: var(--accent); box-shadow: var(--ring); }
+.lui-prompt-disabled .lui-prompt-box { background: var(--surface-2); opacity: .7; }
+
+.lui-prompt-files { display: flex; flex-wrap: wrap; gap: 6px; }
+.lui-prompt-file {
+  display: inline-flex; align-items: center; gap: 6px; max-width: 220px;
+  padding: 4px 6px 4px 9px; border: 1px solid var(--border); border-radius: var(--r-sm);
+  background: var(--surface-2); font-size: 12px; color: var(--text-2);
+}
+.lui-prompt-file-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lui-prompt-file-size { flex: none; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.lui-prompt-file-x {
+  display: grid; place-items: center; flex: none; width: 18px; height: 18px; padding: 0;
+  border: 0; border-radius: var(--r-xs); background: transparent; color: var(--text-3); cursor: pointer;
+}
+.lui-prompt-file-x:hover { background: var(--surface-3); color: var(--text); }
+.lui-prompt-file-x:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-prompt-field {
+  width: 100%; border: 0; outline: none; resize: none; overflow-y: auto;
+  padding: 2px 4px; background: transparent; color: var(--text);
+  font: inherit; font-size: var(--fs-base); line-height: 1.55;
+  max-height: 40vh;
+}
+.lui-prompt-field::placeholder { color: var(--text-3); }
+
+.lui-prompt-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.lui-prompt-tools, .lui-prompt-right { display: flex; align-items: center; gap: 6px; }
+
+.lui-prompt-tool {
+  display: grid; place-items: center; width: 30px; height: 30px; padding: 0;
+  border: 0; border-radius: var(--r-sm); background: transparent; color: var(--text-3); cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-prompt-tool:hover:not(:disabled) { background: var(--surface-2); color: var(--text); }
+.lui-prompt-tool:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-prompt-tool:disabled { opacity: .4; cursor: not-allowed; }
+
+.lui-prompt-count { font-size: 12px; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.lui-prompt-count[data-over] { color: var(--red); font-weight: 600; }
+.lui-prompt-hint { font-size: 12px; color: var(--text-3); }
+
+.lui-prompt-send {
+  display: grid; place-items: center; width: 32px; height: 32px; padding: 0; flex: none;
+  border: 0; border-radius: var(--r-sm); background: var(--accent); color: var(--accent-fg);
+  cursor: pointer; transition: background var(--dur-fast), opacity var(--dur-fast);
+}
+.lui-prompt-send:hover:not(:disabled) { background: var(--accent-hover); }
+.lui-prompt-send:disabled { opacity: .35; cursor: not-allowed; }
+.lui-prompt-send:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-prompt-send[data-stop] { background: var(--text); color: var(--surface); }
+.lui-prompt-stop { width: 11px; height: 11px; border-radius: 2px; background: currentColor; }

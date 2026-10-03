@@ -1,0 +1,17 @@
+/* ============================ HoverCard ============================ */
+.lui-hovercard-trigger { text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; cursor: default; }
+
+.lui-hovercard {
+  z-index: var(--z-popover);
+  padding: 14px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  box-shadow: var(--sh-lg); color: var(--text); font-size: 13.5px; line-height: 1.55;
+  transition: opacity var(--dur-fast) var(--ease);
+  animation: lui-hovercard-in var(--dur) var(--ease) both;
+}
+@keyframes lui-hovercard-in {
+  from { opacity: 0; transform: translateY(-4px) scale(.985); }
+  to { opacity: 1; transform: none; }
+}
+.lui-hovercard[data-side="top"] { transform-origin: bottom; }
+.lui-hovercard[data-side="bottom"] { transform-origin: top; }

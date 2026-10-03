@@ -1,0 +1,90 @@
+/* ============================ Toast ============================ */
+.lui-toaster {
+  position: fixed; z-index: var(--z-toast);
+  display: flex; flex-direction: column; gap: 10px;
+  pointer-events: none; max-width: min(380px, calc(100vw - 24px));
+}
+.lui-toaster-bottom-right { bottom: 24px; right: 24px; }
+.lui-toaster-bottom-left { bottom: 24px; left: 24px; }
+.lui-toaster-top-right { top: 24px; right: 24px; flex-direction: column-reverse; }
+.lui-toaster-top-left { top: 24px; left: 24px; flex-direction: column-reverse; }
+.lui-toaster-bottom-center { bottom: 24px; left: 50%; transform: translateX(-50%); }
+.lui-toaster-top-center { top: 24px; left: 50%; transform: translateX(-50%); flex-direction: column-reverse; }
+
+.lui-toast {
+  --lui-toast-color: var(--text-3);
+  pointer-events: auto; position: relative;
+  display: flex; align-items: flex-start; gap: 11px;
+  min-width: 280px; padding: 13px 14px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-md); box-shadow: var(--sh-lg);
+  animation: lui-toast-in var(--dur-slow) var(--ease-pop) both;
+  overflow: hidden; touch-action: pan-y; user-select: none;
+}
+.lui-toast-icon { animation: lui-toast-icon .5s var(--ease-pop) .08s both; }
+@keyframes lui-toast-icon { from { transform: scale(.3) rotate(-25deg); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Tijdsbalkje: loopt leeg over de levensduur, pauzeert samen met de klok. */
+.lui-toast-timer {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: var(--lui-toast-color); opacity: .55; transform-origin: left;
+  animation: lui-toast-timer var(--lui-toast-life, 4s) linear both;
+}
+.lui-toast-neutral .lui-toast-timer { background: var(--text-3); opacity: .35; }
+.lui-toaster:hover .lui-toast-timer,
+.lui-toaster:focus-within .lui-toast-timer { animation-play-state: paused; }
+@keyframes lui-toast-timer { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@keyframes lui-toast-in {
+  from { opacity: 0; transform: translateY(14px) scale(.96); }
+  to { opacity: 1; transform: none; }
+}
+
+.lui-toast-accent { --lui-toast-color: var(--accent); }
+.lui-toast-green { --lui-toast-color: var(--green); }
+.lui-toast-amber { --lui-toast-color: var(--amber); }
+.lui-toast-red { --lui-toast-color: var(--red); }
+.lui-toast-blue { --lui-toast-color: var(--blue); }
+
+.lui-toast-icon {
+  display: grid; place-items: center; flex: none;
+  width: 26px; height: 26px; border-radius: 7px;
+  color: var(--lui-toast-color);
+  background: color-mix(in srgb, var(--lui-toast-color) 14%, transparent);
+}
+.lui-toast-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; padding-top: 2px; }
+.lui-toast-title { font-size: 13.5px; font-weight: 600; color: var(--text); line-height: 1.35; }
+.lui-toast-description { font-size: var(--fs-sm); color: var(--text-2); line-height: 1.45; }
+.lui-toast-action {
+  flex: none; align-self: center; border: none; background: transparent;
+  color: var(--accent); font: inherit; font-size: 13px; font-weight: 650;
+  cursor: pointer; padding: 4px 6px; border-radius: var(--r-xs);
+}
+.lui-toast-action:hover, .lui-toast-action:focus-visible { background: var(--accent-tint); outline: none; }
+.lui-toast-close {
+  flex: none; display: grid; place-items: center; width: 22px; height: 22px;
+  border: none; background: transparent; color: var(--text-3);
+  border-radius: var(--r-xs); cursor: pointer;
+}
+.lui-toast-close:hover, .lui-toast-close:focus-visible { background: var(--surface-3); color: var(--text); outline: none; }
+
+@media (max-width: 560px) {
+  .lui-toaster { left: 12px; right: 12px; max-width: none; transform: none; }
+  .lui-toaster-bottom-right, .lui-toaster-bottom-left, .lui-toaster-bottom-center { bottom: 12px; }
+  .lui-toaster-top-right, .lui-toaster-top-left, .lui-toaster-top-center { top: 12px; }
+  .lui-toast { min-width: 0; }
+}
+
+/* ---------- Sluiten ---------- */
+.lui-toast[data-state="closed"] { animation: lui-toast-out .18s var(--ease) both; }
+/* Weggeveegd: de positie komt van de veegbeweging, dus alleen nog vervagen. */
+.lui-toast[data-swiped][data-state="closed"] { animation: lui-toast-fade .18s var(--ease) both; }
+@keyframes lui-toast-fade { to { opacity: 0; } }
+
+@keyframes lui-toast-out {
+  from { opacity: 1; transform: none; max-height: 200px; }
+  to { opacity: 0; transform: translateX(12px) scale(.97); max-height: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-toast, .lui-toast[data-state="closed"] { animation-duration: .01ms; }
+}

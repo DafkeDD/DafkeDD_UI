@@ -1,0 +1,155 @@
+/* ============================ Swimlanes ============================ */
+.lui-swim {
+  --lui-swim-label: 180px;
+  --lui-swim-lane: 54px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  overflow: hidden;
+}
+.lui-swim-scroll { overflow: auto; -webkit-overflow-scrolling: touch; }
+.lui-swim-inner { min-width: 100%; }
+
+/* ---------- Tijdas ---------- */
+.lui-swim-axis {
+  display: flex; position: sticky; top: 0; z-index: 3;
+  background: var(--surface-2); border-bottom: 1px solid var(--border);
+  height: 30px;
+}
+.lui-swim-axis-label {
+  width: var(--lui-swim-label); flex: none;
+  border-right: 1px solid var(--border);
+  position: sticky; left: 0; z-index: 1; background: var(--surface-2);
+}
+.lui-swim-axis-track { position: relative; flex: none; }
+.lui-swim-tick {
+  position: absolute; top: 8px;
+  font-size: 10.5px; font-weight: 650; color: var(--text-3);
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+  padding-left: 5px; border-left: 1px solid var(--border);
+  line-height: 1.2;
+}
+
+/* ---------- Baan ---------- */
+.lui-swim-lane {
+  display: flex; align-items: stretch;
+  min-height: var(--lui-swim-lane);
+  border-bottom: 1px solid var(--border);
+}
+.lui-swim-lane:last-child { border-bottom: none; }
+
+.lui-swim-label {
+  width: var(--lui-swim-label); flex: none;
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 12px;
+  border-right: 1px solid var(--border);
+  position: sticky; left: 0; z-index: 2; background: var(--surface);
+}
+.lui-swim-lane[data-today] .lui-swim-label { background: var(--accent-tint); }
+.lui-swim-media { flex: none; display: flex; }
+.lui-swim-label-text { display: flex; flex-direction: column; min-width: 0; }
+.lui-swim-name {
+  font-size: 12.5px; font-weight: 650; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.lui-swim-count { font-size: 11px; color: var(--text-3); }
+
+/* ---------- Spoor ---------- */
+.lui-swim-track { position: relative; flex: none; min-height: var(--lui-swim-lane); }
+.lui-swim-lines {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--border) 0,
+    var(--border) 1px,
+    transparent 1px,
+    transparent var(--lui-swim-hour, 144px)
+  );
+  opacity: .5;
+}
+.lui-swim-slots {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  border: none; background: transparent; padding: 0; cursor: copy;
+}
+.lui-swim-slots:hover { background: color-mix(in srgb, var(--accent) 5%, transparent); }
+.lui-swim-slots:focus-visible { outline: none; box-shadow: inset var(--ring); }
+
+.lui-swim-empty {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  font-size: 12px; color: var(--text-3); font-style: italic; pointer-events: none;
+}
+
+.lui-swim-blocked-full {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--surface-2) 0,
+    var(--surface-2) 5px,
+    var(--surface-3) 5px,
+    var(--surface-3) 10px
+  );
+}
+.lui-swim-blocked-label {
+  font-size: 10.5px; font-weight: 650; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--text-3); background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--r-full); padding: 2px 9px;
+}
+
+/* ---------- Blok ---------- */
+.lui-swim-appt {
+  --lui-event-color: var(--accent);
+  position: absolute; top: 7px; bottom: 7px;
+  display: flex; flex-direction: column; justify-content: center; gap: 1px;
+  padding: 4px 8px; overflow: hidden;
+  border-radius: var(--r-xs);
+  border: 1px solid color-mix(in srgb, var(--lui-event-color) 32%, transparent);
+  border-left: 3px solid var(--lui-event-color);
+  background: color-mix(in srgb, var(--lui-event-color) 13%, var(--surface));
+  cursor: pointer; z-index: 1;
+  transition: box-shadow var(--dur-fast), transform var(--dur-fast);
+}
+.lui-swim-appt:hover { box-shadow: var(--sh-md); z-index: 2; }
+.lui-swim-appt:focus-visible { outline: none; box-shadow: var(--ring); z-index: 3; }
+.lui-swim-appt-time {
+  font-size: 10px; font-weight: 700; color: var(--lui-event-color);
+  font-variant-numeric: tabular-nums; line-height: 1.2;
+}
+.lui-swim-appt-title {
+  font-size: 11.5px; font-weight: 600; color: var(--text); line-height: 1.25;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.lui-swim-appt-accent { --lui-event-color: var(--accent); }
+.lui-swim-appt-green { --lui-event-color: var(--green); }
+.lui-swim-appt-amber { --lui-event-color: var(--amber); }
+.lui-swim-appt-red { --lui-event-color: var(--red); }
+.lui-swim-appt-blue { --lui-event-color: var(--blue); }
+.lui-swim-appt-violet { --lui-event-color: var(--violet); }
+.lui-swim-appt-neutral { --lui-event-color: var(--text-3); }
+
+.lui-swim-appt-blocked {
+  --lui-event-color: var(--red);
+  cursor: default;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--red-tint) 0,
+    var(--red-tint) 4px,
+    var(--surface) 4px,
+    var(--surface) 9px
+  );
+}
+.lui-swim-appt-blocked .lui-swim-appt-title { color: var(--red); }
+.lui-swim-appt-blocked:hover { box-shadow: none; }
+
+/* ---------- Nu-lijn ---------- */
+.lui-swim-now {
+  position: absolute; top: 0; bottom: 0; width: 2px;
+  background: var(--red); z-index: 3; pointer-events: none;
+}
+.lui-swim-now::before {
+  content: ""; position: absolute; top: -3px; left: -3px;
+  width: 8px; height: 8px; border-radius: var(--r-full); background: var(--red);
+}
+/* Alleen de bovenste baan krijgt het bolletje; de lijn loopt gewoon door. */
+.lui-swim-lane + .lui-swim-lane .lui-swim-now::before { display: none; }

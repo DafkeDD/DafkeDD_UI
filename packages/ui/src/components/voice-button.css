@@ -1,0 +1,26 @@
+/* ============================ VoiceButton ============================ */
+.lui-voice {
+  position: relative; display: inline-grid; place-items: center; flex: none;
+  width: calc(38px * var(--density)); height: calc(38px * var(--density));
+  border: 1px solid var(--border); border-radius: var(--r-full);
+  background: var(--surface); color: var(--text-2); cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-voice:hover:not(:disabled) { background: var(--surface-3); color: var(--text); }
+.lui-voice:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-voice:disabled { opacity: .45; cursor: not-allowed; }
+.lui-voice[data-listening] {
+  background: var(--red-tint); border-color: var(--red-border); color: var(--red);
+}
+.lui-voice-pulse {
+  position: absolute; inset: -3px; border-radius: inherit;
+  border: 2px solid var(--red); opacity: .6;
+  animation: lui-voice-pulse 1.4s var(--ease-out) infinite;
+}
+@keyframes lui-voice-pulse {
+  0% { transform: scale(.95); opacity: .55; }
+  70% { transform: scale(1.25); opacity: 0; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+.lui-voice-sm { width: calc(30px * var(--density)); height: calc(30px * var(--density)); }
+.lui-voice-lg { width: calc(46px * var(--density)); height: calc(46px * var(--density)); }

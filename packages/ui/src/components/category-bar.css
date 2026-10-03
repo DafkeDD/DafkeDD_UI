@@ -1,0 +1,56 @@
+/* ============================ CategoryBar ============================ */
+.lui-catbar { --lui-catbar-h: 10px; display: grid; gap: 7px; width: 100%; }
+.lui-catbar-sm { --lui-catbar-h: 6px; }
+.lui-catbar-lg { --lui-catbar-h: 14px; }
+
+.lui-catbar-labels { display: flex; gap: 0; }
+.lui-catbar-label {
+  display: flex; align-items: center; gap: 6px; min-width: 0; padding-inline-end: 10px;
+  font-size: var(--fs-sm); color: var(--text-2);
+}
+.lui-catbar-dot { flex: none; width: 8px; height: 8px; border-radius: 2px; }
+.lui-catbar-label-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.lui-catbar-track {
+  position: relative; display: flex; gap: 2px;
+  height: var(--lui-catbar-h); border-radius: var(--r-full);
+  background: var(--surface-3);
+}
+.lui-catbar-segment {
+  height: 100%; border-radius: var(--r-full);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+.lui-catbar-segment:first-child { border-start-start-radius: var(--r-full); border-end-start-radius: var(--r-full); }
+
+.lui-catbar-marker {
+  position: absolute; top: 50%; z-index: 1;
+  width: 3px; height: calc(var(--lui-catbar-h) + 14px);
+  transform: translate(-50%, -50%);
+  background: var(--text); border-radius: var(--r-full);
+  box-shadow: 0 0 0 2px var(--surface);
+}
+.lui-catbar-marker::after {
+  content: ""; position: absolute; left: 50%; top: -5px;
+  width: 8px; height: 8px; transform: translateX(-50%);
+  background: var(--text); border-radius: 50%; box-shadow: 0 0 0 2px var(--surface);
+}
+.lui-catbar-foot { position: relative; height: 15px; margin-top: 4px; }
+.lui-catbar-marker-label {
+  position: absolute; top: 0; transform: translateX(-50%);
+  font-size: var(--fs-xs); color: var(--text-3); white-space: nowrap;
+}
+
+.lui-catbar-scale {
+  display: flex; justify-content: space-between;
+  font-size: var(--fs-xs); color: var(--text-3); font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-catbar-segment { transition: none; }
+}
+
+/* ---------- Mount: de balk veegt van links naar rechts binnen ---------- */
+.lui-catbar-track { animation: lui-wipe .9s var(--ease-out) both; }
+.lui-catbar-segment { transition: width var(--dur-slow) var(--ease-out), filter var(--dur-fast); }
+.lui-catbar-segment:hover { filter: brightness(1.12) saturate(1.1); }
+.lui-catbar-marker { animation: lui-overlay-in .3s var(--ease) .8s both; }

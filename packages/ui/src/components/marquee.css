@@ -1,0 +1,45 @@
+/* ============================ Marquee ============================ */
+.lui-marquee {
+  --lui-marquee-duration: 28s;
+  --lui-marquee-gap: 20px;
+  --lui-marquee-direction: normal;
+  display: flex; gap: var(--lui-marquee-gap);
+  width: 100%; overflow: hidden;
+}
+.lui-marquee-row {
+  display: flex; flex: none; align-items: center; gap: var(--lui-marquee-gap);
+  min-width: max-content;
+  animation: lui-marquee-x var(--lui-marquee-duration) linear infinite var(--lui-marquee-direction);
+}
+
+.lui-marquee-vertical { flex-direction: column; height: 100%; }
+.lui-marquee-vertical .lui-marquee-row {
+  flex-direction: column; min-width: 0; min-height: max-content;
+  animation-name: lui-marquee-y;
+}
+
+.lui-marquee-pausable:hover .lui-marquee-row { animation-play-state: paused; }
+
+.lui-marquee-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.lui-marquee-fade.lui-marquee-vertical {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* Eén rij plus de gap opschuiven: precies de breedte van de kopie ervoor. */
+@keyframes lui-marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - var(--lui-marquee-gap))); }
+}
+@keyframes lui-marquee-y {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-100% - var(--lui-marquee-gap))); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-marquee-row { animation: none; }
+  .lui-marquee { overflow-x: auto; }
+}

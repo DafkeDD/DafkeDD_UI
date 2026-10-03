@@ -1,0 +1,69 @@
+/* ============================ LogoutButton ============================ */
+.lui-logout {
+  --lui-logout-dur: 1100ms;
+  --lui-logout-door: var(--accent);
+  display: inline-flex; align-items: center; gap: 12px;
+  height: calc(40px * var(--density)); padding: 0 8px 0 16px;
+  border: 1px solid transparent; border-radius: var(--r-sm);
+  font: inherit; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; overflow: hidden;
+  transition: background var(--dur-fast), box-shadow var(--dur-fast), transform var(--dur-fast);
+}
+.lui-logout-dark { background: var(--text); color: var(--surface); }
+.lui-logout-light { background: var(--surface); color: var(--text); border-color: var(--border-strong); }
+.lui-logout-sm { height: calc(34px * var(--density)); font-size: 13px; }
+.lui-logout-lg { height: calc(46px * var(--density)); font-size: var(--fs-base); }
+.lui-logout:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-logout:active { transform: scale(.97); }
+.lui-logout:disabled { opacity: .5; cursor: not-allowed; }
+
+.lui-logout-scene {
+  display: grid; place-items: center; width: 40px; height: 100%;
+  border-inline-start: 1px solid color-mix(in oklab, currentColor 18%, transparent);
+  padding-inline-start: 6px;
+}
+.lui-logout-scene svg { display: block; overflow: visible; }
+
+.lui-logout-frame { fill: color-mix(in oklab, var(--lui-logout-door) 30%, transparent); }
+.lui-logout-leaf {
+  fill: var(--lui-logout-door);
+  transform-box: fill-box; transform-origin: right center;
+  transform: scaleX(.34);
+  transition: transform calc(var(--lui-logout-dur) * .3) var(--ease);
+}
+
+.lui-logout-man { stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; fill: none; }
+.lui-logout-man circle { fill: currentColor; stroke: none; }
+.lui-logout-man { transition: transform var(--dur) var(--ease-out); }
+.lui-logout-leg, .lui-logout-arm { transform-box: view-box; transform-origin: 9px 16px; }
+.lui-logout-arm { transform-origin: 9px 10.5px; }
+
+/* hover: het mannetje zet alvast een stapje richting deur */
+.lui-logout[data-state="idle"]:is(:hover, :focus-visible) .lui-logout-man { transform: translateX(3px); }
+.lui-logout[data-state="idle"]:is(:hover, :focus-visible) .lui-logout-leg-a,
+.lui-logout[data-state="idle"]:is(:hover, :focus-visible) .lui-logout-arm-b { animation: lui-logout-swing .5s ease-in-out infinite alternate; }
+.lui-logout[data-state="idle"]:is(:hover, :focus-visible) .lui-logout-leg-b,
+.lui-logout[data-state="idle"]:is(:hover, :focus-visible) .lui-logout-arm-a { animation: lui-logout-swing .5s ease-in-out infinite alternate-reverse; }
+
+/* klik: wandelt de deur in, verdwijnt, en de deur gaat dicht */
+.lui-logout[data-state="leaving"] .lui-logout-man {
+  animation: lui-logout-walk calc(var(--lui-logout-dur) * .75) var(--ease) forwards;
+}
+.lui-logout[data-state="leaving"] :is(.lui-logout-leg-a, .lui-logout-arm-b) { animation: lui-logout-swing .22s ease-in-out infinite alternate; }
+.lui-logout[data-state="leaving"] :is(.lui-logout-leg-b, .lui-logout-arm-a) { animation: lui-logout-swing .22s ease-in-out infinite alternate-reverse; }
+.lui-logout[data-state="leaving"] .lui-logout-leaf {
+  transform: scaleX(1);
+  transition-delay: calc(var(--lui-logout-dur) * .7);
+}
+.lui-logout[data-state="gone"] .lui-logout-man { opacity: 0; transform: translateX(18px); transition: none; }
+.lui-logout[data-state="gone"] .lui-logout-leaf { transform: scaleX(1); }
+
+@keyframes lui-logout-swing { from { transform: rotate(-24deg); } to { transform: rotate(24deg); } }
+@keyframes lui-logout-walk {
+  0% { transform: translateX(0); opacity: 1; }
+  80% { transform: translateX(18px); opacity: 1; }
+  100% { transform: translateX(20px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-logout *, .lui-logout { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,27 @@
+/* ============================ KeyValueList ============================ */
+.lui-kv {
+  --lui-kv-label: 38%;
+  display: grid; gap: calc(10px * var(--density));
+  grid-template-columns: repeat(var(--lui-kv-cols, 1), minmax(0, 1fr));
+  margin: 0; font-size: var(--fs-base);
+}
+.lui-kv[data-dense] { gap: calc(6px * var(--density)); font-size: var(--fs-sm); }
+@media (max-width: 640px) { .lui-kv { grid-template-columns: minmax(0, 1fr); } }
+
+.lui-kv-row { display: grid; gap: 2px; min-width: 0; }
+.lui-kv[data-horizontal] .lui-kv-row {
+  grid-template-columns: var(--lui-kv-label) minmax(0, 1fr);
+  gap: 16px; align-items: baseline;
+}
+.lui-kv[data-divided] .lui-kv-row { padding-bottom: calc(8px * var(--density)); border-bottom: 1px solid var(--border); }
+.lui-kv[data-divided] .lui-kv-row:last-child { border-bottom: 0; padding-bottom: 0; }
+
+.lui-kv-key {
+  display: inline-flex; align-items: center; gap: 7px; min-width: 0;
+  margin: 0; color: var(--text-3); font-size: var(--fs-sm); font-weight: 550;
+  overflow-wrap: anywhere;
+}
+.lui-kv-key > svg { flex: none; color: var(--text-3); }
+.lui-kv-value { margin: 0; min-width: 0; color: var(--text); }
+.lui-kv-value[data-truncate] { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lui-kv-value[data-empty] { color: var(--text-3); }

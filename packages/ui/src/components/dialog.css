@@ -1,0 +1,64 @@
+/* ============================ Overlay (gedeeld) ============================ */
+.lui-overlay {
+  position: fixed; inset: 0; z-index: var(--z-overlay);
+  display: grid; place-items: center; padding: 24px;
+  background: var(--overlay);
+  animation: lui-overlay-in .15s var(--ease) both;
+}
+.lui-overlay-blur {
+  position: absolute; inset: 0; pointer-events: none;
+  backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+}
+
+/* ============================ Dialog ============================ */
+.lui-dialog {
+  position: relative;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-xl); box-shadow: var(--sh-xl);
+  width: 100%; max-width: calc(100vw - 48px); max-height: calc(100vh - 48px);
+  display: flex; flex-direction: column; overflow: hidden;
+  animation: lui-dialog-in .22s var(--ease-out) both;
+}
+@keyframes lui-dialog-in {
+  from { opacity: 0; transform: translateY(8px) scale(.96); }
+  to { opacity: 1; transform: none; }
+}
+
+.lui-dialog-sm { max-width: min(380px, calc(100vw - 48px)); }
+.lui-dialog-md { max-width: min(480px, calc(100vw - 48px)); }
+.lui-dialog-lg { max-width: min(640px, calc(100vw - 48px)); }
+.lui-dialog-xl { max-width: min(840px, calc(100vw - 48px)); }
+.lui-dialog-full { max-width: calc(100vw - 48px); width: 100%; height: calc(100vh - 48px); }
+
+.lui-dialog-close { position: absolute; top: 14px; right: 14px; z-index: 1; }
+
+.lui-dialog-header { padding: 22px 22px 0; padding-right: 52px; display: flex; flex-direction: column; gap: 5px; }
+.lui-dialog-title { font-size: var(--fs-xl); font-weight: 650; letter-spacing: -0.02em; color: var(--text); }
+.lui-dialog-description { font-size: 13.5px; color: var(--text-3); line-height: 1.5; }
+.lui-dialog-body { padding: 18px 22px; overflow-y: auto; flex: 1; min-height: 0; }
+.lui-dialog-header + .lui-dialog-body { padding-top: 16px; }
+.lui-dialog-footer {
+  display: flex; gap: 10px; justify-content: flex-end;
+  padding: 4px 22px 20px; flex: none;
+}
+
+@media (max-width: 560px) {
+  .lui-overlay { padding: 14px; }
+  .lui-dialog-footer { flex-direction: column-reverse; }
+  .lui-dialog-footer > * { width: 100%; justify-content: center; }
+}
+
+/* ---------- Sluiten ---------- */
+.lui-overlay[data-state="closed"] { animation: lui-overlay-out .16s var(--ease) both; }
+.lui-dialog[data-state="closed"] { animation: lui-dialog-out .16s var(--ease) both; }
+
+@keyframes lui-overlay-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes lui-dialog-out {
+  from { opacity: 1; transform: none; }
+  to { opacity: 0; transform: translateY(6px) scale(.98); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-dialog, .lui-dialog[data-state="closed"],
+  .lui-overlay, .lui-overlay[data-state="closed"] { animation-duration: .01ms; }
+}

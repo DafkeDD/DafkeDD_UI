@@ -1,0 +1,25 @@
+/* ============================ Segmented ============================ */
+.lui-segmented {
+  display: inline-flex; background: var(--surface-3);
+  border-radius: var(--r-sm); padding: 3px; gap: 2px;
+}
+.lui-segmented-block { display: flex; width: 100%; }
+.lui-segmented-block .lui-segmented-item { flex: 1; }
+
+.lui-segmented-item {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  height: calc(30px * var(--density)); padding: 0 13px; border: none; background: transparent;
+  border-radius: var(--r-xs); font: inherit; font-size: 13px; font-weight: 600;
+  color: var(--text-2); cursor: pointer; white-space: nowrap;
+  transition: background var(--dur-fast), color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-segmented-item:hover:not(:disabled) { color: var(--text); }
+.lui-segmented-item:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-segmented-item:disabled { opacity: .45; cursor: not-allowed; }
+.lui-segmented-item[data-state="active"] {
+  background: var(--surface); color: var(--text); box-shadow: var(--sh-xs);
+}
+.lui-segmented-icon { display: inline-flex; }
+.lui-segmented-icon svg { width: 15px; height: 15px; }
+
+.lui-segmented-sm .lui-segmented-item { height: 26px; padding: 0 10px; font-size: 12.5px; }

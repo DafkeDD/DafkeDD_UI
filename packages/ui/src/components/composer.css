@@ -1,0 +1,41 @@
+/* ============================ Composer ============================ */
+.lui-composer { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+
+.lui-composer-box {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 6px 6px 14px;
+  background: var(--surface); border: 1px solid var(--border-strong);
+  border-radius: var(--r-lg); box-shadow: var(--sh-xs);
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-composer-box:focus-within { border-color: var(--accent); box-shadow: var(--ring); }
+.lui-composer-listening { border-color: var(--red); box-shadow: var(--ring-red); }
+
+.lui-composer-input {
+  flex: 1; min-width: 0; height: calc(38px * var(--density));
+  border: none; outline: none; background: transparent;
+  font: inherit; font-size: var(--fs-md); color: var(--text);
+}
+.lui-composer-input::placeholder { color: var(--text-3); }
+.lui-composer-input:disabled { cursor: not-allowed; }
+
+.lui-composer-voice { border-color: transparent; background: transparent; }
+
+.lui-composer-submit {
+  flex: none; display: inline-flex; align-items: center; gap: 7px;
+  height: calc(38px * var(--density)); padding: 0 16px;
+  border: none; border-radius: var(--r-md);
+  background: var(--accent); color: var(--accent-fg);
+  font: inherit; font-size: var(--fs-base); font-weight: 650; cursor: pointer;
+  transition: background var(--dur-fast), opacity var(--dur-fast);
+}
+.lui-composer-submit:hover:not(:disabled) { background: var(--accent-hover); }
+.lui-composer-submit:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-composer-submit:disabled { opacity: .45; cursor: not-allowed; }
+
+.lui-composer-quick { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+
+@media (max-width: 520px) {
+  .lui-composer-submit { padding: 0 12px; }
+  .lui-composer-submit-label { display: none; }
+}

@@ -1,0 +1,22 @@
+/* ============================ SwatchPicker ============================ */
+.lui-swatches { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; }
+
+.lui-swatch {
+  display: grid; place-items: center; flex: none;
+  border-radius: var(--r-full); border: 2px solid transparent;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 12%, transparent);
+  color: #fff; cursor: pointer; padding: 0;
+  transition: transform var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-swatch:hover { transform: scale(1.08); }
+.lui-swatch:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-swatch[aria-checked="true"] {
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px currentColor;
+}
+.lui-swatch-square { border-radius: var(--r-sm); }
+
+.lui-swatch-custom {
+  background: var(--surface); border: 1px dashed var(--border-strong); color: var(--text-3);
+  box-shadow: none;
+}
+.lui-swatch-custom:hover { border-color: var(--accent); color: var(--accent); }

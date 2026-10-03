@@ -1,0 +1,49 @@
+/* ============================ Menu (dropdown) ============================ */
+.lui-menu {
+  z-index: var(--z-popover);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-lg);
+  padding: 5px;
+  overflow-y: auto; overscroll-behavior: contain;
+  animation: lui-menu-in var(--dur-fast) var(--ease) both;
+}
+
+.lui-menu-item {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: calc(8px * var(--density)) 10px; border: none; background: transparent;
+  border-radius: var(--r-sm);
+  font: inherit; font-size: 13.5px; font-weight: 500;
+  color: var(--text); text-align: left; cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+  text-decoration: none;
+}
+.lui-menu-item:hover:not([data-disabled]),
+.lui-menu-item:focus-visible:not([data-disabled]) { background: var(--surface-3); outline: none; }
+.lui-menu-item[data-disabled] { opacity: .45; cursor: not-allowed; }
+.lui-menu-item-icon { display: inline-flex; color: var(--text-3); flex: none; }
+.lui-menu-item-icon svg { width: 16px; height: 16px; }
+.lui-menu-item-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lui-menu-item-shortcut {
+  flex: none; font-size: 11.5px; color: var(--text-3);
+  font-family: var(--mono); letter-spacing: .02em;
+}
+.lui-menu-item-destructive { color: var(--red); }
+.lui-menu-item-destructive .lui-menu-item-icon { color: var(--red); }
+.lui-menu-item-destructive:hover:not([data-disabled]),
+.lui-menu-item-destructive:focus-visible:not([data-disabled]) { background: var(--red-tint); }
+
+.lui-menu-check {
+  width: 16px; height: 16px; border-radius: 4px; flex: none;
+  border: 1.5px solid var(--border-strong); display: grid; place-items: center;
+  color: var(--accent-fg);
+}
+.lui-menu-check-on { background: var(--accent); border-color: var(--accent); }
+
+.lui-menu-label {
+  padding: 7px 10px 5px; font-size: 11px; font-weight: 650;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--text-3);
+}
+.lui-menu-separator { height: 1px; background: var(--border); margin: 4px 6px; }
+.lui-menu-group { display: flex; flex-direction: column; }

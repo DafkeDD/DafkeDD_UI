@@ -1,0 +1,94 @@
+/* ==================== Citations & UsageQuota ==================== */
+.lui-cites { display: grid; gap: 12px; }
+.lui-cites-text { line-height: 1.7; color: var(--text); }
+
+.lui-cite {
+  position: relative; display: inline-grid; place-items: center;
+  min-width: 16px; height: 16px; padding: 0 4px; margin-inline-start: 2px;
+  border-radius: var(--r-full); background: var(--surface-3); color: var(--text-2);
+  font-size: 10.5px; font-weight: 700; line-height: 1; vertical-align: super;
+  text-decoration: none; cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-cite:hover, .lui-cite[data-active] { background: var(--accent); color: var(--accent-fg); }
+.lui-cite:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-cite-tip {
+  position: absolute; bottom: calc(100% + 7px); left: 50%; transform: translateX(-50%);
+  z-index: 3; display: none; width: max-content; max-width: 260px; padding: 7px 10px; text-align: start;
+  border: 1px solid var(--border); border-radius: var(--r-sm);
+  background: var(--surface); box-shadow: var(--sh-lg);
+  font-size: 12px; font-weight: 500; line-height: 1.45; color: var(--text); pointer-events: none;
+}
+.lui-cite:hover .lui-cite-tip, .lui-cite:focus-visible .lui-cite-tip { display: grid; gap: 2px; }
+.lui-cite-tip-title { font-weight: 650; }
+.lui-cite-tip-source { color: var(--text-3); }
+
+.lui-cites-list { border-top: 1px solid var(--border); padding-top: 10px; }
+.lui-cites-toggle {
+  display: flex; align-items: center; gap: 8px; padding: 0; border: 0; background: transparent;
+  font: inherit; font-size: 12.5px; font-weight: 650; color: var(--text-2); cursor: pointer;
+}
+.lui-cites-toggle:hover { color: var(--text); }
+.lui-cites-toggle:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-cites-count {
+  min-width: 18px; padding: 1px 6px; border-radius: var(--r-full);
+  background: var(--surface-3); color: var(--text-3);
+  font-size: 11px; font-weight: 650; text-align: center;
+}
+.lui-cites-chevron {
+  width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translate(-1px, -1px); transition: transform var(--dur-fast);
+}
+.lui-cites-chevron[data-open] { transform: rotate(225deg) translate(-1px, -1px); }
+
+.lui-cites-items { display: grid; gap: 4px; margin: 10px 0 0; padding: 0; list-style: none; counter-reset: none; }
+.lui-cites-item { list-style: none; }
+.lui-cites-link {
+  display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px;
+  border: 1px solid transparent; border-radius: var(--r-sm);
+  color: inherit; text-decoration: none;
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+a.lui-cites-link:hover, .lui-cites-item[data-active] .lui-cites-link {
+  background: var(--surface-2); border-color: var(--border);
+}
+.lui-cites-num {
+  display: grid; place-items: center; flex: none; width: 18px; height: 18px; margin-top: 1px;
+  border-radius: var(--r-full); background: var(--surface-3); color: var(--text-2);
+  font-size: 10.5px; font-weight: 700;
+}
+.lui-cites-item[data-active] .lui-cites-num { background: var(--accent); color: var(--accent-fg); }
+.lui-cites-body { display: grid; gap: 2px; min-width: 0; }
+.lui-cites-title { font-size: 13px; font-weight: 600; color: var(--text); }
+.lui-cites-source { font-size: 11.5px; color: var(--text-3); }
+.lui-cites-snippet {
+  font-size: 12.5px; color: var(--text-3); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.lui-cites-ext { flex: none; margin-top: 2px; color: var(--text-3); }
+
+/* ---------- UsageQuota ---------- */
+.lui-quota { --lui-quota-color: var(--accent); display: grid; gap: 7px; width: 100%; }
+.lui-quota[data-tone="amber"] { --lui-quota-color: var(--amber); }
+.lui-quota[data-tone="red"] { --lui-quota-color: var(--red); }
+
+.lui-quota-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.lui-quota-label { font-size: var(--fs-sm); color: var(--text-2); font-weight: 550; }
+.lui-quota-value {
+  font-size: var(--fs-sm); font-weight: 650; color: var(--lui-quota-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.lui-quota-track { height: 7px; border-radius: var(--r-full); background: var(--surface-3); overflow: hidden; }
+.lui-quota-fill {
+  display: block; height: 100%; border-radius: var(--r-full); background: var(--lui-quota-color);
+  transition: width var(--dur-slow) var(--ease), background var(--dur) var(--ease);
+}
+
+.lui-quota-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.lui-quota-reset { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); color: var(--text-3); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-quota-fill { transition: none; }
+}

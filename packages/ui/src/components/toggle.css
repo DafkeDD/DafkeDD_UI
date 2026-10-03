@@ -1,0 +1,50 @@
+/* ============================ Toggle ============================ */
+.lui-toggle {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  height: calc(36px * var(--density)); padding: 0 12px;
+  border: 1px solid transparent; border-radius: var(--r-sm);
+  background: transparent; color: var(--text-2);
+  font: inherit; font-size: 13.5px; font-weight: 600; white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+.lui-toggle:hover:not(:disabled) { background: var(--surface-3); color: var(--text); }
+.lui-toggle:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-toggle:disabled { opacity: .45; cursor: not-allowed; }
+
+.lui-toggle[data-state="on"] {
+  background: var(--accent-tint); color: var(--accent); border-color: var(--accent-border);
+}
+.lui-toggle[data-state="on"]:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent-tint) 72%, var(--accent));
+}
+
+.lui-toggle-outline { border-color: var(--border); background: var(--surface); }
+.lui-toggle-outline:hover:not(:disabled) { background: var(--surface-2); }
+
+.lui-toggle-sm { height: calc(30px * var(--density)); padding: 0 9px; font-size: 12.5px; }
+.lui-toggle-lg { height: calc(42px * var(--density)); padding: 0 16px; font-size: 14.5px; }
+
+.lui-toggle-icon-only { padding: 0; width: calc(36px * var(--density)); }
+.lui-toggle-sm.lui-toggle-icon-only { width: calc(30px * var(--density)); }
+.lui-toggle-lg.lui-toggle-icon-only { width: calc(42px * var(--density)); }
+
+.lui-toggle-icon { display: inline-flex; }
+.lui-toggle-icon svg { width: 16px; height: 16px; }
+
+/* ---------- ToggleGroup ---------- */
+.lui-toggle-group { display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+
+.lui-toggle-group-joined { gap: 0; }
+.lui-toggle-group-joined .lui-toggle {
+  border-color: var(--border); background: var(--surface); border-radius: 0;
+}
+.lui-toggle-group-joined .lui-toggle + .lui-toggle { margin-left: -1px; }
+.lui-toggle-group-joined .lui-toggle:first-child {
+  border-radius: var(--r-sm) 0 0 var(--r-sm);
+}
+.lui-toggle-group-joined .lui-toggle:last-child {
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+}
+.lui-toggle-group-joined .lui-toggle[data-state="on"] { position: relative; z-index: 1; }

@@ -1,0 +1,18 @@
+{
+  "name": "copy-button",
+  "title": "CopyButton",
+  "description": "Kopieert een waarde en bevestigt dat kort met een vinkje.",
+  "category": "Basis",
+  "dependencies": [],
+  "requires": [],
+  "files": [
+    {
+      "path": "components/copy-button.tsx",
+      "content": "\"use client\";\nimport * as React from \"react\";\nimport { cn } from \"../lib/cn\";\nimport { Icon } from \"../icons/icon\";\nimport { useCopyToClipboard } from \"../lib/hooks\";\n\nexport interface CopyButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, \"value\"> {\n  /** Tekst die naar het klembord gaat. */\n  value: string;\n  /** Toont het label naast het icoon. */\n  label?: React.ReactNode;\n  /** Tekst na het kopiëren. */\n  copiedLabel?: React.ReactNode;\n  size?: \"sm\" | \"md\";\n  variant?: \"ghost\" | \"outline\";\n  onCopied?: (value: string) => void;\n}\n\n/** CopyButton — kopieert een waarde en bevestigt dat kort met een vinkje. */\nexport const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(function CopyButton(\n  { value, label, copiedLabel = \"Gekopieerd\", size = \"md\", variant = \"ghost\", className, onCopied, onClick, ...rest },\n  ref\n) {\n  const { copied, copy } = useCopyToClipboard();\n\n  return (\n    <button\n      ref={ref}\n      type=\"button\"\n      data-copied={copied ? \"\" : undefined}\n      aria-label={label ? undefined : copied ? String(copiedLabel) : \"Kopiëren\"}\n      title={label ? undefined : \"Kopiëren\"}\n      className={cn(\"lui-copy\", `lui-copy-${size}`, `lui-copy-${variant}`, className)}\n      onClick={async (event) => {\n        onClick?.(event);\n        const ok = await copy(value);\n        if (ok) onCopied?.(value);\n      }}\n      {...rest}\n    >\n      <Icon name={copied ? \"check\" : \"copy\"} size={size === \"sm\" ? 13 : 15} />\n      {label && <span>{copied ? copiedLabel : label}</span>}\n    </button>\n  );\n});\n"
+    },
+    {
+      "path": "components/copy-button.css",
+      "content": "/* ============================ CopyButton ============================ */\n.lui-copy {\n  display: inline-flex; align-items: center; justify-content: center; gap: 7px;\n  min-width: 30px; height: 30px; padding: 0 8px;\n  border: 1px solid transparent; border-radius: var(--r-xs);\n  background: transparent; color: var(--text-3);\n  font: inherit; font-size: 12.5px; font-weight: 600;\n  cursor: pointer; transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);\n}\n.lui-copy:hover { background: var(--surface-3); color: var(--text); }\n.lui-copy:focus-visible { outline: none; box-shadow: var(--ring); }\n.lui-copy[data-copied] { color: var(--green); }\n.lui-copy-outline { border-color: var(--border); background: var(--surface); }\n.lui-copy-outline:hover { border-color: var(--border-strong); }\n.lui-copy-sm { min-width: 24px; height: 24px; padding: 0 6px; font-size: 11.5px; }\n"
+    }
+  ]
+}

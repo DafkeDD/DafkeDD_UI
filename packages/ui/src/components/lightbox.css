@@ -1,0 +1,78 @@
+/* ============================ Lightbox ============================ */
+.lui-lightbox { position: fixed; inset: 0; z-index: var(--z-overlay); display: grid; place-items: center; }
+.lui-lightbox-backdrop {
+  position: absolute; inset: 0; background: rgba(2, 6, 23, .82);
+  backdrop-filter: blur(2px);
+  animation: lui-lightbox-in var(--dur) var(--ease-out);
+}
+
+.lui-lightbox-panel {
+  position: relative; z-index: 1; outline: none;
+  display: flex; flex-direction: column; gap: 10px;
+  width: min(1100px, 94vw); max-height: 92vh; padding: 10px;
+}
+
+.lui-lightbox-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.lui-lightbox-counter { font-size: var(--fs-sm); color: rgba(255, 255, 255, .72); font-variant-numeric: tabular-nums; }
+.lui-lightbox-tools { display: flex; align-items: center; gap: 4px; }
+.lui-lightbox-zoom {
+  min-width: 48px; text-align: center;
+  font-size: 12px; color: rgba(255, 255, 255, .72); font-variant-numeric: tabular-nums;
+}
+.lui-lightbox-btn {
+  display: grid; place-items: center; width: 34px; height: 34px; padding: 0;
+  border: 0; border-radius: var(--r-sm); background: rgba(255, 255, 255, .1);
+  color: #fff; cursor: pointer; transition: background var(--dur-fast);
+}
+.lui-lightbox-btn:hover:not(:disabled) { background: rgba(255, 255, 255, .2); }
+.lui-lightbox-btn:disabled { opacity: .35; cursor: not-allowed; }
+.lui-lightbox-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.lui-lightbox-stage {
+  position: relative; flex: 1; min-height: 0;
+  display: grid; place-items: center; overflow: hidden;
+}
+.lui-lightbox-image {
+  max-width: 100%; max-height: 72vh; display: block;
+  border-radius: var(--r-sm); user-select: none;
+  transition: transform var(--dur) var(--ease-out);
+}
+.lui-lightbox-image:active { transition: none; }
+
+.lui-lightbox-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 1;
+  display: grid; place-items: center; width: 42px; height: 42px; padding: 0;
+  border: 0; border-radius: 50%; background: rgba(255, 255, 255, .12);
+  color: #fff; cursor: pointer; transition: background var(--dur-fast);
+}
+.lui-lightbox-nav[data-side="prev"] { inset-inline-start: 6px; }
+.lui-lightbox-nav[data-side="next"] { inset-inline-end: 6px; }
+.lui-lightbox-nav:hover:not(:disabled) { background: rgba(255, 255, 255, .24); }
+.lui-lightbox-nav:disabled { opacity: .3; cursor: not-allowed; }
+.lui-lightbox-nav:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.lui-lightbox-caption {
+  margin: 0; text-align: center; font-size: var(--fs-sm); color: rgba(255, 255, 255, .8);
+}
+
+.lui-lightbox-thumbs {
+  display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+  overflow-x: auto; padding: 2px;
+}
+.lui-lightbox-thumb {
+  flex: none; width: 60px; height: 44px; padding: 0; overflow: hidden;
+  border: 2px solid transparent; border-radius: var(--r-xs);
+  background: rgba(255, 255, 255, .08); cursor: pointer; opacity: .6;
+  transition: opacity var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-lightbox-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lui-lightbox-thumb:hover { opacity: .9; }
+.lui-lightbox-thumb[data-active] { opacity: 1; border-color: #fff; }
+.lui-lightbox-thumb:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+@keyframes lui-lightbox-in { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-lightbox-backdrop { animation: none; }
+  .lui-lightbox-image { transition: none; }
+}

@@ -1,0 +1,65 @@
+/* ============================ Progress ============================ */
+.lui-progress-wrap { --lui-progress-color: var(--accent); display: flex; flex-direction: column; gap: 7px; width: 100%; }
+.lui-progress-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.lui-progress-label { font-size: 13px; font-weight: 550; color: var(--text-2); }
+.lui-progress-value { font-size: var(--fs-sm); font-weight: 650; color: var(--text); font-family: var(--mono); }
+
+.lui-progress {
+  --lui-progress-color: var(--accent);
+  position: relative; width: 100%; height: 8px; overflow: hidden;
+  background: var(--surface-3); border-radius: var(--r-full);
+}
+.lui-progress-sm { height: 5px; }
+.lui-progress-lg { height: 12px; }
+
+.lui-progress-accent { --lui-progress-color: var(--accent); }
+.lui-progress-green { --lui-progress-color: var(--green); }
+.lui-progress-amber { --lui-progress-color: var(--amber); }
+.lui-progress-red { --lui-progress-color: var(--red); }
+.lui-progress-blue { --lui-progress-color: var(--blue); }
+
+.lui-progress-bar {
+  height: 100%; border-radius: inherit;
+  background: var(--lui-progress-color);
+  transition: width .45s var(--ease-out);
+}
+.lui-progress-bar-indeterminate {
+  width: 38%; position: absolute; left: 0;
+  animation: lui-progress-slide 1.15s var(--ease) infinite;
+}
+@keyframes lui-progress-slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(365%); }
+}
+
+/* ---------- Circle ---------- */
+.lui-progress-circle { position: relative; display: inline-grid; place-items: center; }
+.lui-progress-circle svg { position: absolute; inset: 0; }
+.lui-progress-circle-track { stroke: var(--surface-3); }
+.lui-progress-circle-bar {
+  stroke: var(--lui-progress-color, var(--accent));
+  transition: stroke-dashoffset .5s var(--ease-out);
+}
+.lui-progress-circle-value {
+  font-size: var(--fs-sm); font-weight: 700; color: var(--text); font-family: var(--mono);
+}
+
+/* ---------- Mount: balk en ring vullen zich vanaf nul ---------- */
+.lui-progress-bar:not(.lui-progress-bar-indeterminate) {
+  transform-origin: left; animation: lui-fill-x .9s var(--ease-out) both;
+  position: relative; overflow: hidden;
+}
+[dir="rtl"] .lui-progress-bar:not(.lui-progress-bar-indeterminate) { transform-origin: right; }
+/* Zachte glans die af en toe over de balk loopt. */
+.lui-progress-bar:not(.lui-progress-bar-indeterminate)::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / .35) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: lui-progress-sheen 2.6s var(--ease) 1s infinite;
+}
+@keyframes lui-progress-sheen { 0% { transform: translateX(-100%); } 45%, 100% { transform: translateX(100%); } }
+.lui-progress-circle-bar { animation: lui-progress-ring 1s var(--ease-out) both; }
+@keyframes lui-progress-ring { from { stroke-dashoffset: var(--lui-circ); } }
+@media (prefers-reduced-motion: reduce) {
+  .lui-progress-bar::after { display: none; }
+}

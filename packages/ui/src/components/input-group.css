@@ -1,0 +1,34 @@
+/* ============================ InputGroup ============================ */
+/* Plakt inputs, selects, knoppen en teksten aan elkaar tot één controle. */
+.lui-inputgroup { display: inline-flex; align-items: stretch; }
+.lui-inputgroup-block { display: flex; width: 100%; }
+.lui-inputgroup[data-vertical] { flex-direction: column; }
+
+.lui-inputgroup > * { border-radius: 0 !important; }
+.lui-inputgroup > .lui-input-wrap > .lui-input { border-radius: 0 !important; }
+.lui-inputgroup > :first-child,
+.lui-inputgroup > :first-child > .lui-input { border-start-start-radius: var(--r-sm) !important; border-end-start-radius: var(--r-sm) !important; }
+.lui-inputgroup > :last-child,
+.lui-inputgroup > :last-child > .lui-input { border-start-end-radius: var(--r-sm) !important; border-end-end-radius: var(--r-sm) !important; }
+.lui-inputgroup[data-size="sm"] > :first-child, .lui-inputgroup[data-size="sm"] > :first-child > .lui-input { border-start-start-radius: var(--r-xs) !important; border-end-start-radius: var(--r-xs) !important; }
+.lui-inputgroup[data-size="sm"] > :last-child, .lui-inputgroup[data-size="sm"] > :last-child > .lui-input { border-start-end-radius: var(--r-xs) !important; border-end-end-radius: var(--r-xs) !important; }
+.lui-inputgroup[data-size="lg"] > :first-child, .lui-inputgroup[data-size="lg"] > :first-child > .lui-input { border-start-start-radius: var(--r-md) !important; border-end-start-radius: var(--r-md) !important; }
+.lui-inputgroup[data-size="lg"] > :last-child, .lui-inputgroup[data-size="lg"] > :last-child > .lui-input { border-start-end-radius: var(--r-md) !important; border-end-end-radius: var(--r-md) !important; }
+
+/* Verticaal: boven- en onderkant afronden in plaats van links en rechts. */
+.lui-inputgroup[data-vertical] > :first-child { border-radius: var(--r-sm) var(--r-sm) 0 0 !important; }
+.lui-inputgroup[data-vertical] > :last-child { border-radius: 0 0 var(--r-sm) var(--r-sm) !important; }
+
+/* Dubbele randen ertussen wegnemen; de actieve controle komt bovenop. */
+.lui-inputgroup > * + * { margin-inline-start: -1px; }
+.lui-inputgroup[data-vertical] > * + * { margin-inline-start: 0; margin-block-start: -1px; }
+.lui-inputgroup > *:focus-within, .lui-inputgroup > *:focus, .lui-inputgroup > *:hover { position: relative; z-index: 1; }
+.lui-inputgroup > .lui-input, .lui-inputgroup > .lui-select-trigger { flex: 1; min-width: 0; }
+.lui-inputgroup[data-invalid] > * { border-color: var(--red) !important; }
+
+.lui-inputgroup-text {
+  display: inline-flex; align-items: center; gap: 6px; flex: none;
+  padding: 0 12px; border: 1px solid var(--border-strong);
+  background: var(--surface-2); color: var(--text-2);
+  font-size: var(--fs-sm); white-space: nowrap;
+}

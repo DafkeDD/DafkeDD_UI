@@ -1,0 +1,18 @@
+{
+  "name": "aspect-ratio",
+  "title": "AspectRatio",
+  "description": "Houdt een vaste verhouding aan, zodat niets verspringt tijdens het laden.",
+  "category": "Layout",
+  "dependencies": [],
+  "requires": [],
+  "files": [
+    {
+      "path": "components/aspect-ratio.tsx",
+      "content": "\"use client\";\nimport * as React from \"react\";\nimport { cn } from \"../lib/cn\";\n\nexport interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Breedte gedeeld door hoogte. 16 / 9 is breed, 1 is vierkant. */\n  ratio?: number;\n}\n\n/**\n * AspectRatio — houdt een vaste verhouding aan, zodat een afbeelding of kaart\n * niet verspringt terwijl ze laadt.\n */\nexport const AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(function AspectRatio(\n  { ratio = 16 / 9, className, style, ...rest },\n  ref\n) {\n  return (\n    <div\n      ref={ref}\n      className={cn(\"lui-aspect\", className)}\n      style={{ aspectRatio: String(ratio), ...style }}\n      {...rest}\n    />\n  );\n});\n"
+    },
+    {
+      "path": "components/aspect-ratio.css",
+      "content": "/* ============================ AspectRatio ============================ */\n.lui-aspect { position: relative; width: 100%; overflow: hidden; }\n.lui-aspect > img,\n.lui-aspect > video,\n.lui-aspect > iframe {\n  width: 100%; height: 100%; object-fit: cover; display: block; border: 0;\n}\n"
+    }
+  ]
+}

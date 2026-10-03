@@ -1,0 +1,10 @@
+/* ============================ Combobox ============================ */
+.lui-combobox { width: 100%; }
+.lui-combobox .lui-select-item[data-active] { background: var(--surface-3); }
+.lui-combobox .lui-select-item-selected[data-active] { background: var(--accent-tint-2); }
+.lui-combobox-clear {
+  display: inline-grid; place-items: center; width: 20px; height: 20px;
+  border-radius: var(--r-full); color: var(--text-3); flex: none;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-combobox-clear:hover { background: var(--surface-3); color: var(--text); }

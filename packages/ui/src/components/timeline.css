@@ -1,0 +1,88 @@
+/* ============================ Timeline ============================ */
+.lui-timeline {
+  --lui-timeline-dot: 26px;
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column;
+}
+
+.lui-timeline-item {
+  --lui-timeline-color: var(--text-3);
+  position: relative; display: flex; gap: 14px;
+  padding-bottom: 20px;
+}
+.lui-timeline-item:last-child { padding-bottom: 0; }
+
+/* De verbindingslijn loopt vanaf de stip tot de volgende. */
+.lui-timeline-item::before {
+  content: ""; position: absolute; top: var(--lui-timeline-dot); bottom: 0;
+  left: calc(var(--lui-timeline-dot) / 2); width: 1px;
+  background: var(--border); translate: -0.5px 0;
+}
+.lui-timeline-item:last-child::before { display: none; }
+.lui-timeline-item[data-pending]::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--border) 0 4px,
+    transparent 4px 8px
+  );
+}
+
+.lui-timeline-marker { flex: none; }
+.lui-timeline-dot {
+  position: relative; z-index: 1;
+  display: grid; place-items: center;
+  width: var(--lui-timeline-dot); height: var(--lui-timeline-dot);
+  border-radius: var(--r-full);
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--lui-timeline-color);
+}
+.lui-timeline-dot:empty::after {
+  content: ""; width: 7px; height: 7px; border-radius: var(--r-full);
+  background: var(--lui-timeline-color);
+}
+.lui-timeline-dot svg { width: 14px; height: 14px; }
+
+.lui-timeline-item[data-active] .lui-timeline-dot {
+  border-color: var(--lui-timeline-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lui-timeline-color) 16%, transparent);
+}
+
+.lui-timeline-content { min-width: 0; padding-top: 3px; flex: 1; }
+.lui-timeline-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.lui-timeline-title { font-size: 13.5px; font-weight: 600; color: var(--text); }
+.lui-timeline-time { margin-left: auto; font-size: 12px; color: var(--text-3); white-space: nowrap; }
+.lui-timeline-by { margin-top: 2px; font-size: 12.5px; color: var(--text-3); }
+.lui-timeline-body { margin-top: 7px; font-size: 13px; color: var(--text-2); line-height: 1.55; }
+
+.lui-timeline-neutral { --lui-timeline-color: var(--text-3); }
+.lui-timeline-accent { --lui-timeline-color: var(--accent); }
+.lui-timeline-green { --lui-timeline-color: var(--green); }
+.lui-timeline-amber { --lui-timeline-color: var(--amber); }
+.lui-timeline-red { --lui-timeline-color: var(--red); }
+.lui-timeline-blue { --lui-timeline-color: var(--blue); }
+
+.lui-timeline-dense { --lui-timeline-dot: 18px; }
+.lui-timeline-dense .lui-timeline-item { padding-bottom: 12px; gap: 10px; }
+.lui-timeline-dense .lui-timeline-dot svg { width: 11px; height: 11px; }
+.lui-timeline-dense .lui-timeline-content { padding-top: 0; }
+
+/* ---------- Motion: items schuiven binnen terwijl je scrolt ---------- */
+.lui-timeline-item { animation: lui-rise .45s var(--ease-out) var(--lui-d, 0s) backwards; }
+.lui-timeline-item:nth-child(2) { --lui-d: 60ms; }
+.lui-timeline-item:nth-child(3) { --lui-d: 120ms; }
+.lui-timeline-item:nth-child(4) { --lui-d: 180ms; }
+.lui-timeline-item:nth-child(n + 5) { --lui-d: 240ms; }
+.lui-timeline-dot { animation: lui-pop-in .45s var(--ease-pop) var(--lui-d, 0s) backwards; }
+.lui-timeline-item::before {
+  transform-origin: top;
+  animation: lui-timeline-line .6s var(--ease-out) calc(var(--lui-d, 0s) + 150ms) backwards;
+}
+@keyframes lui-timeline-line { from { transform: scaleY(0); } }
+@supports (animation-timeline: view()) {
+  .lui-timeline-item {
+    animation: lui-rise linear both;
+    animation-timeline: view(); animation-range: entry 0% entry 70%;
+  }
+  .lui-timeline-item::before { animation: lui-timeline-line linear both; animation-timeline: view(); animation-range: entry 20% cover 45%; }
+  .lui-timeline-dot { animation: lui-pop-in linear both; animation-timeline: view(); animation-range: entry 10% entry 80%; }
+}

@@ -1,0 +1,34 @@
+/* ============================ Switch ============================ */
+.lui-switch {
+  position: relative; width: 40px; height: 23px; flex: none; padding: 0;
+  border: none; border-radius: var(--r-full); background: var(--border-strong);
+  cursor: pointer; transition: background var(--dur);
+}
+.lui-switch:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-switch:disabled { opacity: .5; cursor: not-allowed; }
+.lui-switch-thumb {
+  position: absolute; top: 2.5px; left: 2.5px;
+  width: 18px; height: 18px; border-radius: var(--r-full);
+  background: var(--surface); box-shadow: var(--sh-sm);
+  transition: transform var(--dur) var(--ease);
+}
+.lui-switch[data-state="on"] { background: var(--accent); }
+.lui-switch[data-state="on"] .lui-switch-thumb { transform: translateX(17px); }
+
+.lui-switch-sm { width: 32px; height: 19px; }
+.lui-switch-sm .lui-switch-thumb { width: 14px; height: 14px; top: 2.5px; left: 2.5px; }
+.lui-switch-sm[data-state="on"] .lui-switch-thumb { transform: translateX(13px); }
+
+.lui-switch-row { display: flex; align-items: flex-start; gap: 11px; cursor: pointer; }
+.lui-switch-row-reverse { flex-direction: row-reverse; justify-content: space-between; }
+.lui-switch-row-disabled { cursor: not-allowed; opacity: .6; }
+.lui-switch-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lui-switch-label { font-size: 13.5px; font-weight: 550; color: var(--text); line-height: 1.35; }
+.lui-switch-description { font-size: var(--fs-sm); color: var(--text-3); line-height: 1.45; }
+
+/* ---------- Motion: verende duim die uitrekt terwijl je drukt ---------- */
+.lui-switch-thumb { transition: transform .32s var(--ease-pop), width .2s var(--ease-out); }
+.lui-switch:active:not(:disabled) .lui-switch-thumb { width: 23px; }
+.lui-switch[data-state="on"]:active:not(:disabled) .lui-switch-thumb { transform: translateX(12px); }
+.lui-switch-sm:active:not(:disabled) .lui-switch-thumb { width: 18px; }
+.lui-switch-sm[data-state="on"]:active:not(:disabled) .lui-switch-thumb { transform: translateX(9px); }

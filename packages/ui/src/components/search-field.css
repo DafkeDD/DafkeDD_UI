@@ -1,0 +1,161 @@
+/* ============================ SearchField ============================ */
+.lui-searchfield {
+  --lui-sf-h: calc(42px * var(--density));
+  position: relative; width: 100%;
+}
+.lui-searchfield-sm { --lui-sf-h: calc(34px * var(--density)); font-size: 13px; }
+.lui-searchfield-lg { --lui-sf-h: calc(48px * var(--density)); font-size: var(--fs-md); }
+
+.lui-searchfield-box {
+  position: relative; display: flex; align-items: center; gap: 8px;
+  height: var(--lui-sf-h); padding: 0 8px 0 4px;
+  border: 1px solid var(--border-strong); border-radius: var(--r-md);
+  background: var(--surface); color: var(--text);
+  transition:
+    border-color var(--dur-fast), box-shadow var(--dur), transform var(--dur) var(--ease-out),
+    width var(--dur-slow) var(--ease-out), padding var(--dur-slow) var(--ease-out),
+    border-radius var(--dur-slow) var(--ease-out);
+}
+.lui-searchfield-box:focus-within {
+  border-color: var(--accent);
+  box-shadow: var(--ring), 0 8px 22px color-mix(in oklab, var(--accent) 14%, transparent);
+  transform: translateY(-1px);
+}
+.lui-searchfield-box[data-panel] { transform: none; }
+
+.lui-searchfield-icon {
+  display: grid; place-items: center; flex: none;
+  width: calc(var(--lui-sf-h) - 10px); height: calc(var(--lui-sf-h) - 10px); padding: 0;
+  border: 0; border-radius: 50%; background: transparent; color: var(--text-3); cursor: text;
+}
+.lui-searchfield-box:focus-within .lui-searchfield-icon { color: var(--accent); }
+
+.lui-searchfield-input {
+  flex: 1; min-width: 0; border: 0; outline: none; background: transparent;
+  color: inherit; font: inherit;
+}
+.lui-searchfield-input::placeholder { color: var(--text-3); }
+.lui-searchfield-input::-webkit-search-cancel-button { display: none; }
+
+.lui-searchfield-clear {
+  display: grid; place-items: center; flex: none; width: 24px; height: 24px; padding: 0;
+  border: 0; border-radius: 50%; background: transparent; color: var(--text-3); cursor: pointer;
+}
+.lui-searchfield-clear:hover { background: var(--surface-3); color: var(--text); }
+.lui-searchfield-clear:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-searchfield-kbd { flex: none; }
+
+/* ---------- uitklapbaar: het rondje schuift open tot een veld ---------- */
+.lui-searchfield-expandable { width: auto; display: inline-block; }
+.lui-searchfield-expandable .lui-searchfield-box {
+  width: calc(var(--lui-sf-h) + 4px); padding: 0; overflow: visible;
+  border-color: var(--accent); border-radius: 999px;
+  justify-content: center; gap: 0;
+}
+.lui-searchfield-expandable .lui-searchfield-icon {
+  width: 100%; height: 100%; color: var(--accent); cursor: pointer;
+}
+.lui-searchfield-expandable .lui-searchfield-icon:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--accent) 9%, transparent);
+}
+.lui-searchfield-expandable .lui-searchfield-icon:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-searchfield-expandable .lui-searchfield-input { width: 0; flex: 0 0 0; opacity: 0; padding: 0; }
+
+.lui-searchfield-expandable[data-open] .lui-searchfield-box {
+  width: var(--lui-sf-open); padding: 0 8px 0 4px; justify-content: flex-start; gap: 8px;
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 12%, transparent),
+    0 10px 28px color-mix(in oklab, var(--accent) 18%, transparent);
+}
+.lui-searchfield-expandable[data-open] .lui-searchfield-icon {
+  width: calc(var(--lui-sf-h) - 10px); height: calc(var(--lui-sf-h) - 10px); cursor: text;
+}
+.lui-searchfield-expandable[data-open] .lui-searchfield-icon:hover { background: transparent; }
+.lui-searchfield-expandable[data-open] .lui-searchfield-input {
+  flex: 1; width: auto; opacity: 1;
+  transition: opacity var(--dur) var(--ease) .12s;
+}
+
+/* zwevende deeltjes rond het open veld */
+.lui-searchfield-particles { position: absolute; inset: 0; pointer-events: none; }
+.lui-searchfield-particles > span {
+  position: absolute; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); opacity: 0;
+  animation: lui-sf-float 3.2s var(--ease) infinite;
+}
+.lui-searchfield-particles > span:nth-child(even) { width: 4px; height: 4px; }
+@keyframes lui-sf-float {
+  0% { opacity: 0; transform: translateY(6px) scale(.6); }
+  25% { opacity: .55; }
+  70% { opacity: .35; }
+  100% { opacity: 0; transform: translateY(-12px) scale(1); }
+}
+
+/* ---------- hint onder het veld ---------- */
+.lui-searchfield-hint {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin: 8px 0 0; font-size: var(--fs-xs); color: var(--text-3);
+  animation: lui-sf-fade var(--dur) var(--ease-out);
+}
+.lui-searchfield-hint-panel { margin: 2px 0 0; padding-top: 8px; border-top: 1px solid var(--border); }
+
+/* ---------- paneel ---------- */
+.lui-searchfield-panel {
+  position: absolute; inset-inline: 0; top: calc(100% + 8px); z-index: var(--z-popover);
+  display: grid; gap: 12px; padding: 10px;
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface); box-shadow: var(--sh-lg);
+  animation: lui-sf-panel var(--dur-fast) var(--ease-out);
+}
+.lui-searchfield-expandable .lui-searchfield-panel { width: var(--lui-sf-open); }
+
+.lui-searchfield-group { display: grid; gap: 4px; }
+.lui-searchfield-grouprow { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.lui-searchfield-grouplabel {
+  margin: 0; padding: 0 6px;
+  font-size: 10.5px; font-weight: 650; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3);
+}
+.lui-searchfield-clearall {
+  border: 0; background: transparent; color: var(--accent);
+  font: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.lui-searchfield-clearall:hover { text-decoration: underline; }
+.lui-searchfield-clearall:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-searchfield-options { display: grid; max-height: 220px; overflow-y: auto; }
+.lui-searchfield-option {
+  display: flex; align-items: center; gap: 9px; width: 100%;
+  padding: 8px 9px; border: 0; border-radius: var(--r-sm);
+  background: transparent; color: var(--text); font: inherit; font-size: var(--fs-sm);
+  text-align: start; cursor: pointer;
+}
+.lui-searchfield-option[data-active] { background: color-mix(in oklab, var(--accent) 9%, transparent); }
+.lui-searchfield-option > svg { flex: none; color: var(--text-3); }
+.lui-searchfield-option[data-active] > svg { color: var(--accent); }
+.lui-searchfield-optiontext { display: grid; gap: 1px; min-width: 0; }
+.lui-searchfield-desc { font-size: 12px; color: var(--text-3); }
+
+.lui-searchfield-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 6px 0; }
+.lui-searchfield-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 11px; border: 1px solid var(--border); border-radius: var(--r-full);
+  background: var(--surface-2); color: var(--text-2); font: inherit; font-size: 12.5px; cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-searchfield-chip:hover, .lui-searchfield-chip[data-active] {
+  background: var(--accent); border-color: var(--accent); color: var(--accent-fg);
+}
+.lui-searchfield-chip:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-searchfield-chip > svg { opacity: .7; }
+
+.lui-searchfield-loading, .lui-searchfield-empty {
+  margin: 0; padding: 10px 4px; text-align: center; font-size: var(--fs-sm); color: var(--text-3);
+}
+
+@keyframes lui-sf-panel { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+@keyframes lui-sf-fade { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-searchfield-box, .lui-searchfield-panel, .lui-searchfield-hint { transition: none; animation: none; }
+  .lui-searchfield-box:focus-within { transform: none; }
+  .lui-searchfield-particles { display: none; }
+}

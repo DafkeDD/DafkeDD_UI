@@ -1,0 +1,18 @@
+{
+  "name": "visually-hidden",
+  "title": "VisuallyHidden",
+  "description": "Tekst enkel voor schermlezers, plus een SkipLink naar de inhoud.",
+  "category": "Layout",
+  "dependencies": [],
+  "requires": [],
+  "files": [
+    {
+      "path": "components/visually-hidden.tsx",
+      "content": "\"use client\";\nimport * as React from \"react\";\nimport { cn } from \"../lib/cn\";\n\nexport interface VisuallyHiddenProps extends React.HTMLAttributes<HTMLElement> {\n  /** Eigen element, standaard een span. */\n  as?: React.ElementType;\n}\n\nexport interface SkipLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {\n  /** Id van het element waar de link naartoe springt, zonder hekje. */\n  targetId?: string;\n  children?: React.ReactNode;\n}\n\n/**\n * VisuallyHidden — tekst die je niet ziet maar een schermlezer wel voorleest.\n * Voor labels bij icoonknoppen, statusmeldingen en tabelkoppen.\n */\nexport const VisuallyHidden = React.forwardRef<HTMLElement, VisuallyHiddenProps>(\n  function VisuallyHidden({ as: Comp = \"span\", className, ...rest }, ref) {\n    return <Comp ref={ref} className={cn(\"lui-sr-only\", className)} {...rest} />;\n  }\n);\n\n/**\n * SkipLink — de eerste link op de pagina: onzichtbaar tot je tabt, en dan\n * springt hij over de navigatie heen naar de inhoud.\n */\nexport const SkipLink = React.forwardRef<HTMLAnchorElement, SkipLinkProps>(function SkipLink(\n  { targetId = \"inhoud\", children = \"Naar de inhoud\", className, ...rest },\n  ref\n) {\n  return (\n    <a ref={ref} href={`#${targetId}`} className={cn(\"lui-skiplink\", className)} {...rest}>\n      {children}\n    </a>\n  );\n});\n"
+    },
+    {
+      "path": "components/visually-hidden.css",
+      "content": "/* ==================== VisuallyHidden & SkipLink ==================== */\n.lui-sr-only {\n  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;\n  overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%);\n  white-space: nowrap; border: 0;\n}\n\n/* Volledig weggeknipt tot hij focus krijgt; dan komt hij linksboven in beeld.\n   Wegknippen in plaats van wegschuiven, zodat hij nergens uitsteekt. */\n.lui-skiplink {\n  position: absolute; inset-inline-start: 12px; top: 12px; z-index: var(--z-toast);\n  width: 1px; height: 1px; padding: 0; margin: -1px;\n  overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap;\n  border-radius: var(--r-sm); background: var(--accent); color: var(--accent-fg);\n  font-size: var(--fs-base); font-weight: 650; text-decoration: none;\n}\n.lui-skiplink:focus {\n  display: inline-flex; align-items: center;\n  width: auto; height: calc(40px * var(--density)); padding: 0 16px; margin: 0;\n  overflow: visible; clip: auto; clip-path: none;\n  box-shadow: var(--sh-lg);\n}\n.lui-skiplink:focus-visible { outline: none; box-shadow: var(--sh-lg), var(--ring); }\n"
+    }
+  ]
+}

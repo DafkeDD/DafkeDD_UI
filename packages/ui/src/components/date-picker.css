@@ -1,0 +1,65 @@
+/* ============================ DatePicker ============================ */
+.lui-datefield {
+  display: flex; align-items: center; gap: 9px;
+  width: 100%; height: calc(42px * var(--density)); padding: 0 11px 0 13px;
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  font: inherit; font-size: var(--fs-base); text-align: left; cursor: pointer;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-datefield:hover:not(:disabled) { border-color: var(--text-3); }
+.lui-datefield:focus-visible { outline: none; border-color: var(--accent); box-shadow: var(--ring); }
+.lui-datefield[data-state="open"] { border-color: var(--accent); box-shadow: var(--ring); }
+.lui-datefield:disabled { background: var(--surface-3); color: var(--text-2); cursor: not-allowed; }
+
+.lui-datefield-sm { height: calc(34px * var(--density)); padding: 0 9px 0 10px; font-size: 13px; border-radius: var(--r-xs); }
+.lui-datefield-lg { height: calc(48px * var(--density)); padding: 0 13px 0 15px; font-size: var(--fs-md); border-radius: var(--r-md); }
+
+.lui-datefield-icon { flex: none; color: var(--text-3); }
+.lui-datefield-value {
+  flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.lui-datefield-placeholder { color: var(--text-3); }
+.lui-datefield-invalid { border-color: var(--red); }
+.lui-datefield-invalid:focus-visible { border-color: var(--red); box-shadow: var(--ring-red); }
+
+.lui-datefield-clear {
+  display: inline-grid; place-items: center; flex: none;
+  width: 20px; height: 20px; border-radius: var(--r-full); color: var(--text-3);
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-datefield-clear:hover { background: var(--surface-3); color: var(--text); }
+
+.lui-datefield-popover { padding: 12px; }
+
+.lui-datefield-today {
+  border: 1px solid var(--border-strong); background: var(--surface);
+  border-radius: var(--r-xs); padding: 5px 11px;
+  font: inherit; font-size: 12.5px; font-weight: 600; color: var(--text);
+  cursor: pointer; transition: background var(--dur-fast);
+}
+.lui-datefield-today:hover { background: var(--surface-hover); }
+
+/* ---------- DateRangePicker ---------- */
+.lui-daterange { display: flex; gap: 14px; }
+.lui-daterange-presets {
+  display: flex; flex-direction: column; gap: 3px;
+  padding-right: 14px; border-right: 1px solid var(--border); min-width: 132px;
+}
+.lui-daterange-preset {
+  border: none; background: transparent; border-radius: var(--r-xs);
+  padding: 7px 10px; text-align: left;
+  font: inherit; font-size: 13px; font-weight: 550; color: var(--text-2);
+  cursor: pointer; transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-daterange-preset:hover { background: var(--surface-3); color: var(--text); }
+.lui-daterange-preset:focus-visible { outline: none; box-shadow: var(--ring); }
+
+@media (max-width: 640px) {
+  .lui-daterange { flex-direction: column; }
+  .lui-daterange-presets {
+    flex-direction: row; flex-wrap: wrap; min-width: 0;
+    padding-right: 0; padding-bottom: 10px;
+    border-right: none; border-bottom: 1px solid var(--border);
+  }
+}

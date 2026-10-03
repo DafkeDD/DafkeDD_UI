@@ -1,0 +1,163 @@
+/* ============================ StepTracker ============================ */
+.lui-steptrack {
+  --lui-st-accent: var(--accent);
+  --lui-st-marker: 20px;
+  container-type: inline-size;
+  display: grid; gap: 14px; padding: 18px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); box-shadow: var(--sh-sm);
+}
+
+/* ---------- Kop ---------- */
+.lui-steptrack-head { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.lui-steptrack-tile {
+  display: grid; place-items: center; flex: none; width: 36px; height: 36px;
+  border-radius: 10px; background: var(--lui-st-accent); color: var(--accent-fg);
+  box-shadow: 0 6px 14px -6px color-mix(in oklab, var(--lui-st-accent) 70%, transparent);
+}
+.lui-steptrack-tile svg { width: 18px; height: 18px; }
+.lui-steptrack-heading { flex: 1; min-width: 0; display: grid; gap: 1px; }
+.lui-steptrack-title { font-size: var(--fs-md); font-weight: 700; letter-spacing: -0.015em; color: var(--text); }
+.lui-steptrack-subtitle { font-size: 12.5px; color: var(--text-3); }
+.lui-steptrack-state { display: flex; align-items: center; gap: 10px; margin-inline-start: auto; }
+
+.lui-steptrack-badge {
+  --lui-st-tone: var(--text-3);
+  display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px;
+  border-radius: var(--r-full); font-size: 11.5px; font-weight: 650;
+  color: color-mix(in oklab, var(--lui-st-tone) 80%, var(--text));
+  background: color-mix(in oklab, var(--lui-st-tone) 13%, transparent);
+  animation: lui-pop-in .35s var(--ease-pop) both;
+}
+.lui-steptrack-badge[data-tone="accent"] { --lui-st-tone: var(--accent); }
+.lui-steptrack-badge[data-tone="green"] { --lui-st-tone: var(--green); }
+.lui-steptrack-badge[data-tone="amber"] { --lui-st-tone: var(--amber); }
+.lui-steptrack-badge[data-tone="red"] { --lui-st-tone: var(--red); }
+.lui-steptrack-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lui-st-tone); position: relative; }
+.lui-steptrack-badge:is([data-tone="accent"], [data-tone="red"]) .lui-steptrack-badge-dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; background: inherit;
+  animation: lui-badge-ping 1.5s var(--ease-out) infinite;
+}
+@keyframes lui-badge-ping { from { transform: scale(1); opacity: .55; } 75%, to { transform: scale(2.6); opacity: 0; } }
+.lui-steptrack-meta { font-family: var(--mono); font-size: 11px; color: var(--text-3); white-space: nowrap; }
+
+/* Smal: de status schuift onder de titel. */
+@container (max-width: 400px) {
+  .lui-steptrack-state { flex-basis: 100%; margin-inline-start: 48px; justify-content: space-between; }
+}
+
+/* ---------- Stappen ---------- */
+.lui-steptrack-list { position: relative; list-style: none; margin: 0; padding: 0; display: grid; }
+
+/* Markering achter de stap die loopt; glijdt mee. */
+.lui-steptrack-highlight {
+  position: absolute; left: -8px; right: -8px; top: 0; z-index: 0;
+  border-radius: var(--r-sm);
+  background: color-mix(in oklab, var(--lui-st-accent) 7%, transparent);
+  transition: transform .45s var(--ease-pop), height .3s var(--ease-out), background var(--dur);
+  pointer-events: none;
+}
+.lui-steptrack-highlight:not([data-ready]) { transition: none; animation: lui-overlay-in .3s var(--ease) both; }
+.lui-steptrack-highlight[data-error] { background: color-mix(in oklab, var(--red) 7%, transparent); }
+
+.lui-steptrack-step {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: var(--lui-st-marker) 1fr; gap: 12px;
+  padding: 7px 0;
+}
+/* Verbindingslijn naar de volgende stap: grijs, vult zich accent zodra de stap klaar is. */
+.lui-steptrack-step:not(:last-child)::before,
+.lui-steptrack-step:not(:last-child)::after {
+  content: ""; position: absolute; left: calc(var(--lui-st-marker) / 2 - 1px); width: 2px;
+  top: calc(7px + var(--lui-st-marker) + 3px); bottom: -4px; border-radius: 2px;
+}
+.lui-steptrack-step:not(:last-child)::before { background: var(--border); }
+.lui-steptrack-step:not(:last-child)::after {
+  background: var(--lui-st-accent); transform-origin: top; transform: scaleY(0);
+  transition: transform .5s var(--ease-out) .12s;
+}
+.lui-steptrack-step[data-status="done"]:not(:last-child)::after { transform: scaleY(1); }
+
+.lui-steptrack-marker {
+  position: relative; display: grid; place-items: center;
+  width: var(--lui-st-marker); height: var(--lui-st-marker); margin-top: 1px;
+  border-radius: 50%; color: #fff;
+  transition: background var(--dur), border-color var(--dur), transform .3s var(--ease-pop);
+}
+.lui-steptrack-step[data-status="pending"] .lui-steptrack-marker {
+  transform: scale(.5); border: 2.5px solid var(--border-strong); background: var(--surface);
+}
+.lui-steptrack-step[data-next] .lui-steptrack-marker {
+  transform: scale(.8); border: 0; background: color-mix(in oklab, var(--lui-st-accent) 30%, transparent);
+}
+.lui-steptrack-step[data-status="done"] .lui-steptrack-marker { background: var(--lui-st-accent); }
+.lui-steptrack-step[data-status="done"] .lui-steptrack-marker svg { animation: lui-st-check .4s var(--ease-pop) both; }
+@keyframes lui-st-check { from { transform: scale(0) rotate(-30deg); } to { transform: none; } }
+.lui-steptrack-step[data-status="active"] .lui-steptrack-marker {
+  background: var(--lui-st-accent);
+  animation: lui-st-ring 1.6s var(--ease-out) infinite;
+}
+@keyframes lui-st-ring {
+  from { box-shadow: 0 0 0 0 color-mix(in oklab, var(--lui-st-accent) 45%, transparent); }
+  to { box-shadow: 0 0 0 9px transparent; }
+}
+.lui-steptrack-marker-icon { display: grid; place-items: center; animation: lui-pop-in .35s var(--ease-pop) both; }
+.lui-steptrack-marker-icon svg { width: 11px; height: 11px; }
+.lui-steptrack-core { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.lui-steptrack-step[data-status="error"] .lui-steptrack-marker {
+  border: 2px solid var(--red); background: var(--surface); color: var(--red);
+  animation: lui-st-shake .45s var(--ease) both;
+}
+.lui-steptrack-bang { font-size: 11px; font-weight: 800; line-height: 1; }
+@keyframes lui-st-shake {
+  0%, 100% { translate: 0; } 20% { translate: -2px; } 40% { translate: 2px; } 60% { translate: -1.5px; } 80% { translate: 1px; }
+}
+
+.lui-steptrack-body { display: grid; gap: 2px; min-width: 0; }
+.lui-steptrack-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; min-width: 0; }
+.lui-steptrack-name {
+  font-size: 13.5px; font-weight: 600; color: var(--text); transition: color var(--dur);
+}
+.lui-steptrack-step[data-status="pending"] .lui-steptrack-name { color: var(--text-3); font-weight: 500; }
+.lui-steptrack-icon { display: inline-flex; color: var(--text-3); flex: none; }
+.lui-steptrack-icon svg { width: 13px; height: 13px; }
+.lui-steptrack-step:is([data-status="active"], [data-status="done"]) .lui-steptrack-icon { color: var(--lui-st-accent); }
+.lui-steptrack-step[data-status="error"] .lui-steptrack-icon { color: var(--red); }
+
+.lui-steptrack-sub {
+  font-size: 12.5px; color: var(--text-3); min-width: 0;
+  animation: lui-st-sub .35s var(--ease-out) both;
+}
+@keyframes lui-st-sub { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+.lui-steptrack-step[data-status="pending"] .lui-steptrack-sub { color: color-mix(in oklab, var(--text-3) 70%, transparent); }
+/* "Bezig…" glanst zacht zolang de stap loopt. */
+.lui-steptrack-step[data-status="active"] .lui-steptrack-sub {
+  background: linear-gradient(90deg, var(--text-3) 0%, var(--text-3) 35%, var(--text) 50%, var(--text-3) 65%, var(--text-3) 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: lui-st-sub .35s var(--ease-out) both, lui-st-shine 1.8s linear infinite;
+}
+@keyframes lui-st-shine { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+.lui-steptrack-step[data-status="error"] .lui-steptrack-sub { color: var(--red); font-weight: 550; }
+
+.lui-steptrack-time {
+  flex: none; font-family: var(--mono); font-size: 11px; color: var(--text-3);
+  animation: lui-st-sub .4s var(--ease-out) .1s both;
+}
+.lui-steptrack-action {
+  flex: none; padding: 0; border: 0; background: none; cursor: pointer;
+  font: inherit; font-size: 12px; font-weight: 700; color: var(--text);
+  text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--text) 30%, transparent);
+  text-underline-offset: 3px; animation: lui-st-sub .35s var(--ease-out) .1s both;
+}
+.lui-steptrack-action:hover { text-decoration-color: currentColor; }
+.lui-steptrack-action:focus-visible { outline: none; box-shadow: var(--ring); border-radius: 3px; }
+
+/* ---------- Voet ---------- */
+.lui-steptrack-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding-top: 12px; border-top: 1px solid var(--border);
+}
+.lui-steptrack-note { font-size: 12px; color: var(--text-3); display: inline-flex; align-items: center; gap: 6px; }
+.lui-steptrack-note:empty { display: none; }
+.lui-steptrack-foot > :last-child { margin-inline-start: auto; }

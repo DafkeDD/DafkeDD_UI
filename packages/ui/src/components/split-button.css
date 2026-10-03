@@ -1,0 +1,33 @@
+/* ============================ SplitButton ============================ */
+.lui-splitbtn { display: inline-flex; align-items: stretch; }
+.lui-splitbtn-block { display: flex; width: 100%; }
+.lui-splitbtn-block .lui-splitbtn-main { flex: 1; }
+
+/* De twee helften vormen samen één knop: alleen de buitenhoeken blijven rond. */
+.lui-splitbtn-main {
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+}
+.lui-splitbtn-toggle {
+  border-start-start-radius: 0 !important;
+  border-end-start-radius: 0 !important;
+  width: auto !important; padding-inline: 8px !important;
+  position: relative;
+}
+/* Haarlijntje tussen de helften, in de kleur van de knop zelf. */
+.lui-splitbtn-toggle::before {
+  content: ""; position: absolute; inset-block: 6px; inset-inline-start: 0;
+  width: 1px; background: currentColor; opacity: .28;
+}
+.lui-splitbtn[data-variant="secondary"] .lui-splitbtn-toggle::before,
+.lui-splitbtn[data-variant="ghost"] .lui-splitbtn-toggle::before { opacity: .18; }
+
+/* Focusring niet laten wegvallen achter de buurhelft. */
+.lui-splitbtn-main:focus-visible, .lui-splitbtn-toggle:focus-visible { z-index: 1; }
+
+.lui-splitbtn-chevron { transition: transform var(--dur-fast) var(--ease); }
+.lui-splitbtn-toggle[aria-expanded="true"] .lui-splitbtn-chevron { transform: rotate(180deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-splitbtn-chevron { transition: none; }
+}

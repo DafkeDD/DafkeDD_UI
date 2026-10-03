@@ -1,0 +1,26 @@
+/* ============================ PulseDot ============================ */
+.lui-pulse {
+  --lui-pulse-color: var(--green);
+  position: relative; display: inline-block; flex: none;
+  border-radius: var(--r-full); background: var(--lui-pulse-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lui-pulse-color) 18%, transparent);
+}
+.lui-pulse::after {
+  content: ""; position: absolute; inset: 0;
+  border-radius: inherit; background: var(--lui-pulse-color);
+  animation: lui-pulse 1.8s var(--ease-out) infinite;
+}
+.lui-pulse-still::after { animation: none; display: none; }
+
+@keyframes lui-pulse {
+  0% { opacity: .55; transform: scale(1); }
+  70% { opacity: 0; transform: scale(2.4); }
+  100% { opacity: 0; transform: scale(2.4); }
+}
+
+.lui-pulse-green { --lui-pulse-color: var(--green); }
+.lui-pulse-amber { --lui-pulse-color: var(--amber); }
+.lui-pulse-red { --lui-pulse-color: var(--red); }
+.lui-pulse-accent { --lui-pulse-color: var(--accent); }
+.lui-pulse-blue { --lui-pulse-color: var(--blue); }
+.lui-pulse-neutral { --lui-pulse-color: var(--text-3); }

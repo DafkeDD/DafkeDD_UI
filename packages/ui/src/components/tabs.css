@@ -1,0 +1,75 @@
+/* ============================ Tabs ============================ */
+.lui-tabs { display: flex; flex-direction: column; min-width: 0; }
+
+.lui-tabs-list { display: flex; gap: 4px; min-width: 0; }
+.lui-tabs-list-line { border-bottom: 1px solid var(--border); margin-bottom: 20px; overflow-x: auto; }
+.lui-tabs-list-pill {
+  background: var(--surface-3); border-radius: var(--r-sm);
+  padding: 3px; gap: 2px; align-self: flex-start; margin-bottom: 18px;
+}
+.lui-tabs-list-solid {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-md); padding: 4px; gap: 3px;
+  align-self: flex-start; margin-bottom: 18px; box-shadow: var(--sh-xs);
+}
+
+.lui-tab {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: none; background: transparent; cursor: pointer;
+  font: inherit; font-size: var(--fs-base); font-weight: 600;
+  color: var(--text-3); white-space: nowrap;
+  transition: color var(--dur-fast), background var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-tab:focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--r-xs); }
+.lui-tab:disabled { opacity: .45; cursor: not-allowed; }
+.lui-tab-icon { display: inline-flex; }
+.lui-tab-icon svg { width: 16px; height: 16px; }
+.lui-tab-badge {
+  display: inline-grid; place-items: center; min-width: 19px; height: 19px;
+  padding: 0 6px; border-radius: var(--r-full);
+  background: var(--surface-3); color: var(--text-2);
+  font-size: 11px; font-weight: 700;
+}
+
+.lui-tabs-list-line .lui-tab {
+  padding: calc(10px * var(--density)) 14px; border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.lui-tabs-list-line .lui-tab:hover:not(:disabled) { color: var(--text); }
+.lui-tabs-list-line .lui-tab[data-state="active"] { color: var(--accent-active); border-bottom-color: var(--accent); }
+.lui-tabs-list-line .lui-tab[data-state="active"] .lui-tab-badge { background: var(--accent-tint-2); color: var(--accent-active); }
+
+.lui-tabs-list-pill .lui-tab,
+.lui-tabs-list-solid .lui-tab {
+  height: calc(32px * var(--density)); padding: 0 13px; border-radius: var(--r-xs); font-size: 13px;
+}
+.lui-tabs-list-pill .lui-tab:hover:not(:disabled),
+.lui-tabs-list-solid .lui-tab:hover:not(:disabled) { color: var(--text); }
+.lui-tabs-list-pill .lui-tab[data-state="active"] {
+  background: var(--surface); color: var(--text); box-shadow: var(--sh-xs);
+}
+.lui-tabs-list-solid .lui-tab[data-state="active"] {
+  background: var(--accent-tint); color: var(--accent-active);
+}
+
+.lui-tabs-content:focus-visible { outline: none; }
+
+/* ---------- Glijdende indicator ---------- */
+.lui-tabs-list { position: relative; }
+.lui-tabs-list .lui-tab { position: relative; z-index: 1; }
+.lui-tabs-indicator {
+  position: absolute; left: 0; z-index: 0; pointer-events: none;
+  transition: transform .34s var(--ease-pop), width .34s var(--ease-pop);
+}
+.lui-tabs-indicator:not([data-ready]) { transition: none; }
+.lui-tabs-list-line > .lui-tabs-indicator { bottom: 0; height: 2px; border-radius: 2px; background: var(--accent); }
+.lui-tabs-list-pill > .lui-tabs-indicator {
+  top: 3px; bottom: 3px; border-radius: var(--r-xs); background: var(--surface); box-shadow: var(--sh-xs);
+}
+.lui-tabs-list-solid > .lui-tabs-indicator { top: 4px; bottom: 4px; border-radius: var(--r-xs); background: var(--accent-tint); }
+.lui-tabs-list-line[data-indicator] .lui-tab[data-state="active"] { border-bottom-color: transparent; }
+.lui-tabs-list-pill[data-indicator] .lui-tab[data-state="active"],
+.lui-tabs-list-solid[data-indicator] .lui-tab[data-state="active"] { background: transparent; box-shadow: none; }
+
+/* Inhoud faadt zacht in bij het wisselen. */
+.lui-tabs-content { animation: lui-fade-in .28s var(--ease-out) both; }
+.lui-tabs-content[hidden] { animation: none; }

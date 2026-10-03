@@ -1,0 +1,78 @@
+/* ============================ NavigationMenu ============================ */
+.lui-navmenu { position: relative; }
+.lui-navmenu-list {
+  display: flex; align-items: center; gap: 2px; margin: 0; padding: 0; list-style: none;
+}
+.lui-navmenu-block .lui-navmenu-list { width: 100%; }
+.lui-navmenu-item { position: relative; }
+
+.lui-navmenu-trigger {
+  display: inline-flex; align-items: center; gap: 7px;
+  height: calc(38px * var(--density)); padding: 0 12px;
+  border: 0; border-radius: var(--r-sm); background: transparent;
+  font: inherit; font-size: var(--fs-base); font-weight: 550; color: var(--text-2);
+  text-decoration: none; cursor: pointer; white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.lui-navmenu-trigger:hover { background: var(--surface-3); color: var(--text); }
+.lui-navmenu-trigger:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-navmenu-trigger[data-open] { background: var(--surface-3); color: var(--text); }
+.lui-navmenu-trigger[data-active] { color: var(--accent); }
+.lui-navmenu-chevron { transition: transform var(--dur) var(--ease); }
+.lui-navmenu-trigger[data-open] .lui-navmenu-chevron { transform: rotate(180deg); }
+
+.lui-navmenu-panel {
+  position: absolute; inset-inline-start: 0; top: calc(100% + 6px); z-index: var(--z-popover);
+  min-width: 260px; padding: 10px; border: 1px solid var(--border);
+  border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--sh-lg);
+  animation: lui-menu-in var(--dur) var(--ease-out) both;
+}
+.lui-navmenu-panel-mega {
+  display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  min-width: min(680px, 88vw); padding: 18px;
+}
+
+.lui-navmenu-section { display: grid; gap: 2px; align-content: start; }
+.lui-navmenu-section-label {
+  padding: 4px 10px; font-size: 11px; font-weight: 650;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--text-3);
+}
+
+.lui-navmenu-link {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 10px; border-radius: var(--r-sm);
+  color: var(--text); text-decoration: none;
+  transition: background var(--dur-fast) var(--ease);
+}
+.lui-navmenu-link:hover { background: var(--surface-3); }
+.lui-navmenu-link:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-navmenu-link-icon {
+  display: grid; place-items: center; width: 30px; height: 30px; flex: none;
+  border-radius: var(--r-sm); background: var(--accent-tint); color: var(--accent);
+}
+.lui-navmenu-link-title { display: block; font-size: var(--fs-base); font-weight: 600; }
+.lui-navmenu-link-desc { display: block; margin-top: 2px; font-size: var(--fs-sm); color: var(--text-3); line-height: 1.45; }
+
+@media (max-width: 720px) {
+  .lui-navmenu-list { flex-wrap: wrap; }
+  .lui-navmenu-panel, .lui-navmenu-panel-mega {
+    position: static; min-width: 0; width: 100%; box-shadow: none; margin-top: 4px;
+  }
+}
+
+/* ---------- Meeschuivende pil ---------- */
+.lui-navmenu[data-indicator] .lui-navmenu-list { position: relative; }
+.lui-navmenu-pill {
+  position: absolute; inset-block: 0; inset-inline-start: 0; z-index: 0;
+  list-style: none; pointer-events: none;
+  border-radius: var(--r-sm);
+  background: color-mix(in oklab, var(--accent) 13%, transparent);
+  transition: transform var(--dur) var(--ease-out), width var(--dur) var(--ease-out);
+}
+.lui-navmenu[data-indicator] .lui-navmenu-item { z-index: 1; }
+/* De eigen achtergrond van de trigger zou de pil verbergen. */
+.lui-navmenu[data-indicator] .lui-navmenu-trigger:hover { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-navmenu-pill { transition: none; }
+}

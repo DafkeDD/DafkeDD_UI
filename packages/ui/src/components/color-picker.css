@@ -1,0 +1,113 @@
+/* ============================ ColorPicker ============================ */
+.lui-colorpicker {
+  --lui-cp-w: calc(232px * var(--density));
+  --lui-cp-checker:
+    linear-gradient(45deg, var(--surface-3) 25%, transparent 25%, transparent 75%, var(--surface-3) 75%),
+    linear-gradient(45deg, var(--surface-3) 25%, transparent 25%, transparent 75%, var(--surface-3) 75%);
+  display: flex; flex-direction: column; gap: 10px;
+  width: var(--lui-cp-w); padding: 10px;
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface); color: var(--text);
+}
+.lui-colorpicker-sm { --lui-cp-w: calc(192px * var(--density)); gap: 8px; padding: 8px; }
+.lui-colorpicker-lg { --lui-cp-w: calc(288px * var(--density)); gap: 12px; padding: 12px; }
+.lui-colorpicker[data-disabled] { opacity: .55; pointer-events: none; }
+
+/* kleurvlak */
+.lui-colorpicker-area {
+  position: relative; height: calc(148px * var(--density));
+  border-radius: var(--r-sm); cursor: crosshair; touch-action: none;
+  outline: none; overflow: hidden;
+}
+.lui-colorpicker-lg .lui-colorpicker-area { height: calc(180px * var(--density)); }
+.lui-colorpicker-sm .lui-colorpicker-area { height: calc(120px * var(--density)); }
+.lui-colorpicker-area:focus-visible { box-shadow: var(--ring); }
+.lui-colorpicker-white, .lui-colorpicker-black {
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+}
+.lui-colorpicker-white { background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0)); }
+.lui-colorpicker-black { background: linear-gradient(to top, #000, rgba(0, 0, 0, 0)); }
+.lui-colorpicker-thumb {
+  position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px;
+  border: 2px solid #fff; border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .35), var(--shadow-sm);
+  pointer-events: none;
+}
+
+/* voorbeeld en schuiven */
+.lui-colorpicker-rows { display: flex; align-items: center; gap: 10px; }
+.lui-colorpicker-preview {
+  flex: none; width: 34px; height: 34px; border-radius: var(--r-sm);
+  border: 1px solid var(--border-strong);
+  background:
+    linear-gradient(var(--lui-cp-color), var(--lui-cp-color)),
+    var(--lui-cp-checker);
+  background-size: auto, 10px 10px, 10px 10px;
+  background-position: 0 0, 0 0, 5px 5px;
+}
+.lui-colorpicker-sliders { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+
+.lui-colorpicker-bar {
+  position: relative; height: 10px; border-radius: 999px;
+  cursor: pointer; touch-action: none; outline: none;
+}
+.lui-colorpicker-bar:focus-visible { box-shadow: var(--ring); }
+.lui-colorpicker-hue {
+  background: linear-gradient(to right,
+    #f00 0%, #ff0 16.66%, #0f0 33.33%, #0ff 50%, #00f 66.66%, #f0f 83.33%, #f00 100%);
+}
+.lui-colorpicker-alpha {
+  background:
+    linear-gradient(to right, transparent, var(--lui-cp-solid)),
+    var(--lui-cp-checker);
+  background-size: auto, 8px 8px, 8px 8px;
+  background-position: 0 0, 0 0, 4px 4px;
+}
+.lui-colorpicker-bar-thumb {
+  position: absolute; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px;
+  border: 2px solid #fff; border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .35), var(--shadow-sm);
+  pointer-events: none;
+}
+
+/* hexveld en pipet */
+.lui-colorpicker-foot { display: flex; gap: 6px; }
+.lui-colorpicker-input {
+  flex: 1; min-width: 0; height: calc(32px * var(--density)); padding: 0 9px;
+  border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text);
+  font: inherit; font-size: 13px; font-variant-numeric: tabular-nums;
+  text-transform: uppercase; outline: none;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-colorpicker-input:focus { border-color: var(--accent); box-shadow: var(--ring); }
+.lui-colorpicker-pipet {
+  display: grid; place-items: center; flex: none;
+  width: calc(32px * var(--density)); height: calc(32px * var(--density)); padding: 0;
+  border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text-2); cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-colorpicker-pipet:hover { background: var(--surface-2); color: var(--text); }
+.lui-colorpicker-pipet:focus-visible { box-shadow: var(--ring); outline: none; }
+
+/* vaste kleuren */
+.lui-colorpicker-presets {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;
+  padding-top: 2px; border-top: 1px solid var(--border); margin-top: 2px;
+}
+.lui-colorpicker-preset {
+  height: 20px; padding: 0; border: 1px solid var(--border-strong);
+  border-radius: var(--r-xs); cursor: pointer;
+  background: linear-gradient(var(--lui-cp-color), var(--lui-cp-color)), var(--lui-cp-checker);
+  background-size: auto, 8px 8px, 8px 8px;
+  background-position: 0 0, 0 0, 4px 4px;
+  transition: transform var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-colorpicker-preset:hover { transform: translateY(-1px); }
+.lui-colorpicker-preset[data-active] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent); }
+.lui-colorpicker-preset:focus-visible { outline: none; box-shadow: var(--ring); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-colorpicker-preset:hover { transform: none; }
+}

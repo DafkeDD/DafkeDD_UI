@@ -1,0 +1,36 @@
+/* ============================ TagsInput ============================ */
+.lui-tagsinput {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  width: 100%; min-height: calc(42px * var(--density)); padding: 5px 8px;
+  border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--surface); cursor: text;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-tagsinput:focus-within { border-color: var(--accent); box-shadow: var(--ring); }
+.lui-tagsinput-invalid { border-color: var(--red); }
+.lui-tagsinput-invalid:focus-within { border-color: var(--red); box-shadow: var(--ring-red); }
+.lui-tagsinput[data-disabled] { background: var(--surface-3); cursor: not-allowed; }
+.lui-tagsinput-sm { min-height: calc(34px * var(--density)); border-radius: var(--r-xs); font-size: 13px; }
+.lui-tagsinput-lg { min-height: calc(48px * var(--density)); border-radius: var(--r-md); font-size: var(--fs-md); }
+
+.lui-tagsinput-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  height: 24px; padding: 0 4px 0 9px; border-radius: var(--r-full);
+  background: var(--accent-tint); color: var(--accent-active);
+  border: 1px solid var(--accent-border); font-size: 12.5px; font-weight: 600;
+}
+.lui-tagsinput-tag button {
+  display: grid; place-items: center; width: 17px; height: 17px; padding: 0;
+  border: 0; border-radius: var(--r-full); background: transparent;
+  color: inherit; cursor: pointer; opacity: .7;
+}
+.lui-tagsinput-tag button:hover { opacity: 1; background: color-mix(in srgb, var(--accent) 18%, transparent); }
+.lui-tagsinput-tag button:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-tagsinput-input {
+  flex: 1; min-width: 90px; border: 0; outline: none; background: transparent;
+  color: var(--text); font: inherit; padding: 2px 0;
+}
+.lui-tagsinput-input::placeholder { color: var(--text-3); }
+/* Het pijltje van de datalist hoort niet in een chipveld. */
+.lui-tagsinput-input::-webkit-calendar-picker-indicator { display: none !important; }

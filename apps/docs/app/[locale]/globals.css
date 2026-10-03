@@ -1,0 +1,200 @@
+@import "tailwindcss";
+
+/* Het volledige Dafke UI design system (tokens + alle componenten). */
+@import "../../../../packages/ui/src/styles/index.css";
+/* Tokens ook als Tailwind-utilities (bg-accent, rounded-lg …). */
+@import "../../../../packages/ui/src/styles/tailwind.css";
+
+/* ------------------------------------------------------------
+   Documentatiesite — eigen chrome (alleen voor deze site)
+   ------------------------------------------------------------ */
+html { scroll-behavior: smooth; }
+body { background: var(--bg); }
+
+a { color: inherit; }
+
+.docs-shell { display: flex; min-height: 100vh; }
+
+.docs-nav {
+  width: 268px; flex: none; border-right: 1px solid var(--border);
+  background: var(--surface); position: sticky; top: 0; height: 100vh;
+  overflow-y: auto; padding: 18px 14px 40px;
+}
+.docs-nav-brand {
+  display: flex; align-items: center; gap: 11px;
+  padding: 6px 8px 18px; text-decoration: none;
+}
+.docs-nav-mark {
+  width: 38px; height: 38px; border-radius: var(--r-md); flex: none;
+  background: var(--accent); color: var(--accent-fg);
+  display: grid; place-items: center; box-shadow: var(--sh-sm);
+  font-weight: 800; font-size: 17px; letter-spacing: -0.03em;
+}
+.docs-nav-name { display: block; font-weight: 700; font-size: 16px; letter-spacing: -0.02em; color: var(--text); line-height: 1.1; }
+.docs-nav-sub { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); margin-top: 2px; }
+
+.docs-nav-group { margin-top: 16px; }
+.docs-nav-group-title {
+  font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text-3); padding: 8px 10px 5px;
+}
+.docs-nav-link {
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 10px; border-radius: var(--r-sm);
+  font-size: 13.5px; font-weight: 500; color: var(--text-2);
+  text-decoration: none; transition: background var(--dur-fast), color var(--dur-fast);
+}
+.docs-nav-link:hover { background: var(--surface-3); color: var(--text); }
+.docs-nav-link[data-active] { background: var(--accent-tint); color: var(--accent-active); font-weight: 600; }
+.docs-nav-count { margin-left: auto; font-size: 11px; color: var(--text-3); font-family: var(--mono); }
+
+.docs-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.docs-topbar {
+  height: 60px; flex: none; display: flex; align-items: center; gap: 12px;
+  padding: 0 24px; border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 30;
+}
+.docs-body { flex: 1; width: 100%; max-width: 880px; margin: 0 auto; padding: 40px 32px 96px; min-width: 0; }
+.docs-body-wide { max-width: 1180px; }
+
+.docs-title { font-size: 34px; font-weight: 700; letter-spacing: -0.03em; color: var(--text); line-height: 1.1; }
+.docs-lead { font-size: 16px; color: var(--text-2); line-height: 1.6; margin-top: 10px; }
+.docs-section { margin-top: 44px; }
+.docs-section-title { font-size: 19px; font-weight: 650; letter-spacing: -0.02em; color: var(--text); }
+.docs-section-desc { font-size: 14px; color: var(--text-3); margin-top: 5px; line-height: 1.55; }
+.docs-h3 { font-size: 15px; font-weight: 650; color: var(--text); margin-top: 26px; }
+.docs-p { font-size: 14.5px; color: var(--text-2); line-height: 1.7; margin-top: 10px; }
+.docs-p code, .docs-inline-code {
+  font-family: var(--mono); font-size: .88em; padding: 2px 5px;
+  background: var(--surface-3); border: 1px solid var(--border);
+  border-radius: 5px; color: var(--text);
+}
+
+/* ---------- Preview + code ---------- */
+.docs-preview { margin-top: 16px; border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; background: var(--surface); }
+.docs-preview-bar {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+  border-bottom: 1px solid var(--border); background: var(--surface-2);
+}
+.docs-preview-stage {
+  padding: 34px 28px; display: flex; align-items: center; justify-content: center;
+  gap: 14px; flex-wrap: wrap; min-height: 120px;
+  background:
+    radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0) 0 0 / 18px 18px,
+    var(--surface);
+}
+.docs-preview-stage-start { justify-content: flex-start; align-items: flex-start; }
+.docs-preview-stage-block { display: block; }
+.docs-code {
+  margin: 0; padding: 18px 20px; overflow-x: auto;
+  background: var(--surface-2); border-top: 1px solid var(--border);
+  font-family: var(--mono); font-size: 12.5px; line-height: 1.65; color: var(--text-2);
+  tab-size: 2;
+}
+.docs-code-standalone {
+  border: 1px solid var(--border); border-radius: var(--r-md); border-top: 1px solid var(--border);
+  margin-top: 14px;
+}
+.docs-code .tok-key { color: var(--violet); }
+.docs-code .tok-str { color: var(--green); }
+.docs-code .tok-tag { color: var(--blue); }
+.docs-code .tok-com { color: var(--text-3); font-style: italic; }
+.docs-code .tok-num { color: var(--amber); }
+
+/* ---------- Props tabel ---------- */
+.docs-props { margin-top: 14px; }
+.docs-props .lui-table-cell { font-size: 13.5px; }
+.docs-type { font-family: var(--mono); font-size: 12px; color: var(--accent); word-break: break-word; }
+.docs-default { font-family: var(--mono); font-size: 12px; color: var(--text-3); }
+
+/* ---------- Kleuren ---------- */
+.docs-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 16px; }
+.docs-swatch { border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; background: var(--surface); }
+.docs-swatch-color { height: 62px; border-bottom: 1px solid var(--border); }
+.docs-swatch-meta { padding: 9px 11px; }
+.docs-swatch-name { font-size: 12.5px; font-weight: 650; color: var(--text); font-family: var(--mono); }
+.docs-swatch-value { font-size: 11.5px; color: var(--text-3); font-family: var(--mono); margin-top: 2px; }
+
+.docs-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 18px; }
+
+/* ---------- Landing ---------- */
+.docs-hero { padding: 90px 32px 70px; text-align: center; background: var(--bg-grad); border-bottom: 1px solid var(--border); }
+.docs-hero-inner { max-width: 780px; margin: 0 auto; }
+.docs-hero h1 { font-size: clamp(34px, 6vw, 52px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; }
+.docs-hero p { font-size: 17px; color: var(--text-2); margin-top: 18px; line-height: 1.6; }
+.docs-hero-actions { display: flex; gap: 12px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+.docs-feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 40px; }
+
+.docs-toc { position: sticky; top: 80px; align-self: start; width: 200px; flex: none; padding: 40px 20px; }
+.docs-toc-title { font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
+.docs-toc a { display: block; padding: 5px 0; font-size: 13px; color: var(--text-3); text-decoration: none; }
+.docs-toc a:hover { color: var(--text); }
+
+.docs-nav-toggle { display: none; }
+
+@media (max-width: 1100px) { .docs-toc { display: none; } }
+@media (max-width: 900px) {
+  .docs-nav {
+    position: fixed; z-index: 80; transform: translateX(-100%);
+    transition: transform .26s var(--ease); box-shadow: var(--sh-xl);
+  }
+  .docs-nav[data-open] { transform: none; }
+  .docs-nav-toggle { display: grid; }
+  .docs-body { padding: 26px 18px 80px; }
+  .docs-title { font-size: 27px; }
+}
+
+/* ---------- labels "nieuw" en "bijgewerkt" ---------- */
+.docs-tag {
+  display: inline-flex; align-items: center; flex: none;
+  margin-left: auto; padding: 1px 7px;
+  border-radius: var(--r-full);
+  font-size: 9.5px; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; line-height: 1.6;
+}
+.docs-tag-new {
+  background: var(--green-tint); color: var(--green);
+  border: 1px solid var(--green-border);
+}
+.docs-tag-updated {
+  background: var(--amber-tint); color: var(--amber);
+  border: 1px solid var(--amber-border);
+}
+.docs-nav-link .docs-tag { margin-left: auto; }
+
+.docs-whatsnew {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: 16px; padding: 16px 18px;
+  border: 1px solid var(--green-border); border-radius: var(--r-lg);
+  background: var(--green-tint);
+}
+.docs-whatsnew-title {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 650; color: var(--text);
+}
+.docs-whatsnew-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.docs-whatsnew-item {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 12px; border-radius: var(--r-sm);
+  background: var(--surface); border: 1px solid var(--border);
+  font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.docs-whatsnew-item:hover { border-color: var(--accent); box-shadow: var(--sh-xs); }
+.docs-whatsnew-item span { font-weight: 400; color: var(--text-3); }
+
+/* ---------- Stappenplan (introductiepagina) ---------- */
+.docs-roadmap { display: grid; gap: 8px; margin-top: 16px; }
+.docs-roadmap-item {
+  display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px;
+  border: 1px solid var(--border); border-radius: var(--r-md); background: var(--surface);
+}
+.docs-roadmap-step {
+  flex: none; width: 26px; height: 26px; border-radius: var(--r-full);
+  display: grid; place-items: center; font-size: 12px; font-weight: 700;
+  background: var(--surface-3); color: var(--text-2);
+}
+.docs-roadmap-item[data-done] .docs-roadmap-step { background: var(--accent); color: var(--accent-fg); }
+.docs-roadmap-title { font-size: 14px; font-weight: 650; color: var(--text); }
+.docs-roadmap-desc { font-size: 12.5px; color: var(--text-3); margin-top: 2px; }

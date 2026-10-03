@@ -1,0 +1,36 @@
+/* ============================ PeriodNav ============================ */
+.lui-periodnav {
+  display: inline-flex; align-items: center; gap: 2px;
+  border-radius: var(--r-sm);
+}
+.lui-periodnav-boxed { background: var(--surface-3); padding: 3px; }
+
+.lui-periodnav-btn {
+  display: grid; place-items: center; flex: none;
+  width: 28px; height: 28px; border-radius: var(--r-xs);
+  border: none; background: transparent; color: var(--text-2); cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-periodnav-boxed .lui-periodnav-btn { background: var(--surface); box-shadow: var(--sh-xs); }
+.lui-periodnav-btn:hover:not(:disabled) { color: var(--text); background: var(--surface-hover); }
+.lui-periodnav-btn:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-periodnav-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+.lui-periodnav-label {
+  padding: 0 10px; font-size: 13px; font-weight: 650; color: var(--text);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+
+.lui-periodnav-today {
+  margin-left: 4px; height: 28px; padding: 0 11px;
+  border: 1px solid var(--border-strong); background: var(--surface);
+  border-radius: var(--r-xs);
+  font: inherit; font-size: 12.5px; font-weight: 600; color: var(--text-2);
+  cursor: pointer; transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-periodnav-today:hover { background: var(--surface-hover); color: var(--text); }
+.lui-periodnav-today:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-periodnav-sm .lui-periodnav-btn { width: 24px; height: 24px; }
+.lui-periodnav-sm .lui-periodnav-label { font-size: 12px; padding: 0 8px; }
+.lui-periodnav-sm .lui-periodnav-today { height: 24px; font-size: 11.5px; padding: 0 9px; }

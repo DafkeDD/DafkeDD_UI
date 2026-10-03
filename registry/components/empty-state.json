@@ -1,0 +1,18 @@
+{
+  "name": "empty-state",
+  "title": "EmptyState",
+  "description": "Lege lijst, geen resultaten of nog niets ingesteld.",
+  "category": "Feedback",
+  "dependencies": [],
+  "requires": [],
+  "files": [
+    {
+      "path": "components/empty-state.tsx",
+      "content": "\"use client\";\nimport * as React from \"react\";\nimport { cn } from \"../lib/cn\";\n\nexport interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  icon?: React.ReactNode;\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  /** Knoppen onderaan. */\n  action?: React.ReactNode;\n  size?: \"sm\" | \"md\";\n}\n\n/** EmptyState — lege lijst, geen resultaten, nog niets ingesteld. */\nexport const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(function EmptyState(\n  { icon, title, description, action, size = \"md\", className, children, ...rest },\n  ref\n) {\n  return (\n    <div ref={ref} className={cn(\"lui-empty\", `lui-empty-${size}`, className)} {...rest}>\n      {icon && <div className=\"lui-empty-icon\">{icon}</div>}\n      <div className=\"lui-empty-title\">{title}</div>\n      {description && <p className=\"lui-empty-description\">{description}</p>}\n      {children}\n      {action && <div className=\"lui-empty-action\">{action}</div>}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "components/empty-state.css",
+      "content": "/* ============================ EmptyState ============================ */\n.lui-empty {\n  display: flex; flex-direction: column; align-items: center; text-align: center;\n  gap: 8px; padding: 52px 24px;\n}\n.lui-empty-sm { padding: 30px 18px; }\n.lui-empty-icon {\n  display: grid; place-items: center; width: 56px; height: 56px;\n  border-radius: var(--r-lg); background: var(--surface-2);\n  border: 1px solid var(--border); color: var(--text-3); margin-bottom: 6px;\n}\n.lui-empty-icon svg { width: 24px; height: 24px; }\n.lui-empty-sm .lui-empty-icon { width: 44px; height: 44px; }\n.lui-empty-title { font-size: var(--fs-lg); font-weight: 650; letter-spacing: -0.02em; color: var(--text); }\n.lui-empty-sm .lui-empty-title { font-size: 14.5px; }\n.lui-empty-description { font-size: 13.5px; color: var(--text-3); max-width: 380px; line-height: 1.55; }\n.lui-empty-action { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; justify-content: center; }\n\n/* ---------- Motion: het icoon zweeft zacht, de tekst schuift na elkaar binnen ---------- */\n.lui-empty > * { animation: lui-rise .45s var(--ease-out) backwards; }\n.lui-empty > :nth-child(2) { animation-delay: 70ms; }\n.lui-empty > :nth-child(3) { animation-delay: 140ms; }\n.lui-empty > :nth-child(n + 4) { animation-delay: 210ms; }\n.lui-empty-icon { position: relative; }\n.lui-empty-icon svg { animation: lui-float 3.2s var(--ease) 0.6s infinite; }\n.lui-empty-icon::after {\n  content: \"\"; position: absolute; inset: -1px; border-radius: inherit;\n  border: 1px dashed var(--border-strong); opacity: 0;\n  animation: lui-empty-halo 3.2s var(--ease) .6s infinite;\n}\n@keyframes lui-empty-halo { 0% { opacity: .0; transform: scale(1); } 40% { opacity: .7; } 100% { opacity: 0; transform: scale(1.35); } }\n"
+    }
+  ]
+}

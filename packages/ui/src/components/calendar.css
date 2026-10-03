@@ -1,0 +1,99 @@
+/* ============================ Calendar ============================ */
+.lui-calendar {
+  --lui-day: 36px;
+  display: inline-flex; flex-direction: column;
+  background: var(--surface); color: var(--text);
+  user-select: none;
+}
+.lui-calendar-sm { --lui-day: 30px; }
+
+.lui-calendar-months { display: flex; gap: 26px; }
+.lui-calendar-month { display: flex; flex-direction: column; gap: 8px; }
+
+.lui-calendar-header {
+  display: flex; align-items: center; gap: 6px;
+  padding: 2px 2px 4px;
+}
+.lui-calendar-title {
+  flex: 1; text-align: center;
+  font-size: 13.5px; font-weight: 650; color: var(--text);
+  letter-spacing: -0.01em; text-transform: capitalize;
+}
+.lui-calendar-nav {
+  display: grid; place-items: center; flex: none;
+  width: 28px; height: 28px; border-radius: var(--r-xs);
+  border: 1px solid transparent; background: transparent;
+  color: var(--text-2); cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-calendar-nav:hover:not(:disabled) { background: var(--surface-3); color: var(--text); }
+.lui-calendar-nav:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-calendar-nav:disabled { opacity: .35; cursor: not-allowed; }
+.lui-calendar-nav-spacer { width: 28px; height: 28px; flex: none; }
+
+.lui-calendar-grid {
+  display: grid; grid-template-columns: repeat(7, var(--lui-day));
+  gap: 2px;
+}
+.lui-calendar-grid-weeks { grid-template-columns: 26px repeat(7, var(--lui-day)); }
+
+.lui-calendar-weekday, .lui-calendar-weekhead {
+  display: grid; place-items: center; height: 26px;
+  font-size: 11px; font-weight: 650; color: var(--text-3);
+  text-transform: lowercase;
+}
+.lui-calendar-weeknumber {
+  display: grid; place-items: center; height: var(--lui-day);
+  font-size: 10.5px; font-weight: 600; color: var(--text-3);
+  font-family: var(--mono);
+}
+
+.lui-calendar-day-empty { width: var(--lui-day); height: var(--lui-day); }
+
+.lui-calendar-day {
+  position: relative;
+  width: var(--lui-day); height: var(--lui-day);
+  display: grid; place-items: center;
+  border: 1px solid transparent; background: transparent;
+  border-radius: var(--r-sm);
+  font: inherit; font-size: 13px; font-weight: 550;
+  color: var(--text); cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-calendar-day:hover:not(:disabled) { background: var(--surface-3); }
+.lui-calendar-day:focus-visible { outline: none; box-shadow: var(--ring); z-index: 1; }
+.lui-calendar-day:disabled { color: var(--text-3); opacity: .4; cursor: not-allowed; }
+.lui-calendar-day[data-outside] { color: var(--text-3); }
+.lui-calendar-day[data-weekend]:not([data-selected]) { color: var(--text-2); }
+
+.lui-calendar-day[data-today]:not([data-selected]) {
+  border-color: var(--accent-border); color: var(--accent-active); font-weight: 650;
+}
+
+.lui-calendar-day[data-in-range] {
+  background: var(--accent-tint); border-radius: 0; color: var(--accent-active);
+}
+.lui-calendar-day[data-range-start] { border-radius: var(--r-sm) 0 0 var(--r-sm); }
+.lui-calendar-day[data-range-end] { border-radius: 0 var(--r-sm) var(--r-sm) 0; }
+.lui-calendar-day[data-range-start][data-range-end] { border-radius: var(--r-sm); }
+
+.lui-calendar-day[data-selected] {
+  background: var(--accent); border-color: var(--accent);
+  color: var(--accent-fg); font-weight: 650;
+}
+.lui-calendar-day[data-selected]:hover { background: var(--accent-hover); }
+
+.lui-calendar-marker {
+  position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: var(--r-full); background: var(--accent);
+}
+.lui-calendar-day[data-selected] .lui-calendar-marker { background: var(--accent-fg); }
+
+.lui-calendar-footer {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);
+}
+
+@media (max-width: 560px) {
+  .lui-calendar-months { flex-direction: column; gap: 18px; }
+}

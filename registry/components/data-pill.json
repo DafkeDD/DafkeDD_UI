@@ -1,0 +1,18 @@
+{
+  "name": "data-pill",
+  "title": "DataPill",
+  "description": "Compacte meetwaarde: label, waarde en eenheid op één regel.",
+  "category": "Data",
+  "dependencies": [],
+  "requires": [],
+  "files": [
+    {
+      "path": "components/data-pill.tsx",
+      "content": "\"use client\";\nimport * as React from \"react\";\nimport { cn } from \"../lib/cn\";\n\nexport interface DataPillProps extends React.HTMLAttributes<HTMLSpanElement> {\n  label: React.ReactNode;\n  value: React.ReactNode;\n  /** Eenheid achter de waarde, bv. \"mmHg\" of \"µm\". */\n  unit?: React.ReactNode;\n  icon?: React.ReactNode;\n  tone?: \"neutral\" | \"accent\" | \"green\" | \"amber\" | \"red\" | \"blue\" | \"violet\";\n  size?: \"sm\" | \"md\";\n}\n\n/** DataPill — compacte meetwaarde: label, waarde en eenheid op één regel. */\nexport const DataPill = React.forwardRef<HTMLSpanElement, DataPillProps>(function DataPill(\n  { label, value, unit, icon, tone = \"neutral\", size = \"md\", className, ...rest },\n  ref\n) {\n  return (\n    <span\n      ref={ref}\n      className={cn(\"lui-datapill\", `lui-datapill-${tone}`, `lui-datapill-${size}`, className)}\n      {...rest}\n    >\n      {icon && <span className=\"lui-datapill-icon\">{icon}</span>}\n      <span className=\"lui-datapill-label\">{label}</span>\n      <b className=\"lui-datapill-value\">{value}</b>\n      {unit && <em className=\"lui-datapill-unit\">{unit}</em>}\n    </span>\n  );\n});\n"
+    },
+    {
+      "path": "components/data-pill.css",
+      "content": "/* ============================ DataPill ============================ */\n.lui-datapill {\n  --lui-pill-color: var(--text-3);\n  display: inline-flex; align-items: baseline; gap: 6px;\n  padding: 5px 11px; border-radius: var(--r-full);\n  background: var(--surface-2); border: 1px solid var(--border);\n  font-size: 12px; color: var(--text-3); white-space: nowrap;\n}\n.lui-datapill-icon { display: inline-flex; align-self: center; color: var(--lui-pill-color); }\n.lui-datapill-icon svg { width: 14px; height: 14px; }\n.lui-datapill-label { font-weight: 600; }\n.lui-datapill-value {\n  font-size: 13px; font-weight: 700; color: var(--text);\n  font-variant-numeric: tabular-nums;\n}\n.lui-datapill-unit { font-style: normal; font-size: 11px; color: var(--text-3); }\n\n.lui-datapill-sm { padding: 3px 8px; font-size: 11px; }\n.lui-datapill-sm .lui-datapill-value { font-size: 12px; }\n\n.lui-datapill-accent { --lui-pill-color: var(--accent); background: var(--accent-tint); border-color: var(--accent-border); }\n.lui-datapill-green { --lui-pill-color: var(--green); background: var(--green-tint); border-color: var(--green-border); }\n.lui-datapill-amber { --lui-pill-color: var(--amber); background: var(--amber-tint); border-color: var(--amber-border); }\n.lui-datapill-red { --lui-pill-color: var(--red); background: var(--red-tint); border-color: var(--red-border); }\n.lui-datapill-blue { --lui-pill-color: var(--blue); background: var(--blue-tint); border-color: var(--blue-border); }\n.lui-datapill-violet { --lui-pill-color: var(--violet); background: var(--violet-tint); border-color: var(--violet-border); }\n"
+    }
+  ]
+}

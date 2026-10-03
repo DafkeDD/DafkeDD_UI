@@ -1,0 +1,49 @@
+/* ============================ Stepper ============================ */
+.lui-stepper { display: flex; min-width: 0; }
+.lui-stepper-horizontal { align-items: center; gap: 0; }
+.lui-stepper-vertical { flex-direction: column; gap: 0; }
+
+.lui-step { display: flex; align-items: center; min-width: 0; }
+.lui-stepper-horizontal .lui-step { flex: 1; }
+.lui-stepper-horizontal .lui-step:last-child { flex: none; }
+.lui-stepper-vertical .lui-step { flex-direction: column; align-items: flex-start; width: 100%; }
+
+.lui-step-main {
+  display: flex; align-items: center; gap: 11px;
+  border: none; background: transparent; padding: 0;
+  font: inherit; text-align: left; cursor: default; min-width: 0;
+}
+.lui-step-main:not(:disabled) { cursor: pointer; }
+.lui-step-main:focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--r-sm); }
+
+.lui-step-marker {
+  display: grid; place-items: center; flex: none;
+  width: 30px; height: 30px; border-radius: var(--r-full);
+  font-size: 13px; font-weight: 650;
+  border: 1.5px solid var(--border-strong);
+  background: var(--surface); color: var(--text-3);
+  transition: background var(--dur-slow), border-color var(--dur-slow), color var(--dur-slow), box-shadow var(--dur-slow);
+}
+.lui-step-text { display: flex; flex-direction: column; min-width: 0; }
+.lui-step-label { font-size: 13px; font-weight: 600; color: var(--text-3); white-space: nowrap; }
+.lui-step-description { font-size: 11.5px; color: var(--text-3); }
+
+.lui-step-active .lui-step-marker {
+  background: var(--accent); border-color: var(--accent);
+  color: var(--accent-fg); box-shadow: var(--ring);
+}
+.lui-step-active .lui-step-label { color: var(--text); }
+.lui-step-done .lui-step-marker {
+  background: var(--accent-tint-2); border-color: var(--accent-border); color: var(--accent-active);
+}
+.lui-step-done .lui-step-label { color: var(--text-2); }
+
+.lui-step-line { background: var(--border-strong); border-radius: 2px; transition: background var(--dur-slow); }
+.lui-stepper-horizontal .lui-step-line { flex: 1; height: 1.5px; margin: 0 12px; }
+.lui-stepper-vertical .lui-step-line { width: 1.5px; height: 26px; margin: 6px 0 6px 14px; }
+.lui-step-done .lui-step-line { background: var(--accent-border); }
+
+@media (max-width: 720px) {
+  .lui-stepper-horizontal .lui-step-text { display: none; }
+  .lui-stepper-horizontal .lui-step-line { margin: 0 6px; }
+}

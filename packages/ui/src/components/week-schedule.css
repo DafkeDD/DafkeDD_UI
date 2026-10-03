@@ -1,0 +1,193 @@
+/* ============================ WeekSchedule ============================ */
+.lui-schedule {
+  --lui-hour-height: 56px;
+  --lui-gutter: 58px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  overflow: hidden;
+}
+.lui-schedule-scroll { overflow: auto; -webkit-overflow-scrolling: touch; max-height: 100%; }
+.lui-schedule-inner { min-width: 680px; }
+
+/* ---------- Kop ---------- */
+.lui-schedule-head {
+  display: grid;
+  grid-template-columns: var(--lui-gutter) repeat(var(--lui-schedule-columns), minmax(0, 1fr));
+  position: sticky; top: 0; z-index: 3;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.lui-schedule-gutter-head { border-right: 1px solid var(--border); }
+.lui-schedule-dayhead {
+  display: flex; flex-direction: column; align-items: center; gap: 1px;
+  padding: 9px 6px; border-right: 1px solid var(--border);
+}
+.lui-schedule-dayhead:last-child { border-right: none; }
+.lui-schedule-dayname {
+  font-size: 11px; font-weight: 650; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--text-3);
+}
+.lui-schedule-daysub {
+  font-size: 16px; font-weight: 700; letter-spacing: -0.02em; color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.lui-schedule-dayhead[data-today] .lui-schedule-dayname { color: var(--accent); }
+.lui-schedule-dayhead[data-today] .lui-schedule-daysub {
+  color: var(--accent-fg); background: var(--accent);
+  border-radius: var(--r-full); min-width: 26px; text-align: center; padding: 0 6px;
+}
+
+/* ---------- Raster ---------- */
+.lui-schedule-body {
+  position: relative; display: grid;
+  grid-template-columns: var(--lui-gutter) repeat(var(--lui-schedule-columns), minmax(0, 1fr));
+}
+
+.lui-schedule-gutter {
+  position: relative; border-right: 1px solid var(--border); background: var(--surface);
+}
+.lui-schedule-hour {
+  position: absolute; right: 8px; transform: translateY(-50%);
+  font-size: 11px; font-weight: 600; color: var(--text-3);
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+/* Het eerste en laatste uurlabel blijven binnen het raster staan. */
+.lui-schedule-hour:first-child { transform: translateY(0); }
+.lui-schedule-hour:last-child { transform: translateY(-100%); }
+
+.lui-schedule-column {
+  position: relative; border-right: 1px solid var(--border); min-width: 0;
+}
+.lui-schedule-column:last-child { border-right: none; }
+
+.lui-schedule-lines {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--border) 0,
+    var(--border) 1px,
+    transparent 1px,
+    transparent var(--lui-hour-height)
+  );
+}
+
+.lui-schedule-hatch {
+  position: absolute; left: 0; right: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--surface-2) 0,
+    var(--surface-2) 5px,
+    var(--surface-3) 5px,
+    var(--surface-3) 10px
+  );
+  opacity: .85;
+}
+.lui-schedule-hatch-full {
+  top: 0; bottom: 0; display: grid; place-items: center;
+}
+.lui-schedule-hatch-label {
+  font-size: 11px; font-weight: 650; color: var(--text-3);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-full); padding: 3px 10px;
+  text-transform: uppercase; letter-spacing: .05em;
+}
+
+.lui-schedule-slots {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  border: none; background: transparent; cursor: copy; padding: 0;
+}
+.lui-schedule-slots:hover { background: color-mix(in srgb, var(--accent) 5%, transparent); }
+.lui-schedule-slots:focus-visible { outline: none; box-shadow: inset var(--ring); }
+
+/* ---------- Nu-lijn ---------- */
+.lui-schedule-now {
+  position: absolute; left: 0; right: 0; height: 2px;
+  background: var(--red); z-index: 2; pointer-events: none;
+}
+.lui-schedule-now-dot {
+  position: absolute; left: -3px; top: -3px;
+  width: 8px; height: 8px; border-radius: var(--r-full); background: var(--red);
+}
+
+/* ---------- Blokken ---------- */
+.lui-schedule-event {
+  --lui-event-color: var(--accent);
+  position: absolute; z-index: 1;
+  display: flex; flex-direction: column; gap: 1px;
+  padding: 5px 8px; overflow: hidden;
+  border-radius: var(--r-xs);
+  border: 1px solid color-mix(in srgb, var(--lui-event-color) 35%, transparent);
+  border-left: 3px solid var(--lui-event-color);
+  background: color-mix(in srgb, var(--lui-event-color) 13%, var(--surface));
+  color: var(--text);
+  cursor: grab; touch-action: none; user-select: none;
+  transition: box-shadow var(--dur-fast), transform var(--dur-fast);
+}
+.lui-schedule-event:hover { box-shadow: var(--sh-md); z-index: 2; }
+.lui-schedule-event:focus-visible { outline: none; box-shadow: var(--ring); z-index: 3; }
+.lui-schedule-event[data-locked] { cursor: default; }
+.lui-schedule-event[data-dragging] {
+  cursor: grabbing; z-index: 4; box-shadow: var(--sh-lg);
+  transform: scale(1.015); opacity: .95;
+}
+.lui-schedule-dragging { cursor: grabbing; }
+.lui-schedule-dragging .lui-schedule-slots { pointer-events: none; }
+
+.lui-schedule-event-time {
+  font-size: 10.5px; font-weight: 650; color: var(--lui-event-color);
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.lui-schedule-event-title {
+  font-size: 12px; font-weight: 650; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.lui-schedule-event-sub {
+  font-size: 11px; color: var(--text-2);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.lui-schedule-event-accent { --lui-event-color: var(--accent); }
+.lui-schedule-event-green { --lui-event-color: var(--green); }
+.lui-schedule-event-amber { --lui-event-color: var(--amber); }
+.lui-schedule-event-red { --lui-event-color: var(--red); }
+.lui-schedule-event-blue { --lui-event-color: var(--blue); }
+.lui-schedule-event-violet { --lui-event-color: var(--violet); }
+.lui-schedule-event-neutral { --lui-event-color: var(--text-3); }
+
+.lui-schedule-handle {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 8px;
+  cursor: ns-resize; touch-action: none;
+}
+.lui-schedule-handle::after {
+  content: ""; position: absolute; left: 50%; bottom: 2px;
+  transform: translateX(-50%);
+  width: 22px; height: 2px; border-radius: var(--r-full);
+  background: color-mix(in srgb, var(--lui-event-color) 55%, transparent);
+  opacity: 0; transition: opacity var(--dur-fast);
+}
+.lui-schedule-event:hover .lui-schedule-handle::after { opacity: 1; }
+
+@media (max-width: 720px) {
+  .lui-schedule { --lui-gutter: 46px; }
+  .lui-schedule-daysub { font-size: 14px; }
+}
+
+/* ---------- Geblokkeerd blok ---------- */
+.lui-schedule-event-blocked {
+  --lui-event-color: var(--red);
+  cursor: default;
+  border-color: color-mix(in srgb, var(--red) 30%, transparent);
+  border-left-color: color-mix(in srgb, var(--red) 55%, transparent);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--red-tint) 0,
+    var(--red-tint) 4px,
+    var(--surface) 4px,
+    var(--surface) 9px
+  );
+  color: var(--red);
+}
+.lui-schedule-event-blocked .lui-schedule-event-title { color: var(--red); }
+.lui-schedule-event-blocked:hover { box-shadow: none; }

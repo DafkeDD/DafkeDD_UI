@@ -1,0 +1,67 @@
+/* ============================ CookieConsent ============================ */
+.lui-cookies-backdrop {
+  position: fixed; inset: 0; z-index: var(--z-overlay);
+  display: grid; place-items: end center; padding: 16px;
+  background: rgba(2, 6, 23, .45);
+}
+.lui-cookies-backdrop .lui-cookies { position: static; animation: none; }
+
+.lui-cookies {
+  position: fixed; z-index: var(--z-overlay);
+  display: grid; gap: 14px; width: min(560px, calc(100vw - 32px)); padding: 16px;
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface); box-shadow: var(--sh-xl);
+  animation: lui-cookies-in var(--dur) var(--ease-out);
+}
+.lui-cookies-bottom { inset-inline: 0; bottom: 16px; margin-inline: auto; }
+.lui-cookies-bottom-left { inset-inline-start: 16px; bottom: 16px; }
+.lui-cookies-bottom-right { inset-inline-end: 16px; bottom: 16px; }
+.lui-cookies-center { inset-inline: 0; top: 50%; margin-inline: auto; transform: translateY(-50%); }
+
+.lui-cookies-head { display: flex; align-items: flex-start; gap: 12px; }
+.lui-cookies-icon {
+  display: grid; place-items: center; flex: none; width: 32px; height: 32px;
+  border-radius: var(--r-sm); background: color-mix(in oklab, var(--accent) 13%, transparent); color: var(--accent);
+}
+.lui-cookies-text { display: grid; gap: 4px; }
+.lui-cookies-title { margin: 0; font-size: var(--fs-md); font-weight: 650; color: var(--text); }
+.lui-cookies-desc { margin: 0; font-size: 13px; line-height: 1.6; color: var(--text-3); }
+.lui-cookies-policy { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+.lui-cookies-list {
+  display: grid; gap: 2px; margin: 0; padding: 4px; list-style: none;
+  max-height: 44vh; overflow-y: auto;
+  border-radius: var(--r-sm); background: var(--surface-2);
+}
+.lui-cookies-item {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;
+  padding: 10px 10px;
+}
+.lui-cookies-item + .lui-cookies-item { border-top: 1px solid var(--border); }
+.lui-cookies-item-text { display: grid; gap: 2px; min-width: 0; }
+.lui-cookies-item-label { font-size: var(--fs-sm); font-weight: 600; color: var(--text); }
+.lui-cookies-item-desc { font-size: 12.5px; line-height: 1.5; color: var(--text-3); }
+
+.lui-cookies-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.lui-cookies-spacer { flex: 1; }
+.lui-cookies-btn {
+  height: 34px; padding: 0 14px; border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text-2);
+  font: inherit; font-size: var(--fs-sm); font-weight: 600; cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-cookies-btn:hover { background: var(--surface-2); color: var(--text); }
+.lui-cookies-btn[data-ghost] { border-color: transparent; background: transparent; }
+.lui-cookies-btn[data-ghost]:hover { background: var(--surface-2); }
+.lui-cookies-btn[data-primary] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.lui-cookies-btn[data-primary]:hover { background: var(--accent-hover); color: var(--accent-fg); }
+.lui-cookies-btn:focus-visible { outline: none; box-shadow: var(--ring); }
+
+@keyframes lui-cookies-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.lui-cookies-center { animation-name: lui-cookies-in-center; }
+@keyframes lui-cookies-in-center {
+  from { opacity: 0; transform: translateY(calc(-50% + 14px)); }
+  to { opacity: 1; transform: translateY(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) { .lui-cookies { animation: none; } }

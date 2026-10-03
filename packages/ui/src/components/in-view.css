@@ -1,0 +1,38 @@
+/* ==================== InView & ScrollProgress ==================== */
+.lui-inview {
+  transition-property: opacity, transform;
+  transition-timing-function: var(--ease-out);
+  opacity: 0;
+}
+.lui-inview[data-visible] { opacity: 1; transform: none; }
+
+.lui-inview-none { opacity: 1; }
+.lui-inview-fade { transform: none; }
+.lui-inview-up { transform: translateY(18px); }
+.lui-inview-down { transform: translateY(-18px); }
+.lui-inview-left { transform: translateX(18px); }
+.lui-inview-right { transform: translateX(-18px); }
+.lui-inview-scale { transform: scale(.94); }
+
+/* ---------- ScrollProgress ---------- */
+.lui-scrollprogress {
+  position: relative; display: flex; align-items: center; gap: 8px;
+  width: 100%; border-radius: var(--r-full); background: var(--surface-3);
+}
+.lui-scrollprogress-fixed {
+  position: fixed; top: 0; inset-inline: 0; z-index: var(--z-sticky);
+  border-radius: 0; background: transparent;
+}
+.lui-scrollprogress-bar {
+  display: block; height: 100%; border-radius: inherit;
+  transition: width 90ms linear;
+}
+.lui-scrollprogress-value {
+  position: absolute; inset-inline-end: 8px; top: 50%; transform: translateY(-50%);
+  font-size: var(--fs-xs); color: var(--text-3); font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-inview { transition: none; opacity: 1; transform: none; }
+  .lui-scrollprogress-bar { transition: none; }
+}

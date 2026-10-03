@@ -1,0 +1,149 @@
+/* ============================ Sidebar ============================ */
+.lui-sidebar {
+  --lui-rail-w: var(--sidebar-w);
+  width: var(--lui-rail-w); flex: none;
+  background: var(--surface); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 16px 12px; position: sticky; top: 0; height: 100vh;
+  overflow-x: hidden; overflow-y: auto;
+  transition: width .22s var(--ease);
+}
+.lui-sidebar[data-collapsed] { --lui-rail-w: 76px; }
+.lui-sidebar[data-collapsed] .lui-sidebar-label { opacity: 0; pointer-events: none; }
+.lui-sidebar[data-collapsed] .lui-sidebar-section { height: 0; padding-top: 0; padding-bottom: 0; }
+
+.lui-sidebar-label { opacity: 1; transition: opacity .14s var(--ease); white-space: nowrap; }
+
+.lui-sidebar-brand { display: flex; align-items: center; gap: 11px; padding: 4px 6px 12px; }
+.lui-sidebar-mark {
+  display: grid; place-items: center; width: 40px; height: 40px; flex: none;
+  border-radius: var(--r-md); background: var(--accent); color: var(--accent-fg);
+  box-shadow: var(--sh-sm); font-weight: 700;
+}
+.lui-sidebar-mark svg { width: 22px; height: 22px; }
+.lui-sidebar-brand-text { display: flex; flex-direction: column; min-width: 0; }
+.lui-sidebar-brand-name { font-weight: 700; font-size: 16.5px; letter-spacing: -0.02em; color: var(--text); line-height: 1.05; }
+.lui-sidebar-brand-sub {
+  font-size: 10.5px; font-weight: 600; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--text-3); margin-top: 2px;
+}
+
+.lui-sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
+.lui-sidebar-section {
+  font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text-3); padding: 14px 12px 6px; overflow: hidden;
+  transition: opacity .14s var(--ease), height var(--dur) var(--ease), padding var(--dur) var(--ease);
+}
+
+.lui-sidebar-item {
+  position: relative; display: flex; align-items: center; gap: 12px;
+  height: 44px; padding: 0 12px; width: 100%;
+  border: none; background: transparent; border-radius: var(--r-md);
+  color: var(--text-2); font: inherit; font-size: var(--fs-base); font-weight: 550;
+  cursor: pointer; text-align: left; text-decoration: none;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-sidebar-item-icon { display: inline-flex; flex: none; }
+.lui-sidebar-item-icon svg { width: 20px; height: 20px; }
+.lui-sidebar-item:hover { background: var(--surface-3); color: var(--text); }
+.lui-sidebar-item:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-sidebar-item[data-active] { background: var(--accent-tint); color: var(--accent-active); font-weight: 600; }
+.lui-sidebar-item[data-active] .lui-sidebar-item-icon { color: var(--accent); }
+.lui-sidebar-item[data-active]::before {
+  content: ""; position: absolute; left: -12px; top: 9px; bottom: 9px;
+  width: 3px; background: var(--accent); border-radius: 0 3px 3px 0;
+}
+.lui-sidebar-item-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.lui-sidebar-item-badge {
+  flex: none; display: inline-grid; place-items: center;
+  min-width: 20px; height: 20px; padding: 0 6px; border-radius: var(--r-full);
+  font-size: 11px; font-weight: 700; background: var(--surface-3); color: var(--text-2);
+}
+.lui-sidebar-item:hover .lui-sidebar-item-badge { background: var(--surface); }
+.lui-sidebar-item[data-active] .lui-sidebar-item-badge { background: var(--accent-border); color: var(--accent-active); }
+
+.lui-sidebar-footer { margin-top: auto; padding-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+
+.lui-sidebar-collapse {
+  display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 12px;
+  border: none; background: transparent; border-radius: var(--r-md);
+  color: var(--text-3); font: inherit; font-size: 13px; font-weight: 550;
+  cursor: pointer; margin-top: 6px;
+}
+.lui-sidebar-collapse:hover { background: var(--surface-3); color: var(--text); }
+.lui-sidebar-collapse svg { flex: none; }
+
+.lui-sidebar-mobile-close { display: none; }
+
+@media (max-width: 860px) {
+  .lui-sidebar {
+    --lui-rail-w: min(82vw, 300px);
+    position: fixed; top: 0; left: 0; height: 100dvh; z-index: var(--z-drawer);
+    transform: translateX(-100%); transition: transform .26s var(--ease);
+    box-shadow: var(--sh-xl);
+  }
+  .lui-sidebar[data-collapsed] { --lui-rail-w: min(82vw, 300px); }
+  .lui-sidebar[data-collapsed] .lui-sidebar-label { opacity: 1; pointer-events: auto; }
+  .lui-sidebar[data-collapsed] .lui-sidebar-section { height: auto; padding: 14px 12px 6px; }
+  .lui-sidebar-open { transform: none; }
+  .lui-sidebar-collapse { display: none; }
+  .lui-sidebar-mobile-close {
+    display: grid; place-items: center; position: absolute; top: 14px; right: 12px;
+    width: 34px; height: 34px; border: none; background: transparent;
+    color: var(--text-3); border-radius: var(--r-sm); cursor: pointer;
+  }
+  .lui-sidebar-mobile-close:hover { background: var(--surface-3); color: var(--text); }
+}
+
+/* ---------- Donkere variant (tone="inverted") ---------- */
+.lui-sidebar[data-tone="inverted"] {
+  background: var(--sidebar-ink);
+  border-right-color: var(--sidebar-ink-border);
+  color: var(--sidebar-ink-text);
+}
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-brand-name { color: var(--sidebar-ink-strong); }
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-brand-sub,
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-section { color: var(--sidebar-ink-dim); }
+
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-item { color: var(--sidebar-ink-text); }
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-item:hover {
+  background: var(--sidebar-ink-hover); color: var(--sidebar-ink-strong);
+}
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-item[data-active] {
+  background: var(--sidebar-ink-active); color: var(--sidebar-ink-accent);
+}
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-item[data-active] .lui-sidebar-item-icon {
+  color: var(--sidebar-ink-accent);
+}
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-item[data-active]::before {
+  background: var(--sidebar-ink-accent);
+}
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-item-badge {
+  background: var(--sidebar-ink-hover); color: var(--sidebar-ink-text);
+}
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-item[data-active] .lui-sidebar-item-badge {
+  background: var(--sidebar-ink-active); color: var(--sidebar-ink-accent);
+}
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-collapse,
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-mobile-close { color: var(--sidebar-ink-dim); }
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-collapse:hover,
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-mobile-close:hover {
+  background: var(--sidebar-ink-hover); color: var(--sidebar-ink-strong);
+}
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-footer { border-top: 1px solid var(--sidebar-ink-border); }
+
+/* Een blokje binnen de donkere rail, bv. een locatiekiezer of profielkaart. */
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-panel {
+  display: flex; align-items: center; gap: 9px; width: 100%;
+  padding: 9px 10px; margin-bottom: 10px;
+  border: none; border-radius: var(--r-md);
+  background: var(--sidebar-ink-hover); color: var(--sidebar-ink-strong);
+  font: inherit; font-size: 13px; text-align: left; cursor: pointer;
+  transition: background var(--dur-fast);
+}
+.lui-sidebar[data-tone="inverted"] .lui-sidebar-panel:hover { background: var(--sidebar-ink-active); }
+.lui-sidebar-panel-title { display: block; font-size: 12px; font-weight: 650; line-height: 1.2; }
+.lui-sidebar-panel-sub {
+  display: block; font-size: 10.5px; color: var(--sidebar-ink-dim); line-height: 1.2;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}

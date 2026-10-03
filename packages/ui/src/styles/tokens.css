@@ -1,0 +1,249 @@
+/* ============================================================
+   Dafke UI — Design tokens
+   Bron: het Dafke UI-design (Claude Design).
+   ALLE kleuren komen uit dit bestand. Componenten gebruiken
+   NOOIT een hardcoded kleur — altijd var(--...).
+   ============================================================ */
+
+:root {
+  /* ---------- Accent (teal) ---------- */
+  --accent: #0d9488;
+  --accent-hover: #0f766e;
+  --accent-active: #115e59;
+  --accent-fg: #ffffff;
+  --accent-tint: #f0fdfa;
+  --accent-tint-2: #ccfbf1;
+  --accent-border: #99f6e4;
+
+  /* ---------- Neutraal (slate) — light ---------- */
+  --bg: #f7f8fa;
+  --bg-grad: radial-gradient(120% 120% at 50% 0%, #ffffff 0%, #f4f6f8 60%, #eef1f4 100%);
+  --surface: #ffffff;
+  --surface-2: #f9fafb;
+  --surface-3: #f1f3f5;
+  --surface-hover: #f4f6f8;
+  --border: #e7e9ee;
+  --border-strong: #d6dae1;
+  --text: #0f1729;
+  --text-2: #475063;
+  --text-3: #8a93a6;
+  --text-inv: #ffffff;
+  --overlay: rgba(10, 13, 18, .45);
+
+  /* ---------- Status ---------- */
+  --green: #16a34a;
+  --green-tint: #f0fdf4;
+  --green-border: #bbf7d0;
+  --amber: #d97706;
+  --amber-tint: #fffbeb;
+  --amber-border: #fde68a;
+  --red: #dc2626;
+  --red-tint: #fef2f2;
+  --red-border: #fecaca;
+  --blue: #2563eb;
+  --blue-tint: #eff6ff;
+  --blue-border: #bfdbfe;
+  --violet: #7c3aed;
+  --violet-tint: #f5f3ff;
+  --violet-border: #ddd6fe;
+
+  /* ---------- Datavisualisatie ---------- */
+  --chart-1: var(--accent);
+  --chart-2: var(--blue);
+  --chart-3: var(--violet);
+  --chart-4: var(--amber);
+  --chart-5: var(--green);
+  --chart-6: var(--red);
+
+  /* ---------- Radius ---------- */
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 11px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-2xl: 26px;
+  --r-full: 999px;
+
+  /* ---------- Shadow ---------- */
+  --sh-xs: 0 1px 2px rgba(16, 23, 41, .05);
+  --sh-sm: 0 1px 2px rgba(16, 23, 41, .06), 0 1px 1px rgba(16, 23, 41, .04);
+  --sh-md: 0 4px 12px rgba(16, 23, 41, .07), 0 1px 3px rgba(16, 23, 41, .05);
+  --sh-lg: 0 12px 32px rgba(16, 23, 41, .10), 0 4px 10px rgba(16, 23, 41, .05);
+  --sh-xl: 0 24px 60px rgba(16, 23, 41, .16), 0 8px 18px rgba(16, 23, 41, .07);
+  --ring: 0 0 0 3.5px color-mix(in srgb, var(--accent) 22%, transparent);
+  --ring-red: 0 0 0 3.5px color-mix(in srgb, var(--red) 22%, transparent);
+
+  /* ---------- Layout ---------- */
+  --sidebar-w: 256px;
+  --topbar-h: 64px;
+  --maxw: 1160px;
+
+  /* ---------- Typografie ---------- */
+  --font: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --fs-xs: 11.5px;
+  --fs-sm: 12.5px;
+  --fs-base: 14px;
+  --fs-md: 15px;
+  --fs-lg: 16px;
+  --fs-xl: 20px;
+  --fs-2xl: 26px;
+  --fs-3xl: 34px;
+
+  /* ---------- Motion ---------- */
+  --ease: cubic-bezier(.4, 0, .2, 1);
+  --ease-out: cubic-bezier(.2, .9, .3, 1);
+  --ease-pop: cubic-bezier(.2, .9, .3, 1.2);
+  --dur-fast: .12s;
+  --dur: .18s;
+  --dur-slow: .28s;
+
+  /* ---------- Z-index schaal ---------- */
+  --z-sticky: 20;
+  --z-drawer: 70;
+  --z-overlay: 100;
+  --z-popover: 2000;
+  --z-toast: 2200;
+
+  /* ---------- Sidebar, donkere variant ---------- */
+  /* Volledig afgeleid van de bestaande tokens: een donkere, teal-getinte rail
+     die ook in lichtmodus werkt (zoals in het planningsdesign). */
+  --sidebar-ink: color-mix(in srgb, var(--accent-active) 20%, var(--text));
+  --sidebar-ink-2: color-mix(in srgb, var(--accent-active) 32%, var(--text));
+  --sidebar-ink-border: color-mix(in srgb, var(--text-inv) 10%, transparent);
+  --sidebar-ink-text: color-mix(in srgb, var(--text-inv) 72%, transparent);
+  --sidebar-ink-strong: var(--text-inv);
+  --sidebar-ink-dim: color-mix(in srgb, var(--text-inv) 48%, transparent);
+  --sidebar-ink-hover: color-mix(in srgb, var(--text-inv) 8%, transparent);
+  --sidebar-ink-active: color-mix(in srgb, var(--accent) 26%, transparent);
+  --sidebar-ink-accent: var(--accent-tint-2);
+
+  /* ---------- Dichtheid ----------
+     Schaalt de hoogte en binnenmarge van bedieningselementen.
+     Zet data-density="compact" of "comfy" op <html> of op een deel van de pagina. */
+  --density: 1;
+}
+
+[data-density="compact"] { --density: 0.86; }
+[data-density="comfy"] { --density: 1.14; }
+
+[data-theme="dark"] {
+  --accent: #2dd4bf;
+  --accent-hover: #5eead4;
+  --accent-active: #99f6e4;
+  --accent-fg: #04201d;
+  --accent-tint: #0c2925;
+  --accent-tint-2: #123e38;
+  --accent-border: #1c4f48;
+
+  --bg: #0a0c10;
+  --bg-grad: radial-gradient(120% 120% at 50% 0%, #14181f 0%, #0d1015 55%, #08090d 100%);
+  --surface: #14171d;
+  --surface-2: #181c23;
+  --surface-3: #1e232b;
+  --surface-hover: #1b2027;
+  --border: #262b34;
+  --border-strong: #333a45;
+  --text: #eef1f6;
+  --text-2: #a7b0c0;
+  --text-3: #6b7484;
+  --text-inv: #0a0c10;
+  --overlay: rgba(2, 4, 8, .62);
+
+  --green: #4ade80;
+  --green-tint: #0e2417;
+  --green-border: #1c4029;
+  --amber: #fbbf24;
+  --amber-tint: #2a2008;
+  --amber-border: #4a3a12;
+  --red: #f87171;
+  --red-tint: #2a1313;
+  --red-border: #4a2222;
+  --blue: #60a5fa;
+  --blue-tint: #0f1d33;
+  --blue-border: #1e3a5f;
+  --violet: #a78bfa;
+  --violet-tint: #1c1633;
+  --violet-border: #322a52;
+
+  --sh-xs: 0 1px 2px rgba(0, 0, 0, .4);
+  --sh-sm: 0 1px 2px rgba(0, 0, 0, .45);
+  --sh-md: 0 4px 14px rgba(0, 0, 0, .5);
+  --sh-lg: 0 14px 36px rgba(0, 0, 0, .55);
+  --sh-xl: 0 26px 64px rgba(0, 0, 0, .6);
+  --ring: 0 0 0 3.5px color-mix(in srgb, var(--accent) 28%, transparent);
+  --ring-red: 0 0 0 3.5px color-mix(in srgb, var(--red) 28%, transparent);
+
+  /* ---------- Sidebar, donkere variant ---------- */
+  --sidebar-ink: color-mix(in srgb, var(--accent-active) 14%, var(--surface));
+  --sidebar-ink-2: color-mix(in srgb, var(--accent-active) 20%, var(--surface-2));
+  --sidebar-ink-border: var(--border);
+  --sidebar-ink-text: var(--text-2);
+  --sidebar-ink-strong: var(--text);
+  --sidebar-ink-dim: var(--text-3);
+  --sidebar-ink-hover: color-mix(in srgb, var(--text) 8%, transparent);
+  --sidebar-ink-active: color-mix(in srgb, var(--accent) 18%, transparent);
+  --sidebar-ink-accent: var(--accent);
+}
+
+/* Volgt het systeem wanneer er geen expliciete keuze is gemaakt. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    --accent: #2dd4bf;
+    --accent-hover: #5eead4;
+    --accent-active: #99f6e4;
+    --accent-fg: #04201d;
+    --accent-tint: #0c2925;
+    --accent-tint-2: #123e38;
+    --accent-border: #1c4f48;
+
+    --bg: #0a0c10;
+    --bg-grad: radial-gradient(120% 120% at 50% 0%, #14181f 0%, #0d1015 55%, #08090d 100%);
+    --surface: #14171d;
+    --surface-2: #181c23;
+    --surface-3: #1e232b;
+    --surface-hover: #1b2027;
+    --border: #262b34;
+    --border-strong: #333a45;
+    --text: #eef1f6;
+    --text-2: #a7b0c0;
+    --text-3: #6b7484;
+    --text-inv: #0a0c10;
+    --overlay: rgba(2, 4, 8, .62);
+
+    --green: #4ade80;
+    --green-tint: #0e2417;
+    --green-border: #1c4029;
+    --amber: #fbbf24;
+    --amber-tint: #2a2008;
+    --amber-border: #4a3a12;
+    --red: #f87171;
+    --red-tint: #2a1313;
+    --red-border: #4a2222;
+    --blue: #60a5fa;
+    --blue-tint: #0f1d33;
+    --blue-border: #1e3a5f;
+    --violet: #a78bfa;
+    --violet-tint: #1c1633;
+    --violet-border: #322a52;
+
+    --sh-xs: 0 1px 2px rgba(0, 0, 0, .4);
+    --sh-sm: 0 1px 2px rgba(0, 0, 0, .45);
+    --sh-md: 0 4px 14px rgba(0, 0, 0, .5);
+    --sh-lg: 0 14px 36px rgba(0, 0, 0, .55);
+    --sh-xl: 0 26px 64px rgba(0, 0, 0, .6);
+    --ring: 0 0 0 3.5px color-mix(in srgb, var(--accent) 28%, transparent);
+    --ring-red: 0 0 0 3.5px color-mix(in srgb, var(--red) 28%, transparent);
+
+    --sidebar-ink: color-mix(in srgb, var(--accent-active) 14%, var(--surface));
+    --sidebar-ink-2: color-mix(in srgb, var(--accent-active) 20%, var(--surface-2));
+    --sidebar-ink-border: var(--border);
+    --sidebar-ink-text: var(--text-2);
+    --sidebar-ink-strong: var(--text);
+    --sidebar-ink-dim: var(--text-3);
+    --sidebar-ink-hover: color-mix(in srgb, var(--text) 8%, transparent);
+    --sidebar-ink-active: color-mix(in srgb, var(--accent) 18%, transparent);
+    --sidebar-ink-accent: var(--accent);
+  }
+}

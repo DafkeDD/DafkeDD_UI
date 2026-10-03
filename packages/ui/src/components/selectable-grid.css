@@ -1,0 +1,95 @@
+/* ========================= SelectableGrid ========================= */
+.lui-selgrid { --lui-selgrid-cols: 2; display: grid; gap: 12px; width: 100%; }
+
+.lui-selgrid-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.lui-selgrid-deselect {
+  border: 0; background: transparent; color: var(--text-3);
+  font: inherit; font-size: var(--fs-sm); cursor: pointer;
+}
+.lui-selgrid-deselect:hover { color: var(--text); text-decoration: underline; }
+.lui-selgrid-deselect:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-selgrid-items {
+  display: grid; gap: 10px;
+  grid-template-columns: repeat(var(--lui-selgrid-cols), minmax(0, 1fr));
+}
+
+.lui-selgrid-card {
+  position: relative; display: grid;
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface);
+  transition: border-color var(--dur-fast), background var(--dur-fast), transform var(--dur-fast);
+}
+.lui-selgrid-card:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+.lui-selgrid-card[data-selected] {
+  border-color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 7%, var(--surface));
+}
+.lui-selgrid-card[data-disabled] { opacity: .5; }
+.lui-selgrid-card[data-disabled]:hover { transform: none; border-color: var(--border); }
+
+.lui-selgrid-check { position: absolute; top: 9px; inset-inline-start: 9px; z-index: 1; }
+
+.lui-selgrid-body {
+  display: grid; gap: 4px; justify-items: center; text-align: center;
+  padding: 26px 12px 14px; border: 0; border-radius: inherit;
+  background: transparent; color: inherit; font: inherit; cursor: pointer;
+}
+.lui-selgrid-body:disabled { cursor: default; }
+.lui-selgrid-body:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-selgrid-icon {
+  display: grid; place-items: center; width: 38px; height: 38px; margin-bottom: 4px;
+  border-radius: var(--r-sm); background: var(--surface-3); color: var(--text-2);
+}
+.lui-selgrid-card[data-tone="accent"] .lui-selgrid-icon { background: color-mix(in oklab, var(--accent) 14%, transparent); color: var(--accent); }
+.lui-selgrid-card[data-tone="green"] .lui-selgrid-icon { background: color-mix(in oklab, var(--green) 14%, transparent); color: var(--green); }
+.lui-selgrid-card[data-tone="amber"] .lui-selgrid-icon { background: color-mix(in oklab, var(--amber) 16%, transparent); color: var(--amber); }
+.lui-selgrid-card[data-tone="red"] .lui-selgrid-icon { background: color-mix(in oklab, var(--red) 14%, transparent); color: var(--red); }
+.lui-selgrid-card[data-tone="blue"] .lui-selgrid-icon { background: color-mix(in oklab, var(--blue) 14%, transparent); color: var(--blue); }
+.lui-selgrid-card[data-tone="violet"] .lui-selgrid-icon { background: color-mix(in oklab, var(--violet) 14%, transparent); color: var(--violet); }
+
+.lui-selgrid-title { font-size: var(--fs-sm); font-weight: 600; color: var(--text); }
+.lui-selgrid-desc { font-size: 12px; color: var(--text-3); }
+
+/* actiebalk */
+.lui-selgrid-bar {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 8px; border-radius: var(--r-full);
+  background: var(--accent); color: var(--accent-fg);
+  box-shadow: var(--sh-lg);
+  animation: lui-selgrid-bar var(--dur) var(--ease-out);
+}
+.lui-selgrid-bar[data-tone="red"] { background: var(--red); color: #fff; }
+.lui-selgrid-bar[data-tone="violet"] { background: var(--violet); color: #fff; }
+
+.lui-selgrid-action {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border: 0; border-radius: var(--r-full);
+  background: transparent; color: inherit;
+  font: inherit; font-size: var(--fs-sm); font-weight: 650; cursor: pointer;
+  transition: background var(--dur-fast);
+}
+.lui-selgrid-action:hover { background: rgba(255, 255, 255, .18); }
+.lui-selgrid-action:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+.lui-selgrid-empty {
+  display: grid; justify-items: center; gap: 4px; padding: 34px 16px;
+  border: 1px dashed var(--border-strong); border-radius: var(--r-md);
+}
+.lui-selgrid-empty-icon {
+  display: grid; place-items: center; width: 40px; height: 40px; margin-bottom: 6px;
+  border-radius: 50%; background: color-mix(in oklab, var(--green) 14%, transparent); color: var(--green);
+}
+.lui-selgrid-empty-title { margin: 0; font-size: var(--fs-sm); font-weight: 650; color: var(--text); }
+.lui-selgrid-empty-desc { margin: 0; font-size: 12.5px; color: var(--text-3); }
+
+@keyframes lui-selgrid-bar {
+  from { opacity: 0; transform: translateY(10px) scale(.96); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-selgrid-card:hover { transform: none; }
+  .lui-selgrid-bar { animation: none; }
+}

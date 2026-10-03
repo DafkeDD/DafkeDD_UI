@@ -1,0 +1,18 @@
+{
+  "name": "pulse-dot",
+  "title": "PulseDot",
+  "description": "Statusbolletje met kloppende halo, voor live of bezet.",
+  "category": "Feedback",
+  "dependencies": [],
+  "requires": [],
+  "files": [
+    {
+      "path": "components/pulse-dot.tsx",
+      "content": "\"use client\";\nimport * as React from \"react\";\nimport { cn } from \"../lib/cn\";\n\nexport interface PulseDotProps extends React.HTMLAttributes<HTMLSpanElement> {\n  tone?: \"green\" | \"amber\" | \"red\" | \"accent\" | \"blue\" | \"neutral\";\n  size?: number;\n  /** Zet de kloppende animatie uit; de halo blijft. */\n  still?: boolean;\n  label?: string;\n}\n\n/** PulseDot — statusbolletje met halo, voor \"live\", \"bezet\" of \"online\". */\nexport const PulseDot = React.forwardRef<HTMLSpanElement, PulseDotProps>(function PulseDot(\n  { tone = \"green\", size = 9, still, label, className, style, ...rest },\n  ref\n) {\n  return (\n    <span\n      ref={ref}\n      role={label ? \"status\" : undefined}\n      aria-label={label}\n      className={cn(\"lui-pulse\", `lui-pulse-${tone}`, still && \"lui-pulse-still\", className)}\n      style={{ width: size, height: size, ...style }}\n      {...rest}\n    />\n  );\n});\n"
+    },
+    {
+      "path": "components/pulse-dot.css",
+      "content": "/* ============================ PulseDot ============================ */\n.lui-pulse {\n  --lui-pulse-color: var(--green);\n  position: relative; display: inline-block; flex: none;\n  border-radius: var(--r-full); background: var(--lui-pulse-color);\n  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lui-pulse-color) 18%, transparent);\n}\n.lui-pulse::after {\n  content: \"\"; position: absolute; inset: 0;\n  border-radius: inherit; background: var(--lui-pulse-color);\n  animation: lui-pulse 1.8s var(--ease-out) infinite;\n}\n.lui-pulse-still::after { animation: none; display: none; }\n\n@keyframes lui-pulse {\n  0% { opacity: .55; transform: scale(1); }\n  70% { opacity: 0; transform: scale(2.4); }\n  100% { opacity: 0; transform: scale(2.4); }\n}\n\n.lui-pulse-green { --lui-pulse-color: var(--green); }\n.lui-pulse-amber { --lui-pulse-color: var(--amber); }\n.lui-pulse-red { --lui-pulse-color: var(--red); }\n.lui-pulse-accent { --lui-pulse-color: var(--accent); }\n.lui-pulse-blue { --lui-pulse-color: var(--blue); }\n.lui-pulse-neutral { --lui-pulse-color: var(--text-3); }\n"
+    }
+  ]
+}

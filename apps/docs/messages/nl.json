@@ -1,0 +1,169 @@
+{
+  "metadata": {
+    "title": "Dafke UI",
+    "description": "Een volledig eigen React component library op basis van het Dafke UI-design. Geen shadcn, geen Radix, geen externe UI-dependencies."
+  },
+  "nav": {
+    "subtitle": "Design system",
+    "search": "Zoek component…",
+    "start": "Aan de slag",
+    "intro": "Introductie",
+    "installation": "Installatie",
+    "theming": "Thema & tokens",
+    "results": "{count} resultaten",
+    "new": "nieuw",
+    "updated": "bijgewerkt"
+  },
+  "categories": {
+    "basis": "Basis",
+    "forms": "Formulieren",
+    "overlays": "Overlays",
+    "navigation": "Navigatie",
+    "scheduling": "Datum & planning",
+    "data": "Data",
+    "feedback": "Feedback",
+    "layout": "Layout",
+    "motion": "Motion"
+  },
+  "shell": {
+    "docs": "Documentatie",
+    "openNav": "Navigatie openen",
+    "language": "Taal"
+  },
+  "home": {
+    "badge": "{count} componenten · volledig eigen code",
+    "titleLine1": "Je eigen component library,",
+    "titleLine2": "gebouwd op het Dafke UI-design.",
+    "intro": "Werkt zoals shadcn — dezelfde compositie, dezelfde copy-paste-aanpak — maar zonder één regel code van shadcn, Radix of welke UI-library dan ook. Alles staat in jouw repo.",
+    "ctaComponents": "Bekijk de componenten",
+    "ctaInstall": "Installatie",
+    "allTitle": "Alles wat erin zit",
+    "allDescription": "Van knop tot commandopalet, van tabel tot donutgrafiek.",
+    "features": {
+      "zeroDeps": {
+        "title": "Nul UI-dependencies",
+        "text": "Geen shadcn, geen Radix, geen Headless UI. Elk component — inclusief focus-trap, positionering en toetsenbordnavigatie — is hier zelf geschreven."
+      },
+      "tokens": {
+        "title": "Alle kleuren uit één bron",
+        "text": "Elke kleur, radius en schaduw komt uit het Dafke UI-design. Componenten gebruiken uitsluitend tokens, nooit een hardcoded hex."
+      },
+      "copyPaste": {
+        "title": "Copy-paste, jouw code",
+        "text": "Zoals shadcn: `npx dafke-ui add button` kopieert de bron in je project. Je bezit de componenten en past ze aan wanneer je wil."
+      },
+      "theme": {
+        "title": "Licht én donker",
+        "text": "Eén ThemeProvider, twee volledige paletten. Alles schakelt mee, tot en met grafieken en overlays."
+      }
+    }
+  },
+  "component": {
+    "install": "Installatie",
+    "copies": "Kopieert",
+    "and": "en",
+    "andTakes": "en neemt",
+    "along": "mee.",
+    "intoProject": " mee naar je project.",
+    "notes": "Goed om te weten"
+  },
+  "props": {
+    "prop": "Prop",
+    "type": "Type",
+    "default": "Standaard",
+    "description": "Omschrijving"
+  },
+  "preview": {
+    "preview": "Voorbeeld",
+    "code": "Code",
+    "missing": "Demo “{key}” niet gevonden."
+  },
+  "intro": {
+    "badge": "Introductie",
+    "lead": "Een eigen React component library, opgebouwd uit het Dafke UI-design. De API voelt aan als shadcn — compositie met sub-componenten, <code>asChild</code>, controlled én uncontrolled — maar er zit geen enkele regel externe UI-code in. Geen shadcn, geen Radix, geen Headless UI, geen cva, geen clsx: alles staat in <code>packages/ui/src</code>.",
+    "buildTitle": "Opbouw",
+    "buildBadge": "{done}/{total} stappen",
+    "buildDesc": "De library groeit stap voor stap. Elke stap voegt componenten én hun docs toe.",
+    "getTitle": "Wat je krijgt",
+    "getComponents": "{count} componenten",
+    "getComponentsText": "Allemaal met dezelfde tokens, en er komen er elke stap bij.",
+    "getPrimitives": "Eigen primitieven",
+    "getPrimitivesText": "cn(), variants(), Slot en hooks — zelf geschreven.",
+    "getTheme": "Licht + donker",
+    "getThemeText": "Twee volledige paletten, één ThemeProvider.",
+    "getA11y": "Toegankelijk",
+    "getA11yText": "ARIA-rollen, toetsenbordnavigatie en zichtbare focus op elk interactief component.",
+    "rulesTitle": "Regels van dit design system",
+    "rule1Title": "Alle kleuren komen uit het Dafke UI-design",
+    "rule1Body": "Componenten gebruiken uitsluitend CSS-variabelen (<code>var(--accent)</code>, <code>var(--surface)</code>, …). Wil je herkleuren? Pas <code>tokens.css</code> aan en de hele library volgt.",
+    "rule2Title": "Eén klassenprefix",
+    "rule2Body": "Elke klasse begint met <code>lui-</code>, dus niets botst met bestaande CSS in je projecten.",
+    "rule3Title": "Tailwind is enkel de engine",
+    "rule3Body": "Tailwind v4 levert de reset en de utilities voor nieuwe markup. De componenten zelf zijn gewone CSS-klassen — geen utility-soep, wél volledig aanpasbaar.",
+    "overviewTitle": "Overzicht",
+    "cta": "Naar de installatie"
+  },
+  "install": {
+    "badge": "Aan de slag",
+    "title": "Installatie",
+    "lead": "Dafke UI werkt in elk React-project met een bundler (Next.js, Vite, Remix). Je hebt twee manieren: componenten kopiëren met de CLI, of de monorepo rechtstreeks gebruiken.",
+    "s1Title": "1 · De monorepo lokaal draaien",
+    "s1Text": "Dit is de documentatiesite die je nu bekijkt, met alle bronbestanden ernaast.",
+    "s1Structure": "Structuur: <code>packages/ui</code> (de library), <code>packages/cli</code> (de add-CLI), <code>apps/docs</code> (deze site) en <code>registry/</code> (gegenereerde JSON).",
+    "s2Title": "2 · Componenten in een bestaand project zetten",
+    "stepInit": "tokens + basis",
+    "stepAdd": "component kopiëren",
+    "stepImport": "importeren",
+    "stepImportDesc": "css + component",
+    "s2Init": "<code>init</code> maakt <code>dafke-ui.json</code> aan met je paden en kopieert de gedeelde bestanden (tokens, base-CSS, <code>cn()</code>, <code>variants()</code>, Slot, Portal, hooks en de icon set).",
+    "npmTitle": "Nog niet op npm?",
+    "npmBody": "Koppel de CLI dan eenmalig vanuit deze monorepo met <code>cd packages/cli && npm link</code>. Daarna werkt <code>dafke-ui init</code> in elk project op je machine, en vindt de CLI de registry vanzelf. Of geef een pad of URL mee met <code>--registry</code>, bijvoorbeeld de raw-URL van <code>registry/index.json</code> op GitHub.",
+    "s2Index": "De CLI houdt ook <code>components/ui/index.ts</code> bij, zodat je alles importeert via <code>@/components/ui</code>. Interne hulpbestanden (<code>cn</code>, <code>hooks</code>, <code>anchor</code> …) staan er bewust niet in; die importeer je rechtstreeks, bv. <code>@/components/ui/cn</code>.",
+    "s2Update": "<code>update</code> haalt de nieuwste versie van alles wat al in je project staat en installeert meteen de componenten die intussen aan de registry zijn toegevoegd. Bestanden die je zelf aangepast hebt blijven staan — die worden overgeslagen tenzij je <code>--force</code> meegeeft. Bekijk vooraf wat er zou gebeuren met <code>--dry-run</code>, of blijf bij wat je al hebt met <code>--only-installed</code>. Daarvoor houdt de CLI <code>dafke-ui.lock.json</code> bij; commit dat bestand mee.",
+    "s3Title": "3 · CSS inladen",
+    "s3Text": "Importeer één stylesheet in je globale CSS. De volgorde maakt niet uit; alles werkt met cascade-vrije klassen.",
+    "twTitle": "Tailwind is niet verplicht",
+    "twBody": "De componenten hebben Tailwind niet nodig — ze gebruiken eigen <code>lui-</code>klassen. Tailwind v4 staat er alleen voor de reset en voor utilities in je eigen markup. Gebruik je Tailwind wel, importeer dan ook <code>tailwind.css</code>: dan bestaan dezelfde tokens als utilities (<code>bg-accent</code>, <code>rounded-lg</code>). Zonder Tailwind laat je dat bestand weg.",
+    "s4Title": "4 · Providers",
+    "s4Text": "Twee providers zet je één keer bovenaan je app: thema en meldingen.",
+    "fontsTitle": "Lettertypes",
+    "fontsText": "Het design gebruikt <strong>Hanken Grotesk</strong> voor tekst en <strong>JetBrains Mono</strong> voor code. Laad ze via Google Fonts, of pas <code>--font</code> en <code>--mono</code> aan in <code>tokens.css</code>.",
+    "reqTitle": "Vereisten",
+    "req1": "React 18 of 19",
+    "req2": "Node 20 of hoger (voor de CLI)",
+    "req3": "Een bundler die CSS-imports aankan (Next.js, Vite, …)",
+    "req4": "Geen enkele UI- of utility-library — die zitten er bewust niet in"
+  },
+  "theming": {
+    "badge": "Fundament",
+    "title": "Thema & tokens",
+    "lead": "Elke kleur in deze library komt uit één bestand: <code>tokens.css</code>. Componenten schrijven nooit een hex-waarde — ze gebruiken alleen variabelen. Pas een token aan en de volledige UI verandert mee, in licht én donker.",
+    "sourceTitle": "Bron: het Dafke UI-design",
+    "sourceBody": "De waarden hieronder zijn exact overgenomen uit het admin-paneel-design. Wil je een tweede merk ondersteunen? Kopieer het <code>:root</code>-blok en overschrijf het onder een eigen selector, bijvoorbeeld <code>[data-brand=\"klant-x\"]</code>.",
+    "dark": "donker",
+    "radiusTitle": "Radius & schaduw",
+    "radius": "Radius",
+    "shadow": "Schaduw",
+    "recolorTitle": "Herkleuren",
+    "recolorText": "Eén variabele aanpassen volstaat om de hele library te herkleuren:",
+    "densityTitle": "Dichtheid",
+    "densityText": "Naast licht en donker heeft de library één schaalknop: <code>--density</code>. Elke hoogte en padding is geschreven als <code>calc(Npx * var(--density))</code>, dus compact en ruim werken meteen door in knoppen, velden, tabellen, lijsten en agenda’s — zonder één component aan te passen.",
+    "densityProvider": "<code>ThemeProvider</code> zet <code>data-density</code> op <code>&lt;html&gt;</code> en onthoudt de keuze; <code>DensityToggle</code> is de kant-en-klare schakelaar en <code>ThemeScript</code> zet ze terug vóór de eerste paint.",
+    "allTitle": "Alle tokens",
+    "token": "Token",
+    "light": "Licht",
+    "darkCol": "Donker"
+  },
+  "tokenGroups": {
+    "accent": "Accent",
+    "accentDesc": "De teal-accentkleur van het Dafke UI-design en zijn tinten.",
+    "surfaces": "Oppervlakken",
+    "surfacesDesc": "Achtergronden, kaarten en randen.",
+    "text": "Tekst",
+    "textDesc": "Drie tekstniveaus plus de inverse kleur.",
+    "status": "Status",
+    "statusDesc": "Elke status heeft een kleur, een tint en een rand.",
+    "dataviz": "Datavisualisatie",
+    "datavizDesc": "Zes reeksen voor grafieken, afgeleid van dezelfde kleuren."
+  }
+}

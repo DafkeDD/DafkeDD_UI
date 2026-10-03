@@ -1,0 +1,18 @@
+{
+  "name": "label",
+  "title": "Label",
+  "description": "Bijschrift voor een formulierveld, met verplicht-markering.",
+  "category": "Formulieren",
+  "dependencies": [],
+  "requires": [],
+  "files": [
+    {
+      "path": "components/label.tsx",
+      "content": "\"use client\";\nimport * as React from \"react\";\nimport { cn } from \"../lib/cn\";\n\nexport interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {\n  /** Toont een rood sterretje. */\n  required?: boolean;\n}\n\n/** Label — bijschrift voor een formulierveld. */\nexport const Label = React.forwardRef<HTMLLabelElement, LabelProps>(function Label(\n  { required, className, children, ...rest },\n  ref\n) {\n  return (\n    <label ref={ref} className={cn(\"lui-label\", className)} {...rest}>\n      {children}\n      {required && (\n        <span className=\"lui-label-required\" aria-hidden=\"true\">\n          *\n        </span>\n      )}\n    </label>\n  );\n});\n"
+    },
+    {
+      "path": "components/label.css",
+      "content": "/* ============================ Label ============================ */\n.lui-label {\n  display: inline-flex; align-items: center; gap: 7px;\n  font-size: 13px; font-weight: 600; color: var(--text);\n  line-height: 1.3;\n}\n.lui-label-required { color: var(--red); }\n"
+    }
+  ]
+}

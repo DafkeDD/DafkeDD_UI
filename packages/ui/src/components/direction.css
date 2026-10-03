@@ -1,0 +1,6 @@
+/* ========================= DirectionProvider ========================= */
+/* Doorzichtige wikkel: display: contents laat de kinderen rechtstreeks in de
+   layout van de ouder vallen, zodat een provider midden in een flex- of
+   grid-container niets breekt. Wil je er wel een echte doos van maken, geef
+   dan zelf een display mee via style of className. */
+.lui-dir { display: contents; }

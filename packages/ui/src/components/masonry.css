@@ -1,0 +1,21 @@
+/* ============================ Masonry ============================ */
+.lui-masonry {
+  --lui-masonry-gap: 16px;
+  --lui-masonry-cols: 3;
+  column-count: var(--lui-masonry-cols);
+  column-gap: var(--lui-masonry-gap);
+  width: 100%;
+}
+.lui-masonry-item {
+  break-inside: avoid;
+  margin-bottom: var(--lui-masonry-gap);
+}
+
+/* Standaardbreekpunten wanneer er geen vast aantal kolommen is meegegeven. */
+.lui-masonry[data-auto] { column-count: 1; }
+@media (min-width: 640px) { .lui-masonry[data-auto] { column-count: 2; } }
+@media (min-width: 1024px) { .lui-masonry[data-auto] { column-count: 3; } }
+
+/* Zelf verdeeld: echte flexkolommen, dus geen column-break-verrassingen. */
+.lui-masonry-balanced { display: flex; column-count: auto; align-items: flex-start; }
+.lui-masonry-balanced > .lui-masonry-column { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }

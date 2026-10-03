@@ -1,0 +1,41 @@
+/* ============================ Collapsible ============================ */
+.lui-collapsible { display: block; min-width: 0; }
+
+.lui-collapsible-trigger {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 10px; border: 1px solid transparent; border-radius: var(--r-sm);
+  background: transparent; color: var(--text);
+  font: inherit; font-size: 14px; font-weight: 600; text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+.lui-collapsible-trigger:hover:not(:disabled) { background: var(--surface-2); }
+.lui-collapsible-trigger:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-collapsible-trigger:disabled { opacity: .5; cursor: not-allowed; }
+
+.lui-collapsible-chevron {
+  display: inline-flex; color: var(--text-3);
+  transition: transform var(--dur) var(--ease);
+}
+.lui-collapsible-trigger[data-state="open"] .lui-collapsible-chevron { transform: rotate(180deg); }
+
+/* De hoogte-animatie zonder de hoogte te meten: de rij groeit van 0fr naar 1fr.
+   Werkt dus ook als de inhoud onderweg verandert. */
+.lui-collapsible-content {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-slow) var(--ease), opacity var(--dur) var(--ease);
+  opacity: 0;
+}
+.lui-collapsible-content[data-state="open"] { grid-template-rows: 1fr; opacity: 1; }
+
+.lui-collapsible-inner { overflow: hidden; min-height: 0; }
+
+/* Dicht: niets mag nog focus krijgen of gelezen worden. */
+.lui-collapsible-content[data-state="closed"] .lui-collapsible-inner {
+  visibility: hidden;
+  transition: visibility 0s linear var(--dur-slow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-collapsible-content { transition: none; }
+}

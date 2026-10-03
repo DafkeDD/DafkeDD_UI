@@ -1,0 +1,44 @@
+/* ============================ Editable ============================ */
+.lui-editable { --lui-editable-fs: var(--fs-base); display: block; width: 100%; }
+.lui-editable-sm { --lui-editable-fs: var(--fs-sm); }
+.lui-editable-lg { --lui-editable-fs: var(--fs-lg); }
+
+.lui-editable-preview {
+  display: inline-flex; align-items: center; gap: 8px; max-width: 100%;
+  margin: 0; padding: 5px 8px; border: 1px solid transparent; border-radius: var(--r-sm);
+  background: transparent; color: var(--text); font: inherit; font-size: var(--lui-editable-fs);
+  text-align: start; cursor: text;
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-editable-preview:hover:not(:disabled) { background: var(--surface-2); border-color: var(--border); }
+.lui-editable-preview:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-editable-preview:disabled { cursor: default; color: var(--text-3); }
+
+.lui-editable-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: pre-wrap; }
+.lui-editable-placeholder { color: var(--text-3); font-style: italic; }
+.lui-editable-icon { flex: none; color: var(--text-3); opacity: 0; transition: opacity var(--dur-fast); }
+.lui-editable-preview:hover .lui-editable-icon,
+.lui-editable-preview:focus-visible .lui-editable-icon { opacity: 1; }
+
+.lui-editable-edit { display: flex; align-items: flex-start; gap: 6px; }
+.lui-editable-input {
+  flex: 1; min-width: 0; padding: 5px 8px;
+  border: 1px solid var(--accent); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text);
+  font: inherit; font-size: var(--lui-editable-fs); outline: none;
+  box-shadow: var(--ring); resize: vertical;
+}
+.lui-editable-input:disabled { opacity: .6; }
+
+.lui-editable-actions { display: flex; gap: 4px; flex: none; }
+.lui-editable-btn {
+  display: grid; place-items: center; width: 30px; height: 30px; padding: 0;
+  border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text-2); cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-editable-btn:hover:not(:disabled) { background: var(--surface-2); color: var(--text); }
+.lui-editable-btn[data-primary] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.lui-editable-btn[data-primary]:hover:not(:disabled) { background: var(--accent-hover); color: var(--accent-fg); }
+.lui-editable-btn:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-editable-btn:disabled { opacity: .5; cursor: not-allowed; }

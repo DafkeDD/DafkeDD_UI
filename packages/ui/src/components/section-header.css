@@ -1,0 +1,38 @@
+/* ============================ SectionHeader ============================ */
+.lui-section-header {
+  --lui-section-color: var(--accent);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px; min-width: 0;
+}
+.lui-section-header-divider {
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+
+.lui-section-accent { --lui-section-color: var(--accent); }
+.lui-section-green { --lui-section-color: var(--green); }
+.lui-section-amber { --lui-section-color: var(--amber); }
+.lui-section-red { --lui-section-color: var(--red); }
+.lui-section-blue { --lui-section-color: var(--blue); }
+.lui-section-violet { --lui-section-color: var(--violet); }
+.lui-section-neutral { --lui-section-color: var(--text-3); }
+
+.lui-section-bar {
+  flex: none; width: 3px; height: 15px;
+  border-radius: var(--r-full); background: var(--lui-section-color);
+}
+.lui-section-icon { display: inline-flex; flex: none; color: var(--lui-section-color); }
+.lui-section-icon svg { width: 16px; height: 16px; }
+
+.lui-section-text { flex: 1; min-width: 0; }
+.lui-section-title {
+  font-size: 13px; font-weight: 700; letter-spacing: .01em; color: var(--text);
+  display: flex; align-items: baseline; gap: 6px; min-width: 0;
+}
+.lui-section-count { font-size: 12px; font-weight: 500; color: var(--text-3); }
+.lui-section-description { font-size: var(--fs-sm); color: var(--text-3); margin-top: 2px; line-height: 1.45; }
+
+.lui-section-actions { flex: none; display: flex; align-items: center; gap: 8px; margin-left: auto; }
+
+.lui-section-header-sm { margin-bottom: 10px; gap: 8px; }
+.lui-section-header-sm .lui-section-bar { height: 12px; width: 2.5px; }
+.lui-section-header-sm .lui-section-title { font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; }

@@ -1,0 +1,76 @@
+# Maakt een GitHub-release zodra er naar main gemerged wordt.
+# Het versienummer komt uit package.json (root). Bestaat de tag vX.Y.Z al,
+# dan wordt er niets gereleased: verhoog eerst de versie op developer
+# met `npm run version:patch` (of :minor / :major).
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run registry
+      - run: npm run typecheck
+      - run: npm run build
+
+      - name: Unit- en componenttests (Vitest)
+        run: npm test
+
+      - name: Browsertest (Chrome klikt de componenten na)
+        run: node scripts/ui-test.mjs
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+
+      - name: Versie bepalen
+        id: version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+          if git rev-parse "v$VERSION" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "::warning::Tag v$VERSION bestaat al — geen release gemaakt. Verhoog de versie op developer met 'npm run version:patch' en merge opnieuw."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Release-bestanden inpakken
+        if: steps.version.outputs.exists == 'false'
+        run: |
+          TAG=${{ steps.version.outputs.tag }}
+          tar -czf "dafke-ui-registry-$TAG.tar.gz" registry
+          cp -r registry packages/cli/registry
+          (cd packages/cli && npm pack --pack-destination ../..)
+
+      - name: GitHub-release maken
+        if: steps.version.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=${{ steps.version.outputs.tag }}
+          gh release create "$TAG" \
+            --target "$GITHUB_SHA" \
+            --title "Dafke UI $TAG" \
+            --generate-notes \
+            dafke-ui-registry-$TAG.tar.gz \
+            dafke-ui-*.tgz

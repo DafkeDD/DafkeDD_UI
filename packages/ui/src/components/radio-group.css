@@ -1,0 +1,50 @@
+/* ============================ RadioGroup ============================ */
+.lui-radio-group { display: flex; gap: 10px; }
+.lui-radio-group-vertical { flex-direction: column; }
+.lui-radio-group-horizontal { flex-direction: row; flex-wrap: wrap; gap: 18px; }
+
+.lui-radio { position: relative; display: inline-grid; place-items: center; flex: none; }
+.lui-radio-input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.lui-radio-input:disabled { cursor: not-allowed; }
+
+.lui-radio-dot {
+  width: 18px; height: 18px; border-radius: var(--r-full);
+  background: var(--surface); border: 1.5px solid var(--border-strong);
+  display: grid; place-items: center; pointer-events: none;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-radio-dot::after {
+  content: ""; width: 8px; height: 8px; border-radius: var(--r-full);
+  background: var(--accent); transform: scale(0);
+  transition: transform var(--dur-fast) var(--ease-pop);
+}
+.lui-radio-input:hover:not(:disabled) + .lui-radio-dot { border-color: var(--text-3); }
+.lui-radio-input:focus-visible + .lui-radio-dot { border-color: var(--accent); box-shadow: var(--ring); }
+.lui-radio-input:checked + .lui-radio-dot { border-color: var(--accent); }
+.lui-radio-input:checked + .lui-radio-dot::after { transform: scale(1); }
+.lui-radio-input:disabled + .lui-radio-dot { background: var(--surface-3); border-color: var(--border); }
+
+.lui-radio-row { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+.lui-radio-disabled { cursor: not-allowed; opacity: .6; }
+.lui-radio-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lui-radio-label { font-size: 13.5px; font-weight: 550; color: var(--text); line-height: 1.35; }
+.lui-radio-description { font-size: var(--fs-sm); color: var(--text-3); line-height: 1.45; }
+
+.lui-radio-card {
+  padding: 13px 15px; border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface); transition: border-color var(--dur), background var(--dur), box-shadow var(--dur);
+}
+.lui-radio-card:hover:not(.lui-radio-disabled) { border-color: var(--border-strong); }
+.lui-radio-card.lui-radio-checked {
+  border-color: var(--accent); background: var(--accent-tint); box-shadow: var(--sh-sm);
+}
+
+/* ---------- Motion ---------- */
+.lui-radio-dot::after { transition: transform .3s var(--ease-pop); }
+.lui-radio-input:checked + .lui-radio-dot { animation: lui-check-pulse .45s var(--ease-out); }
+@keyframes lui-check-pulse {
+  from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); }
+  to { box-shadow: 0 0 0 7px transparent; }
+}
+.lui-radio-input:active:not(:disabled) + .lui-radio-dot { transform: scale(.9); }
+.lui-radio-dot { transition: border-color var(--dur-fast), box-shadow var(--dur-fast), transform .2s var(--ease-pop); }

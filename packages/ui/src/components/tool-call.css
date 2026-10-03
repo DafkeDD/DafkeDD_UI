@@ -1,0 +1,106 @@
+/* ==================== ToolCall & ApprovalCard ==================== */
+.lui-toolcall {
+  border: 1px solid var(--border); border-radius: var(--r-sm);
+  background: var(--surface); overflow: hidden;
+}
+.lui-toolcall-compact { border-radius: var(--r-full); }
+.lui-toolcall-compact[data-open] { border-radius: var(--r-sm); }
+
+.lui-toolcall-head {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  padding: 7px 11px; border: 0; background: transparent;
+  font: inherit; font-size: 13px; color: var(--text-2); text-align: start; cursor: pointer;
+}
+.lui-toolcall-head:disabled { cursor: default; }
+.lui-toolcall-head:hover:not(:disabled) { background: var(--surface-2); }
+.lui-toolcall-head:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-toolcall-mark {
+  display: grid; place-items: center; flex: none; width: 20px; height: 20px;
+  border-radius: 50%; background: var(--surface-3); color: var(--text-3);
+}
+.lui-toolcall[data-status="success"] .lui-toolcall-mark { background: color-mix(in oklab, var(--green) 16%, transparent); color: var(--green); }
+.lui-toolcall[data-status="error"] .lui-toolcall-mark { background: color-mix(in oklab, var(--red) 16%, transparent); color: var(--red); }
+.lui-toolcall[data-status="running"] .lui-toolcall-mark { background: color-mix(in oklab, var(--accent) 16%, transparent); color: var(--accent); }
+.lui-toolcall[data-status="running"] .lui-toolcall-mark > svg { animation: lui-toolcall-spin 1s linear infinite; }
+@keyframes lui-toolcall-spin { to { transform: rotate(360deg); } }
+
+.lui-toolcall-name { font-family: var(--mono); font-weight: 600; color: var(--text); }
+.lui-toolcall-summary {
+  flex: 1; min-width: 0; color: var(--text-3);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.lui-toolcall-duration { flex: none; font-size: 11.5px; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.lui-toolcall-chevron {
+  flex: none; width: 6px; height: 6px; border-right: 1.5px solid var(--text-3); border-bottom: 1.5px solid var(--text-3);
+  transform: rotate(45deg) translate(-1px, -1px); transition: transform var(--dur-fast);
+}
+.lui-toolcall[data-open] .lui-toolcall-chevron { transform: rotate(225deg) translate(-1px, -1px); }
+
+.lui-toolcall-body { display: grid; gap: 10px; padding: 10px 11px 12px; border-top: 1px solid var(--border); }
+.lui-toolcall-part { display: grid; gap: 4px; }
+.lui-toolcall-part-label {
+  font-size: 10.5px; font-weight: 650; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3);
+}
+.lui-toolcall-pre {
+  margin: 0; padding: 9px 11px; overflow-x: auto; max-height: 260px;
+  border-radius: var(--r-xs); background: var(--surface-2);
+  font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--text-2);
+}
+.lui-toolcall-error { margin: 0; font-size: 13px; color: var(--red); }
+
+/* ---------- ApprovalCard ---------- */
+.lui-approval {
+  display: grid; gap: 12px; padding: 14px;
+  border: 1px solid var(--border); border-radius: var(--r-md); background: var(--surface);
+  border-inline-start: 3px solid var(--amber);
+}
+.lui-approval[data-tone="accent"] { border-inline-start-color: var(--accent); }
+.lui-approval[data-tone="red"] { border-inline-start-color: var(--red); }
+
+.lui-approval-head { display: flex; align-items: flex-start; gap: 10px; }
+.lui-approval-icon {
+  display: grid; place-items: center; flex: none; width: 30px; height: 30px;
+  border-radius: var(--r-sm); background: color-mix(in oklab, var(--amber) 15%, transparent); color: var(--amber);
+}
+.lui-approval[data-tone="accent"] .lui-approval-icon { background: color-mix(in oklab, var(--accent) 15%, transparent); color: var(--accent); }
+.lui-approval[data-tone="red"] .lui-approval-icon { background: color-mix(in oklab, var(--red) 15%, transparent); color: var(--red); }
+
+.lui-approval-text { display: grid; gap: 3px; }
+.lui-approval-title { margin: 0; font-size: var(--fs-sm); font-weight: 650; color: var(--text); }
+.lui-approval-desc { margin: 0; font-size: 13px; color: var(--text-3); line-height: 1.55; }
+
+.lui-approval-details {
+  display: grid; gap: 6px; margin: 0; padding: 10px 12px;
+  border-radius: var(--r-sm); background: var(--surface-2);
+}
+.lui-approval-row { display: flex; align-items: baseline; gap: 12px; justify-content: space-between; }
+.lui-approval-row dt { font-size: 12.5px; color: var(--text-3); }
+.lui-approval-row dd {
+  margin: 0; font-size: 12.5px; color: var(--text); font-family: var(--mono);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.lui-approval-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+.lui-approval-always {
+  display: flex; align-items: center; gap: 6px; margin-inline-end: auto;
+  font-size: 12.5px; color: var(--text-3); cursor: pointer;
+}
+.lui-approval-btn {
+  height: 32px; padding: 0 14px; border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text-2);
+  font: inherit; font-size: var(--fs-sm); font-weight: 600; cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-approval-btn:hover:not(:disabled) { background: var(--surface-2); color: var(--text); }
+.lui-approval-btn[data-primary] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.lui-approval-btn[data-primary]:hover:not(:disabled) { background: var(--accent-hover); color: var(--accent-fg); }
+.lui-approval-btn:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-approval-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.lui-approval-decision {
+  display: flex; align-items: center; gap: 7px; margin: 0;
+  font-size: var(--fs-sm); font-weight: 600;
+}
+.lui-approval-decision[data-decision="approved"] { color: var(--green); }
+.lui-approval-decision[data-decision="denied"] { color: var(--text-3); }

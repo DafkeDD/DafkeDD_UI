@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@/*": ["./*"],
+      "@dafke/ui": ["../../packages/ui/src/index.ts"],
+      "@dafke/ui/motion": ["../../packages/ui/src/motion/index.ts"],
+      "@dafke/ui/*": ["../../packages/ui/src/components/*"]
+    },
+    "incremental": true
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

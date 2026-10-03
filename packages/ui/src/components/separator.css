@@ -1,0 +1,8 @@
+/* ============================ Separator ============================ */
+.lui-separator { background: var(--border); border: none; flex: none; }
+.lui-separator-horizontal { height: 1px; width: 100%; }
+.lui-separator-vertical { width: 1px; align-self: stretch; min-height: 1em; }
+
+.lui-separator-labelled { display: flex; align-items: center; gap: 12px; width: 100%; }
+.lui-separator-labelled .lui-separator-line { flex: 1; height: 1px; background: var(--border); }
+.lui-separator-label { font-size: var(--fs-sm); color: var(--text-3); font-weight: 550; white-space: nowrap; }

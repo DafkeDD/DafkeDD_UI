@@ -1,0 +1,4 @@
+/* ============================ Spinner ============================ */
+.lui-spinner { animation: lui-spin .8s linear infinite; flex: none; }
+.lui-spinner-track { stroke: currentColor; opacity: .22; }
+.lui-spinner-head { stroke: currentColor; }

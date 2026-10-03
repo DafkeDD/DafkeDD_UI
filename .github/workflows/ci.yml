@@ -1,0 +1,47 @@
+# Controle op elke push naar developer en op elke pull request.
+name: CI
+
+on:
+  push:
+    branches: [developer]
+  pull_request:
+    branches: [developer, main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: CI-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Registry up-to-date?
+        run: |
+          npm run registry
+          if ! git diff --quiet -- registry apps/docs/content/props.generated.json apps/docs/demos/index.ts; then
+            echo "::error::registry/, props.generated.json of demos/index.ts is niet bijgewerkt. Draai 'npm run registry' en commit het resultaat."
+            git status --short -- registry apps/docs/content apps/docs/demos
+            exit 1
+          fi
+
+      - run: npm run typecheck
+
+      - run: npm run build
+
+      - name: Unit- en componenttests (Vitest)
+        run: npm test
+
+      - name: Browsertest (Chrome klikt de componenten na)
+        run: node scripts/ui-test.mjs
+        env:
+          CHROME_PATH: /usr/bin/google-chrome

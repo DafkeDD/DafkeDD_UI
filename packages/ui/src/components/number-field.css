@@ -1,0 +1,32 @@
+/* ============================ NumberField ============================ */
+.lui-numfield {
+  display: inline-flex; align-items: center; gap: 6px; width: 100%;
+  height: calc(42px * var(--density)); padding: 0 6px 0 13px;
+  border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text);
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-numfield:focus-within { border-color: var(--accent); box-shadow: var(--ring); }
+.lui-numfield-invalid { border-color: var(--red); }
+.lui-numfield-invalid:focus-within { border-color: var(--red); box-shadow: var(--ring-red); }
+.lui-numfield[data-disabled] { background: var(--surface-3); color: var(--text-2); }
+
+.lui-numfield-sm { height: calc(34px * var(--density)); padding-inline-start: 10px; border-radius: var(--r-xs); font-size: 13px; }
+.lui-numfield-lg { height: calc(48px * var(--density)); padding-inline-start: 15px; border-radius: var(--r-md); font-size: var(--fs-md); }
+
+.lui-numfield-input {
+  flex: 1; min-width: 0; border: 0; outline: none; background: transparent;
+  color: inherit; font: inherit; font-variant-numeric: tabular-nums;
+}
+.lui-numfield-input:disabled { cursor: not-allowed; }
+.lui-numfield-prefix, .lui-numfield-unit { flex: none; color: var(--text-3); font-size: 13px; }
+
+.lui-numfield-steppers { display: grid; flex: none; gap: 1px; }
+.lui-numfield-steppers button {
+  display: grid; place-items: center; width: 22px; height: 14px; padding: 0;
+  border: 1px solid var(--border); background: var(--surface-2); color: var(--text-2); cursor: pointer;
+}
+.lui-numfield-steppers button:first-child { border-radius: var(--r-xs) var(--r-xs) 0 0; }
+.lui-numfield-steppers button:last-child { border-radius: 0 0 var(--r-xs) var(--r-xs); }
+.lui-numfield-steppers button:hover:not(:disabled) { background: var(--surface-3); color: var(--text); }
+.lui-numfield-steppers button:disabled { opacity: .4; cursor: not-allowed; }

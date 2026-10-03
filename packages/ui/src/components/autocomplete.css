@@ -1,0 +1,44 @@
+/* ============================ Autocomplete ============================ */
+.lui-autocomplete {
+  position: relative; display: flex; align-items: center; gap: 8px; width: 100%;
+  height: calc(42px * var(--density)); padding: 0 8px 0 13px;
+  border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text);
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-autocomplete:focus-within { border-color: var(--accent); box-shadow: var(--ring); }
+.lui-autocomplete[data-disabled] { background: var(--surface-3); }
+.lui-autocomplete-sm { height: calc(34px * var(--density)); border-radius: var(--r-xs); font-size: 13px; }
+.lui-autocomplete-lg { height: calc(48px * var(--density)); border-radius: var(--r-md); font-size: var(--fs-md); }
+.lui-autocomplete-prefix { display: inline-flex; flex: none; color: var(--text-3); }
+.lui-autocomplete-input {
+  flex: 1; min-width: 0; border: 0; outline: none; background: transparent;
+  color: inherit; font: inherit;
+}
+.lui-autocomplete-input::placeholder { color: var(--text-3); }
+.lui-autocomplete-clear {
+  display: grid; place-items: center; width: 22px; height: 22px; flex: none;
+  border: 0; border-radius: var(--r-full); background: transparent; color: var(--text-3); cursor: pointer;
+}
+.lui-autocomplete-clear:hover { background: var(--surface-3); color: var(--text); }
+.lui-autocomplete-clear:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-autocomplete-list {
+  z-index: var(--z-popover); max-height: 300px; overflow-y: auto;
+  margin: 0; padding: 5px; list-style: none;
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface); box-shadow: var(--sh-lg);
+  animation: lui-menu-in var(--dur-fast) var(--ease-out) both;
+}
+.lui-autocomplete-option {
+  display: flex; align-items: center; gap: 10px;
+  padding: calc(8px * var(--density)) 10px; border-radius: var(--r-sm);
+  font-size: var(--fs-base); color: var(--text); cursor: pointer;
+}
+.lui-autocomplete-option[data-active] { background: var(--surface-3); }
+.lui-autocomplete-option[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
+.lui-autocomplete-icon { display: inline-flex; flex: none; color: var(--text-3); }
+.lui-autocomplete-text { display: grid; min-width: 0; }
+.lui-autocomplete-text > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lui-autocomplete-desc { font-size: var(--fs-sm); color: var(--text-3); }
+.lui-autocomplete-status { padding: 12px 10px; font-size: var(--fs-sm); color: var(--text-3); text-align: center; }

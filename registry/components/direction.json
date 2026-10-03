@@ -1,0 +1,18 @@
+{
+  "name": "direction",
+  "title": "DirectionProvider",
+  "description": "Zet de leesrichting voor alles eronder; de componenten spiegelen mee.",
+  "category": "Layout",
+  "dependencies": [],
+  "requires": [],
+  "files": [
+    {
+      "path": "components/direction.tsx",
+      "content": "\"use client\";\nimport * as React from \"react\";\nimport { cn } from \"../lib/cn\";\n\nexport type Direction = \"ltr\" | \"rtl\";\n\nconst DirectionContext = React.createContext<Direction>(\"ltr\");\n\n/** Geeft de leesrichting van de dichtstbijzijnde DirectionProvider terug. */\nexport function useDirection(): Direction {\n  return React.useContext(DirectionContext);\n}\n\n/** True bij rechts-naar-links; handig om een pijltje of berekening te spiegelen. */\nexport function useIsRtl(): boolean {\n  return useDirection() === \"rtl\";\n}\n\nexport interface DirectionProviderProps extends React.HTMLAttributes<HTMLDivElement> {\n  dir?: Direction;\n  /** Alleen de context zetten, zonder een extra element eromheen. */\n  asChild?: boolean;\n  /** Ook het dir-attribuut op <html> zetten, voor overlays in een Portal. */\n  applyToDocument?: boolean;\n}\n\n/**\n * DirectionProvider — zet de leesrichting voor alles eronder. De componenten\n * zelf gebruiken logische CSS-eigenschappen (inset-inline, margin-inline), dus\n * ze spiegelen mee zodra `dir` omgaat.\n */\nexport const DirectionProvider = React.forwardRef<HTMLDivElement, DirectionProviderProps>(\n  function DirectionProvider({ dir = \"ltr\", asChild, applyToDocument, className, children, ...rest }, ref) {\n    React.useEffect(() => {\n      if (!applyToDocument) return;\n      const vorige = document.documentElement.dir;\n      document.documentElement.dir = dir;\n      return () => {\n        document.documentElement.dir = vorige;\n      };\n    }, [applyToDocument, dir]);\n\n    if (asChild) {\n      return <DirectionContext.Provider value={dir}>{children}</DirectionContext.Provider>;\n    }\n\n    return (\n      <DirectionContext.Provider value={dir}>\n        <div ref={ref} dir={dir} className={cn(\"lui-dir\", className)} {...rest}>\n          {children}\n        </div>\n      </DirectionContext.Provider>\n    );\n  }\n);\n"
+    },
+    {
+      "path": "components/direction.css",
+      "content": "/* ========================= DirectionProvider ========================= */\n/* Doorzichtige wikkel: display: contents laat de kinderen rechtstreeks in de\n   layout van de ouder vallen, zodat een provider midden in een flex- of\n   grid-container niets breekt. Wil je er wel een echte doos van maken, geef\n   dan zelf een display mee via style of className. */\n.lui-dir { display: contents; }\n"
+    }
+  ]
+}

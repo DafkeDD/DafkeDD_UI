@@ -1,0 +1,44 @@
+/* ============================ BarList ============================ */
+.lui-barlist { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+
+.lui-barlist-row { display: flex; align-items: center; gap: 14px; }
+.lui-barlist-track {
+  position: relative; flex: 1; min-width: 0; display: flex; align-items: center;
+  height: calc(30px * var(--density)); padding: 0 10px;
+  border: 0; border-radius: var(--r-xs); background: transparent;
+  font: inherit; text-align: start; text-decoration: none; color: inherit;
+  overflow: hidden;
+}
+.lui-barlist-sm .lui-barlist-track { height: calc(24px * var(--density)); padding-inline: 8px; }
+
+a.lui-barlist-track, button.lui-barlist-track { cursor: pointer; }
+a.lui-barlist-track:hover .lui-barlist-label,
+button.lui-barlist-track:hover .lui-barlist-label { color: var(--accent); }
+a.lui-barlist-track:focus-visible, button.lui-barlist-track:focus-visible {
+  outline: none; box-shadow: var(--ring);
+}
+
+.lui-barlist-fill {
+  position: absolute; inset-block: 0; inset-inline-start: 0;
+  border-radius: var(--r-xs); opacity: .22;
+  transition: width var(--dur-slow) var(--ease-out);
+}
+.lui-barlist-label {
+  position: relative; display: flex; align-items: center; gap: 7px; min-width: 0;
+  font-size: var(--fs-sm); color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  transition: color var(--dur-fast);
+}
+.lui-barlist-value {
+  flex: none; font-size: var(--fs-sm); font-weight: 650; color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-barlist-fill { transition: none; }
+}
+
+/* ---------- Mount: rijen vullen na elkaar ---------- */
+.lui-barlist-fill { transform-origin: left; animation: lui-fill-x .7s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 60ms); }
+[dir="rtl"] .lui-barlist-fill { transform-origin: right; }
+.lui-barlist-row { animation: lui-rise .4s var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 60ms); }

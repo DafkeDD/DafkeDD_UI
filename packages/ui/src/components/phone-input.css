@@ -1,0 +1,66 @@
+/* ============================ PhoneInput ============================ */
+.lui-phone {
+  display: inline-flex; align-items: stretch; width: 100%;
+  height: calc(42px * var(--density));
+  border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text); overflow: hidden;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-phone:focus-within { border-color: var(--accent); box-shadow: var(--ring); }
+.lui-phone-invalid { border-color: var(--red); }
+.lui-phone-invalid:focus-within { border-color: var(--red); box-shadow: var(--ring-red); }
+.lui-phone[data-disabled] { background: var(--surface-3); color: var(--text-2); }
+
+.lui-phone-sm { height: calc(34px * var(--density)); font-size: 13px; }
+.lui-phone-lg { height: calc(48px * var(--density)); font-size: var(--fs-md); }
+
+.lui-phone-country {
+  display: inline-flex; align-items: center; gap: 6px; flex: none;
+  padding: 0 9px 0 11px; border: 0; border-inline-end: 1px solid var(--border);
+  background: var(--surface-2); color: var(--text); font: inherit; cursor: pointer;
+  transition: background var(--dur-fast);
+}
+.lui-phone-country:hover:not(:disabled) { background: var(--surface-3); }
+.lui-phone-country:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--accent); }
+.lui-phone-country:disabled { cursor: not-allowed; }
+
+.lui-phone-flag { font-size: 16px; line-height: 1; }
+.lui-phone-dial { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.lui-phone-chevron { color: var(--text-3); }
+
+.lui-phone-field {
+  flex: 1; min-width: 0; padding: 0 12px; border: 0; outline: none;
+  background: transparent; color: inherit; font: inherit;
+  font-variant-numeric: tabular-nums; letter-spacing: .01em;
+}
+.lui-phone-field::placeholder { color: var(--text-3); letter-spacing: 0; }
+.lui-phone-field:disabled { cursor: not-allowed; }
+
+/* lijst */
+.lui-phone-list {
+  z-index: var(--z-popover); max-height: 300px; display: flex; flex-direction: column;
+  border: 1px solid var(--border); border-radius: var(--r-sm);
+  background: var(--surface); box-shadow: var(--sh-lg); overflow: hidden;
+}
+.lui-phone-search {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+  border-bottom: 1px solid var(--border); color: var(--text-3);
+}
+.lui-phone-search input {
+  flex: 1; min-width: 0; border: 0; outline: none; background: transparent;
+  color: var(--text); font: inherit; font-size: var(--fs-sm);
+}
+.lui-phone-options { overflow-y: auto; padding: 4px; }
+.lui-phone-empty { margin: 0; padding: 14px; text-align: center; font-size: var(--fs-sm); color: var(--text-3); }
+
+.lui-phone-option {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 7px 9px; border: 0; border-radius: var(--r-xs);
+  background: transparent; color: var(--text); font: inherit; font-size: var(--fs-sm);
+  text-align: start; cursor: pointer;
+}
+.lui-phone-option:hover { background: var(--surface-2); }
+.lui-phone-option[data-active] { background: color-mix(in oklab, var(--accent) 12%, transparent); font-weight: 600; }
+.lui-phone-option:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-phone-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lui-phone-code { flex: none; color: var(--text-3); font-variant-numeric: tabular-nums; }

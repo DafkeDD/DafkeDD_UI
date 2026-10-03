@@ -1,0 +1,34 @@
+/* ============================ Stat (KPI) ============================ */
+.lui-stat-grid { display: grid; gap: 16px; }
+
+.lui-stat {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); box-shadow: var(--sh-sm);
+  padding: 18px 20px; display: flex; flex-direction: column; min-width: 0;
+}
+.lui-stat-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.lui-stat-label { font-size: 13px; color: var(--text-3); font-weight: 550; }
+.lui-stat-icon {
+  display: grid; place-items: center; width: 34px; height: 34px;
+  border-radius: 9px; flex: none;
+}
+.lui-stat-icon svg { width: 17px; height: 17px; }
+.lui-stat-icon-accent { background: var(--accent-tint); color: var(--accent); }
+.lui-stat-icon-green { background: var(--green-tint); color: var(--green); }
+.lui-stat-icon-amber { background: var(--amber-tint); color: var(--amber); }
+.lui-stat-icon-red { background: var(--red-tint); color: var(--red); }
+.lui-stat-icon-blue { background: var(--blue-tint); color: var(--blue); }
+.lui-stat-icon-violet { background: var(--violet-tint); color: var(--violet); }
+
+.lui-stat-value {
+  font-size: 30px; font-weight: 700; letter-spacing: -0.03em;
+  margin-top: 10px; line-height: 1; color: var(--text);
+}
+.lui-stat-delta {
+  font-size: var(--fs-sm); font-weight: 600; margin-top: 7px;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.lui-stat-delta-up { color: var(--green); }
+.lui-stat-delta-down { color: var(--red); }
+.lui-stat-delta-label { color: var(--text-3); font-weight: 500; margin-left: 3px; }
+.lui-stat-chart { margin-top: 14px; }

@@ -1,0 +1,17 @@
+/* ============================ Breadcrumb ============================ */
+.lui-breadcrumb { min-width: 0; }
+.lui-breadcrumb-list {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0;
+  list-style: none; margin: 0; padding: 0;
+}
+.lui-breadcrumb-entry { display: inline-flex; align-items: center; }
+.lui-breadcrumb-item {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--text-3); text-decoration: none;
+  transition: color var(--dur-fast); border-radius: var(--r-xs);
+}
+.lui-breadcrumb-item svg { width: 14px; height: 14px; }
+a.lui-breadcrumb-item:hover { color: var(--text); }
+.lui-breadcrumb-item:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-breadcrumb-current { color: var(--text); font-weight: 600; }
+.lui-breadcrumb-separator { display: inline-flex; color: var(--text-3); margin: 0 7px; opacity: .7; }

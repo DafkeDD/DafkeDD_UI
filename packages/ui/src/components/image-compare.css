@@ -1,0 +1,47 @@
+/* ============================ ImageCompare ============================ */
+.lui-compare { width: 100%; }
+.lui-compare-frame {
+  position: relative; width: 100%; overflow: hidden;
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface-2); touch-action: none; user-select: none; cursor: ew-resize;
+}
+.lui-compare-vertical .lui-compare-frame { cursor: ns-resize; }
+
+.lui-compare-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block; pointer-events: none;
+}
+.lui-compare-clip { position: absolute; inset: 0; }
+
+.lui-compare-label {
+  position: absolute; z-index: 2; padding: 3px 9px; border-radius: var(--r-full);
+  background: rgba(2, 6, 23, .62); color: #fff;
+  font-size: 11.5px; font-weight: 600; pointer-events: none;
+}
+.lui-compare-label[data-side="before"] { inset-block-end: 10px; inset-inline-start: 10px; }
+.lui-compare-label[data-side="after"] { inset-block-end: 10px; inset-inline-end: 10px; }
+
+.lui-compare-line {
+  position: absolute; z-index: 3;
+  inset-block: 0; width: 2px; transform: translateX(-1px);
+  background: rgba(255, 255, 255, .9); box-shadow: 0 0 0 1px rgba(2, 6, 23, .25);
+}
+.lui-compare-vertical .lui-compare-line {
+  inset-block: auto; inset-inline: 0; height: 2px; width: auto; transform: translateY(-1px);
+}
+
+.lui-compare-handle {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  display: grid; place-items: center; width: 34px; height: 34px; padding: 0;
+  border: 2px solid #fff; border-radius: 50%;
+  background: rgba(2, 6, 23, .5); color: #fff; cursor: inherit;
+  box-shadow: var(--sh-md);
+}
+.lui-compare-handle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.lui-compare-grip {
+  width: 12px; height: 12px;
+  background:
+    linear-gradient(#fff, #fff) center left / 3px 12px no-repeat,
+    linear-gradient(#fff, #fff) center right / 3px 12px no-repeat;
+}
+.lui-compare-vertical .lui-compare-grip { transform: rotate(90deg); }

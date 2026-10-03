@@ -1,0 +1,80 @@
+/* ============================ AppShell ============================ */
+.lui-shell { display: flex; min-height: 100vh; background: var(--bg); }
+.lui-shell-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+.lui-shell-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 65;
+  background: var(--overlay); backdrop-filter: blur(2px);
+  opacity: 0; pointer-events: none; transition: opacity var(--dur-slow) var(--ease);
+}
+
+/* ---------- Topbar ---------- */
+.lui-topbar {
+  height: var(--topbar-h); flex: none;
+  display: flex; align-items: center; gap: 18px; padding: 0 22px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: blur(8px);
+  position: sticky; top: 0; z-index: var(--z-sticky);
+}
+.lui-topbar-menu {
+  display: none; place-items: center; width: 40px; height: 40px; margin-left: -6px;
+  border: none; background: transparent; color: var(--text-2);
+  border-radius: var(--r-sm); cursor: pointer; flex: none;
+}
+.lui-topbar-menu:hover { background: var(--surface-3); color: var(--text); }
+.lui-topbar-spacer { flex: 1; }
+
+.lui-topbar-search {
+  flex: 1; max-width: 540px; margin: 0 auto;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface-3); border: 1px solid transparent;
+  border-radius: var(--r-md); padding: 9px 14px;
+  transition: background var(--dur), border-color var(--dur);
+  color: var(--text-3);
+}
+.lui-topbar-search:focus-within {
+  background: var(--surface); border-color: var(--accent-border); box-shadow: var(--ring);
+}
+.lui-topbar-search input {
+  flex: 1; min-width: 0; border: 0; outline: 0; background: transparent;
+  font: inherit; font-size: var(--fs-base); color: var(--text);
+}
+.lui-topbar-search input::placeholder { color: var(--text-3); }
+.lui-topbar-kbd {
+  flex: none; font-size: 11px; font-weight: 600; padding: 2px 7px;
+  border-radius: var(--r-xs); background: var(--surface);
+  border: 1px solid var(--border); color: var(--text-3);
+}
+
+/* ---------- Content ---------- */
+.lui-content {
+  padding: 32px; width: 100%; max-width: var(--maxw);
+  margin: 0 auto; flex: 1; min-width: 0;
+}
+.lui-content-wide { max-width: 100%; }
+
+/* ---------- PageHeader ---------- */
+.lui-page-header { margin-bottom: 26px; display: flex; flex-direction: column; gap: 10px; }
+.lui-page-header-row { display: flex; align-items: flex-start; gap: 16px; }
+.lui-page-header-text { flex: 1; min-width: 0; }
+.lui-page-title { font-size: 25px; font-weight: 650; letter-spacing: -0.02em; color: var(--text); }
+.lui-page-description { margin-top: 5px; font-size: 14.5px; color: var(--text-2); }
+.lui-page-actions { display: flex; gap: 10px; flex: none; flex-wrap: wrap; }
+
+@media (max-width: 860px) {
+  .lui-topbar { padding: 0 14px; gap: 12px; }
+  .lui-topbar-menu { display: grid; }
+  .lui-topbar-search { display: none; }
+  .lui-content { padding: 20px 16px; }
+  .lui-shell-backdrop { display: block; }
+  .lui-shell-backdrop-open { opacity: 1; pointer-events: auto; }
+  .lui-page-header-row { flex-direction: column; align-items: stretch; }
+  .lui-page-title { font-size: 22px; }
+  .lui-page-actions > * { flex: 1; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .lui-content { padding: 16px 13px; }
+  .lui-page-title { font-size: 20px; }
+}

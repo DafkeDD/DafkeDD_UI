@@ -1,0 +1,18 @@
+{
+  "name": "segmented",
+  "title": "Segmented",
+  "description": "Compacte keuzeschakelaar voor weergaven en filters.",
+  "category": "Navigatie",
+  "dependencies": [],
+  "requires": [],
+  "files": [
+    {
+      "path": "components/segmented.tsx",
+      "content": "\"use client\";\nimport * as React from \"react\";\nimport { cn } from \"../lib/cn\";\nimport { useControllableState } from \"../lib/hooks\";\n\nexport interface SegmentedOption {\n  value: string;\n  label: React.ReactNode;\n  icon?: React.ReactNode;\n  disabled?: boolean;\n  /** Toegankelijk label wanneer er alleen een icoon staat. */\n  ariaLabel?: string;\n}\n\nexport interface SegmentedProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\" | \"defaultValue\"> {\n  options: SegmentedOption[];\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (value: string) => void;\n  size?: \"sm\" | \"md\";\n  /** Vult de beschikbare breedte. */\n  block?: boolean;\n}\n\n/** Segmented — compacte keuzeschakelaar (view-switch, filter). */\nexport const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(function Segmented(\n  { options, value, defaultValue, onValueChange, size = \"md\", block, className, ...rest },\n  ref\n) {\n  const [current, setCurrent] = useControllableState<string | undefined>({\n    value,\n    defaultValue: defaultValue ?? options[0]?.value,\n    onChange: (next) => next !== undefined && onValueChange?.(next),\n  });\n\n  return (\n    <div\n      ref={ref}\n      role=\"tablist\"\n      className={cn(\"lui-segmented\", `lui-segmented-${size}`, block && \"lui-segmented-block\", className)}\n      {...rest}\n    >\n      {options.map((option) => (\n        <button\n          key={option.value}\n          type=\"button\"\n          role=\"tab\"\n          aria-selected={current === option.value}\n          aria-label={option.ariaLabel}\n          disabled={option.disabled}\n          data-state={current === option.value ? \"active\" : \"inactive\"}\n          className=\"lui-segmented-item\"\n          onClick={() => setCurrent(option.value)}\n        >\n          {option.icon && <span className=\"lui-segmented-icon\">{option.icon}</span>}\n          {option.label}\n        </button>\n      ))}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "components/segmented.css",
+      "content": "/* ============================ Segmented ============================ */\n.lui-segmented {\n  display: inline-flex; background: var(--surface-3);\n  border-radius: var(--r-sm); padding: 3px; gap: 2px;\n}\n.lui-segmented-block { display: flex; width: 100%; }\n.lui-segmented-block .lui-segmented-item { flex: 1; }\n\n.lui-segmented-item {\n  display: inline-flex; align-items: center; justify-content: center; gap: 7px;\n  height: calc(30px * var(--density)); padding: 0 13px; border: none; background: transparent;\n  border-radius: var(--r-xs); font: inherit; font-size: 13px; font-weight: 600;\n  color: var(--text-2); cursor: pointer; white-space: nowrap;\n  transition: background var(--dur-fast), color var(--dur-fast), box-shadow var(--dur-fast);\n}\n.lui-segmented-item:hover:not(:disabled) { color: var(--text); }\n.lui-segmented-item:focus-visible { outline: none; box-shadow: var(--ring); }\n.lui-segmented-item:disabled { opacity: .45; cursor: not-allowed; }\n.lui-segmented-item[data-state=\"active\"] {\n  background: var(--surface); color: var(--text); box-shadow: var(--sh-xs);\n}\n.lui-segmented-icon { display: inline-flex; }\n.lui-segmented-icon svg { width: 15px; height: 15px; }\n\n.lui-segmented-sm .lui-segmented-item { height: 26px; padding: 0 10px; font-size: 12.5px; }\n"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+/* ============================ Scrollspy ============================ */
+.lui-scrollspy { font-size: var(--fs-sm); }
+.lui-scrollspy-title {
+  margin-bottom: 8px; font-size: 11px; font-weight: 650;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--text-3);
+}
+.lui-scrollspy ul { margin: 0; padding: 0; list-style: none; border-inline-start: 1px solid var(--border); }
+.lui-scrollspy li[data-level="2"] a { padding-inline-start: 26px; }
+.lui-scrollspy li[data-level="3"] a { padding-inline-start: 38px; }
+.lui-scrollspy a {
+  display: block; padding: 5px 10px 5px 14px; margin-inline-start: -1px;
+  border-inline-start: 2px solid transparent;
+  color: var(--text-3); text-decoration: none; line-height: 1.45;
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.lui-scrollspy a:hover { color: var(--text); }
+.lui-scrollspy a:focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--r-xs); }
+.lui-scrollspy a[data-active] { color: var(--accent); border-inline-start-color: var(--accent); font-weight: 600; }

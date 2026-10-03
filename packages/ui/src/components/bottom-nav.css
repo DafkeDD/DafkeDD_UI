@@ -1,0 +1,87 @@
+/* ============================ BottomNav ============================ */
+.lui-bottomnav {
+  --lui-bottomnav-h: 60px;
+  position: fixed; inset-inline: 0; bottom: 0; z-index: 30;
+  display: none; align-items: stretch;
+  height: var(--lui-bottomnav-h);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -2px 12px color-mix(in srgb, var(--text) 7%, transparent);
+}
+.lui-bottomnav[data-safe] {
+  height: calc(var(--lui-bottomnav-h) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.lui-bottomnav[data-always] { display: flex; }
+
+@media (max-width: 860px) {
+  .lui-bottomnav { display: flex; }
+}
+
+.lui-bottomnav-item {
+  position: relative; flex: 1 1 0; min-width: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  padding: 0 4px; border: 0; background: transparent; cursor: pointer;
+  font-family: inherit; color: var(--text-3); text-decoration: none;
+  transition: color var(--dur) var(--ease);
+}
+.lui-bottomnav-item:hover { color: var(--text-2); }
+.lui-bottomnav-item[data-active] { color: var(--accent); }
+.lui-bottomnav-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; border-radius: var(--r-sm); }
+.lui-bottomnav-item::after {
+  content: ""; position: absolute; top: 0; left: 50%; translate: -50% 0;
+  width: 26px; height: 2px; border-radius: 0 0 var(--r-full) var(--r-full);
+  background: var(--accent); opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+.lui-bottomnav-item[data-active]::after { opacity: 1; }
+
+.lui-bottomnav-icon { position: relative; display: grid; place-items: center; }
+.lui-bottomnav-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .01em;
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.lui-bottomnav-badge {
+  position: absolute; top: -5px; left: calc(50% + 5px);
+  display: grid; place-items: center; min-width: 16px; height: 16px; padding: 0 4px;
+  border-radius: var(--r-full); background: var(--red); color: #fff;
+  font-size: 9.5px; font-weight: 800; line-height: 1;
+}
+.lui-bottomnav-dot { min-width: 8px; height: 8px; padding: 0; top: -1px; }
+
+/* ---------- Bubbel-indicator ---------- */
+/* Het actieve icoon tilt uit de balk in een gekleurde bol, met een zachte
+   uitsnede eronder. De bol zit achter het icoon en groeit vanuit niets. */
+.lui-bottomnav-bubble {
+  position: absolute; inset: -9px; z-index: -1;
+  border-radius: 50%; background: var(--accent);
+  transform: scale(0); opacity: 0;
+  transition: transform var(--dur) var(--ease-out), opacity var(--dur-fast);
+}
+.lui-bottomnav[data-indicator="bubble"] .lui-bottomnav-icon { position: relative; z-index: 0; }
+.lui-bottomnav[data-indicator="bubble"] .lui-bottomnav-item {
+  transition: transform var(--dur) var(--ease-out);
+}
+.lui-bottomnav[data-indicator="bubble"] .lui-bottomnav-item[data-active] {
+  transform: translateY(-13px);
+  color: var(--accent-fg);
+}
+.lui-bottomnav[data-indicator="bubble"] .lui-bottomnav-item[data-active] .lui-bottomnav-bubble {
+  transform: scale(1); opacity: 1;
+  box-shadow: 0 6px 16px color-mix(in oklab, var(--accent) 45%, transparent);
+}
+.lui-bottomnav[data-indicator="bubble"] .lui-bottomnav-item[data-active] .lui-bottomnav-label {
+  color: var(--accent); transform: translateY(2px);
+}
+/* Het streepje van de standaardvariant hoort hier niet. */
+.lui-bottomnav[data-indicator="bubble"] .lui-bottomnav-item[data-active]::before,
+.lui-bottomnav[data-indicator="bubble"] .lui-bottomnav-item[data-active]::after,
+.lui-bottomnav[data-indicator="none"] .lui-bottomnav-item[data-active]::before,
+.lui-bottomnav[data-indicator="none"] .lui-bottomnav-item[data-active]::after { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-bottomnav-bubble,
+  .lui-bottomnav[data-indicator="bubble"] .lui-bottomnav-item { transition: none; }
+}

@@ -1,0 +1,31 @@
+/* ============================ EmptyState ============================ */
+.lui-empty {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: 8px; padding: 52px 24px;
+}
+.lui-empty-sm { padding: 30px 18px; }
+.lui-empty-icon {
+  display: grid; place-items: center; width: 56px; height: 56px;
+  border-radius: var(--r-lg); background: var(--surface-2);
+  border: 1px solid var(--border); color: var(--text-3); margin-bottom: 6px;
+}
+.lui-empty-icon svg { width: 24px; height: 24px; }
+.lui-empty-sm .lui-empty-icon { width: 44px; height: 44px; }
+.lui-empty-title { font-size: var(--fs-lg); font-weight: 650; letter-spacing: -0.02em; color: var(--text); }
+.lui-empty-sm .lui-empty-title { font-size: 14.5px; }
+.lui-empty-description { font-size: 13.5px; color: var(--text-3); max-width: 380px; line-height: 1.55; }
+.lui-empty-action { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; justify-content: center; }
+
+/* ---------- Motion: het icoon zweeft zacht, de tekst schuift na elkaar binnen ---------- */
+.lui-empty > * { animation: lui-rise .45s var(--ease-out) backwards; }
+.lui-empty > :nth-child(2) { animation-delay: 70ms; }
+.lui-empty > :nth-child(3) { animation-delay: 140ms; }
+.lui-empty > :nth-child(n + 4) { animation-delay: 210ms; }
+.lui-empty-icon { position: relative; }
+.lui-empty-icon svg { animation: lui-float 3.2s var(--ease) 0.6s infinite; }
+.lui-empty-icon::after {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit;
+  border: 1px dashed var(--border-strong); opacity: 0;
+  animation: lui-empty-halo 3.2s var(--ease) .6s infinite;
+}
+@keyframes lui-empty-halo { 0% { opacity: .0; transform: scale(1); } 40% { opacity: .7; } 100% { opacity: 0; transform: scale(1.35); } }

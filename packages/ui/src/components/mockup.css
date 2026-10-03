@@ -1,0 +1,175 @@
+/* ============================ Mockups ============================ */
+.lui-mockup {
+  --lui-mockup-chrome: var(--surface-2);
+  --lui-mockup-line: var(--border);
+  display: flex; flex-direction: column; overflow: hidden;
+  border: 1px solid var(--lui-mockup-line); border-radius: var(--r-lg);
+  background: var(--surface); box-shadow: var(--sh-md);
+}
+.lui-mockup-dark {
+  --lui-mockup-chrome: #1b2231;
+  --lui-mockup-line: #2b3446;
+  color-scheme: dark;
+}
+
+.lui-mockup-bar {
+  display: flex; align-items: center; gap: 12px; flex: none;
+  height: 38px; padding: 0 12px;
+  background: var(--lui-mockup-chrome);
+  border-bottom: 1px solid var(--lui-mockup-line);
+}
+
+.lui-mockup-dots { display: inline-flex; gap: 6px; flex: none; }
+.lui-mockup-dots > span {
+  width: 10px; height: 10px; border-radius: var(--r-full); background: var(--border-strong);
+}
+.lui-mockup-dots > span:nth-child(1) { background: #ec6a5e; }
+.lui-mockup-dots > span:nth-child(2) { background: #f4bf4f; }
+.lui-mockup-dots > span:nth-child(3) { background: #61c554; }
+
+.lui-mockup-url {
+  flex: 1; min-width: 0; height: 24px; padding: 0 12px;
+  display: flex; align-items: center;
+  background: var(--surface); border: 1px solid var(--lui-mockup-line);
+  border-radius: var(--r-full);
+  font-size: 12px; color: var(--text-3);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.lui-mockup-dark .lui-mockup-url { background: #131926; }
+
+.lui-mockup-title {
+  flex: 1; text-align: center; font-size: 12.5px; font-weight: 600; color: var(--text-2);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+/* De stippen links even breed compenseren, zodat de titel echt centreert. */
+.lui-mockup-window .lui-mockup-dots + .lui-mockup-title { margin-right: 42px; }
+
+.lui-mockup-screen { flex: 1; min-height: 0; overflow: auto; background: var(--surface); }
+.lui-mockup-dark .lui-mockup-screen { background: #0f1520; }
+
+/* ---------- Telefoon ---------- */
+/* Opbouw zoals een echt toestel: een dunne lichte ring (het metaal), daarbinnen
+   een zwarte rand en dan pas het scherm. Alle maten zijn een percentage van de
+   breedte, zodat de verhoudingen op elk formaat kloppen. */
+.lui-mockup-phone {
+  --lui-phone-w: 280px;
+  --lui-phone-ring: #74798a;          /* metaalkleur van de rand */
+  --lui-phone-frame: #000000;         /* zwart tussen ring en scherm */
+  --lui-phone-screen: var(--surface);  /* achtergrond van het scherm */
+  --lui-phone-radius: calc(var(--lui-phone-w) * 0.195);
+  display: inline-block; width: var(--lui-phone-w); max-width: 100%;
+}
+
+.lui-mockup-phone-frame {
+  position: relative; width: 100%; overflow: hidden;
+  padding: calc(var(--lui-phone-w) * 0.015);
+  border: calc(var(--lui-phone-w) * 0.012) solid var(--lui-phone-ring);
+  border-radius: var(--lui-phone-radius);
+  background: var(--lui-phone-frame);
+  box-shadow: 0 26px 60px -24px rgba(8, 12, 20, .55);
+}
+
+/* Het scherm loopt mee met de hoek van het frame; het teveel wordt geknipt. */
+.lui-mockup-phone-screen {
+  position: relative; display: flex; flex-direction: column;
+  width: 100%; height: 100%; overflow: hidden;
+  border-radius: calc(var(--lui-phone-radius) * 0.93);
+  background: var(--lui-phone-screen); color: var(--text);
+}
+
+/* Wallpaper ligt achter de inhoud, over de volle hoogte van het scherm. */
+.lui-mockup-phone-screen::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background-image: var(--lui-phone-wallpaper, none);
+  background-size: cover; background-position: center;
+}
+
+/* Statusbalk, inhoud en veegstreepje staan boven de wallpaper. */
+.lui-mockup-phone-screen > * { position: relative; z-index: 1; }
+
+/* Donkere achtergrond: statusbalk en streepje in het wit, en omgekeerd. */
+.lui-mockup-phone-screen[data-tone="dark"] { color: #ffffff; }
+.lui-mockup-phone-screen[data-tone="dark"] .lui-mockup-phone-status,
+.lui-mockup-phone-screen[data-tone="dark"] .lui-mockup-phone-icons { color: #ffffff; }
+.lui-mockup-phone-screen[data-tone="dark"] .lui-mockup-phone-home {
+  background: rgba(255, 255, 255, .55);
+}
+.lui-mockup-phone-screen[data-tone="light"] { color: #10141c; }
+.lui-mockup-phone-screen[data-tone="light"] .lui-mockup-phone-status,
+.lui-mockup-phone-screen[data-tone="light"] .lui-mockup-phone-icons { color: #10141c; }
+.lui-mockup-phone-screen[data-tone="light"] .lui-mockup-phone-home {
+  background: rgba(16, 20, 28, .4);
+}
+
+/* ---- Statusbalk: houdt de ruimte vrij waar de pil of inkeping staat ---- */
+.lui-mockup-phone-status {
+  position: relative; z-index: 2; flex: none;
+  display: flex; align-items: center; justify-content: space-between;
+  height: calc(var(--lui-phone-w) * 0.135);
+  padding: calc(var(--lui-phone-w) * 0.012) calc(var(--lui-phone-w) * 0.075) 0 calc(var(--lui-phone-w) * 0.085);
+  font-size: calc(var(--lui-phone-w) * 0.046);
+  font-weight: 650; letter-spacing: .01em; color: var(--text);
+}
+.lui-mockup-phone-time { font-variant-numeric: tabular-nums; }
+.lui-mockup-phone-icons {
+  display: inline-flex; align-items: center; gap: calc(var(--lui-phone-w) * 0.017);
+  color: var(--text);
+}
+.lui-mockup-phone-icons svg { width: auto; height: calc(var(--lui-phone-w) * 0.032); display: block; }
+
+/* ---- Pil en inkeping ---- */
+.lui-mockup-phone-top {
+  position: absolute; left: 50%; translate: -50% 0; z-index: 3;
+  background: #000000;
+}
+.lui-mockup-phone-island {
+  top: calc(var(--lui-phone-w) * 0.026);
+  width: calc(var(--lui-phone-w) * 0.27);
+  height: calc(var(--lui-phone-w) * 0.076);
+  border-radius: var(--r-full);
+}
+.lui-mockup-phone-notch {
+  top: calc(var(--lui-phone-w) * -0.01);
+  width: calc(var(--lui-phone-w) * 0.42);
+  height: calc(var(--lui-phone-w) * 0.075);
+  border-radius: 0 0 calc(var(--lui-phone-w) * 0.055) calc(var(--lui-phone-w) * 0.055);
+}
+
+/* ---- Inhoud ---- */
+.lui-mockup-phone-content {
+  flex: 1; min-height: 0; overflow: auto;
+  padding-bottom: calc(var(--lui-phone-w) * 0.07);
+}
+.lui-mockup-phone-screen[data-top="none"] .lui-mockup-phone-status:empty { display: none; }
+
+.lui-mockup-phone-home {
+  position: absolute; bottom: calc(var(--lui-phone-w) * 0.025); left: 50%; translate: -50% 0; z-index: 3;
+  width: calc(var(--lui-phone-w) * 0.36);
+  height: calc(var(--lui-phone-w) * 0.014);
+  border-radius: var(--r-full);
+  background: color-mix(in srgb, var(--text) 38%, transparent);
+}
+
+/* ---- Zijknoppen (standaard uit: ze maken de omtrek onrustig) ---- */
+.lui-mockup-phone-btn {
+  position: absolute; z-index: 0;
+  background: var(--lui-phone-ring);
+  border-radius: calc(var(--lui-phone-w) * 0.006);
+}
+.lui-mockup-phone-silent,
+.lui-mockup-phone-vol-up,
+.lui-mockup-phone-vol-down {
+  left: calc(var(--lui-phone-w) * -0.008);
+  width: calc(var(--lui-phone-w) * 0.009);
+}
+.lui-mockup-phone-silent { top: 16%; height: 3.5%; }
+.lui-mockup-phone-vol-up { top: 24%; height: 7%; }
+.lui-mockup-phone-vol-down { top: 33%; height: 7%; }
+.lui-mockup-phone-power {
+  right: calc(var(--lui-phone-w) * -0.008); top: 26%; height: 11%;
+  width: calc(var(--lui-phone-w) * 0.009);
+}
+
+@media (max-width: 480px) {
+  .lui-mockup-phone { max-width: 100%; }
+}

@@ -1,0 +1,38 @@
+/* ============================ Meter ============================ */
+.lui-meter { --lui-meter-color: var(--accent); display: grid; gap: 6px; width: 100%; }
+.lui-meter[data-tone="green"] { --lui-meter-color: var(--green); }
+.lui-meter[data-tone="amber"] { --lui-meter-color: var(--amber); }
+.lui-meter[data-tone="red"] { --lui-meter-color: var(--red); }
+
+.lui-meter-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.lui-meter-label { font-size: var(--fs-sm); color: var(--text-2); font-weight: 550; }
+.lui-meter-value {
+  font-size: var(--fs-sm); font-weight: 650; color: var(--lui-meter-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.lui-meter-track {
+  position: relative; height: 8px; border-radius: var(--r-full);
+  background: var(--surface-3);
+}
+.lui-meter[data-size="sm"] .lui-meter-track { height: 5px; }
+.lui-meter[data-size="lg"] .lui-meter-track { height: 12px; }
+.lui-meter-fill {
+  display: block; height: 100%; border-radius: var(--r-full);
+  background: var(--lui-meter-color);
+  transition: width var(--dur-slow) var(--ease), background var(--dur) var(--ease);
+}
+.lui-meter-marker {
+  position: absolute; top: -3px; bottom: -3px; width: 2px;
+  background: var(--text); border-radius: var(--r-full); opacity: .55;
+}
+.lui-meter-foot { position: relative; height: 14px; }
+.lui-meter-marker-label {
+  position: absolute; top: 0; transform: translateX(-50%);
+  font-size: var(--fs-xs); color: var(--text-3); white-space: nowrap;
+}
+
+/* ---------- Mount ---------- */
+.lui-meter-fill { transform-origin: left; animation: lui-fill-x .8s var(--ease-out) both; }
+[dir="rtl"] .lui-meter-fill { transform-origin: right; }
+.lui-meter-marker { animation: lui-overlay-in .3s var(--ease) .6s both; }

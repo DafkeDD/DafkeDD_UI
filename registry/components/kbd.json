@@ -1,0 +1,18 @@
+{
+  "name": "kbd",
+  "title": "Kbd",
+  "description": "Toetsaanslag of sneltoets tonen.",
+  "category": "Basis",
+  "dependencies": [],
+  "requires": [],
+  "files": [
+    {
+      "path": "components/kbd.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"../lib/cn\";\n\nexport interface KbdProps extends React.HTMLAttributes<HTMLElement> {\n  /** Toetsen als reeks, bv. [\"⌘\", \"K\"]. */\n  keys?: string[];\n}\n\n/** Kbd — toont een toetsaanslag of sneltoets. */\nexport const Kbd = React.forwardRef<HTMLElement, KbdProps>(function Kbd(\n  { keys, className, children, ...rest },\n  ref\n) {\n  if (keys?.length) {\n    return (\n      <span ref={ref as React.Ref<HTMLSpanElement>} className={cn(\"lui-kbd-group\", className)} {...rest}>\n        {keys.map((key) => (\n          <kbd key={key} className=\"lui-kbd\">\n            {key}\n          </kbd>\n        ))}\n      </span>\n    );\n  }\n  return (\n    <kbd ref={ref as React.Ref<HTMLElement>} className={cn(\"lui-kbd\", className)} {...rest}>\n      {children}\n    </kbd>\n  );\n});\n"
+    },
+    {
+      "path": "components/kbd.css",
+      "content": "/* ============================ Kbd ============================ */\n.lui-kbd {\n  display: inline-flex; align-items: center; justify-content: center;\n  min-width: 20px; height: 20px; padding: 0 6px;\n  border-radius: 5px; background: var(--surface-3);\n  border: 1px solid var(--border); border-bottom-width: 2px;\n  font-family: var(--mono); font-size: 11px; font-weight: 600;\n  color: var(--text-2); line-height: 1;\n}\n.lui-kbd-group { display: inline-flex; align-items: center; gap: 3px; }\n"
+    }
+  ]
+}

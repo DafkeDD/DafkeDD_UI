@@ -1,0 +1,39 @@
+/* ============================ Carousel ============================ */
+.lui-carousel { position: relative; }
+
+.lui-carousel-track {
+  display: flex; gap: 12px;
+  overflow: auto; scroll-behavior: smooth;
+  scroll-snap-type: both mandatory;
+  scrollbar-width: none;
+  outline: none;
+}
+.lui-carousel-track::-webkit-scrollbar { display: none; }
+.lui-carousel-track:focus-visible { border-radius: var(--r-md); box-shadow: var(--ring); }
+
+.lui-carousel-horizontal .lui-carousel-track { flex-direction: row; }
+.lui-carousel-vertical .lui-carousel-track { flex-direction: column; }
+
+.lui-carousel-item {
+  flex: 0 0 100%; min-width: 0; min-height: 0;
+  scroll-snap-align: start; scroll-snap-stop: always;
+}
+
+.lui-carousel-btn { flex: none; }
+
+.lui-carousel-dots {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  margin-top: 12px;
+}
+.lui-carousel-dot {
+  width: 7px; height: 7px; padding: 0; border: none; cursor: pointer;
+  border-radius: var(--r-full); background: var(--border-strong);
+  transition: width var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.lui-carousel-dot:hover { background: var(--text-3); }
+.lui-carousel-dot[data-active] { width: 18px; background: var(--accent); }
+.lui-carousel-dot:focus-visible { outline: none; box-shadow: var(--ring); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-carousel-track { scroll-behavior: auto; }
+}

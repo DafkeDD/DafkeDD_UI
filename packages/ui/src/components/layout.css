@@ -1,0 +1,52 @@
+/* ============================ Layout ============================ */
+/* Eén afstandsschaal voor Stack, Row, Grid en Container.
+   Row gebruikt .lui-hstack en niet .lui-row: die laatste hoort bij ListRow. */
+:is(.lui-stack, .lui-hstack, .lui-grid, .lui-container) {
+  --lui-gap: 16px;
+  min-width: 0;
+}
+
+/* Bewust gescoped op de layout-klassen: een losse [data-gap] zou ook markup
+   van de gebruiker raken, en daar zijn deze regels niet voor. */
+:is(.lui-stack, .lui-hstack, .lui-grid, .lui-container)[data-gap="none"] { --lui-gap: 0; }
+:is(.lui-stack, .lui-hstack, .lui-grid, .lui-container)[data-gap="xs"] { --lui-gap: 6px; }
+:is(.lui-stack, .lui-hstack, .lui-grid, .lui-container)[data-gap="sm"] { --lui-gap: 10px; }
+:is(.lui-stack, .lui-hstack, .lui-grid, .lui-container)[data-gap="md"] { --lui-gap: 16px; }
+:is(.lui-stack, .lui-hstack, .lui-grid, .lui-container)[data-gap="lg"] { --lui-gap: 24px; }
+:is(.lui-stack, .lui-hstack, .lui-grid, .lui-container)[data-gap="xl"] { --lui-gap: 36px; }
+
+.lui-stack { display: flex; flex-direction: column; gap: var(--lui-gap); }
+.lui-hstack { display: flex; flex-direction: row; gap: var(--lui-gap); }
+.lui-hstack[data-wrap] { flex-wrap: wrap; }
+.lui-grid {
+  display: grid; gap: var(--lui-gap);
+  grid-template-columns: var(--lui-grid-cols, repeat(auto-fit, minmax(min(var(--lui-grid-min, 220px), 100%), 1fr)));
+}
+
+:is(.lui-stack, .lui-hstack, .lui-grid)[data-align="start"] { align-items: flex-start; }
+:is(.lui-stack, .lui-hstack, .lui-grid)[data-align="center"] { align-items: center; }
+:is(.lui-stack, .lui-hstack, .lui-grid)[data-align="end"] { align-items: flex-end; }
+:is(.lui-stack, .lui-hstack, .lui-grid)[data-align="stretch"] { align-items: stretch; }
+:is(.lui-stack, .lui-hstack)[data-align="baseline"] { align-items: baseline; }
+
+:is(.lui-stack, .lui-hstack, .lui-grid, .lui-container)[data-justify="start"] { justify-content: flex-start; }
+:is(.lui-stack, .lui-hstack, .lui-grid, .lui-container)[data-justify="center"] { justify-content: center; }
+:is(.lui-stack, .lui-hstack, .lui-grid, .lui-container)[data-justify="end"] { justify-content: flex-end; }
+:is(.lui-stack, .lui-hstack, .lui-grid, .lui-container)[data-justify="between"] { justify-content: space-between; }
+:is(.lui-stack, .lui-hstack, .lui-grid, .lui-container)[data-justify="around"] { justify-content: space-around; }
+
+/* Scheidingslijnen tussen de kinderen van een Stack. */
+.lui-stack[data-divided] > * + * {
+  border-top: 1px solid var(--border);
+  padding-top: var(--lui-gap);
+}
+
+.lui-container { width: 100%; margin-inline: auto; }
+.lui-container[data-size="sm"] { max-width: 640px; }
+.lui-container[data-size="md"] { max-width: var(--maxw); }
+.lui-container[data-size="lg"] { max-width: 1400px; }
+.lui-container[data-size="full"] { max-width: none; }
+.lui-container[data-padded] { padding-inline: 20px; }
+@media (max-width: 640px) { .lui-container[data-padded] { padding-inline: 16px; } }
+
+.lui-spacer { display: block; }

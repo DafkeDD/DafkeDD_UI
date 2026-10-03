@@ -1,0 +1,51 @@
+/* ============================ TimeField ============================ */
+.lui-timefield { position: relative; display: inline-flex; align-items: center; width: 100%; }
+.lui-timefield-icon {
+  position: absolute; left: 11px; color: var(--text-3); pointer-events: none;
+}
+
+.lui-timefield-input {
+  width: 100%; height: calc(42px * var(--density)); padding: 0 12px 0 33px;
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  font-size: var(--fs-base); font-variant-numeric: tabular-nums;
+  outline: none; transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-timefield-input::placeholder { color: var(--text-3); }
+.lui-timefield-input:hover:not(:disabled):not(:focus) { border-color: var(--text-3); }
+.lui-timefield-input:focus { border-color: var(--accent); box-shadow: var(--ring); }
+.lui-timefield-input:disabled { background: var(--surface-3); color: var(--text-2); cursor: not-allowed; }
+.lui-timefield-invalid { border-color: var(--red); }
+.lui-timefield-invalid:focus { border-color: var(--red); box-shadow: var(--ring-red); }
+
+.lui-timefield-sm { height: calc(34px * var(--density)); padding: 0 9px 0 29px; font-size: 13px; border-radius: var(--r-xs); }
+.lui-timefield-lg { height: calc(48px * var(--density)); padding: 0 14px 0 36px; font-size: var(--fs-md); border-radius: var(--r-md); }
+
+.lui-timefield-list {
+  z-index: var(--z-popover);
+  min-width: 104px; padding: 5px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-md); box-shadow: var(--sh-lg);
+  overflow-y: auto; overscroll-behavior: contain;
+  animation: lui-menu-in var(--dur-fast) var(--ease) both;
+}
+.lui-timefield-option {
+  display: block; width: 100%; padding: 7px 11px;
+  border: none; background: transparent; border-radius: var(--r-xs);
+  font: inherit; font-size: 13px; font-variant-numeric: tabular-nums;
+  color: var(--text); text-align: left; cursor: pointer;
+  transition: background var(--dur-fast);
+}
+.lui-timefield-option:hover { background: var(--surface-3); }
+.lui-timefield-option[data-selected] {
+  background: var(--accent-tint); color: var(--accent-active); font-weight: 650;
+}
+
+/* ---------- TimeRangeField ---------- */
+.lui-timerange { display: flex; align-items: center; gap: 9px; width: 100%; }
+.lui-timerange .lui-timefield { flex: 1; min-width: 0; }
+.lui-timerange-sep { flex: none; color: var(--text-3); font-size: var(--fs-base); }
+.lui-timerange-duration {
+  flex: none; font-size: var(--fs-sm); font-weight: 650; color: var(--text-3);
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}

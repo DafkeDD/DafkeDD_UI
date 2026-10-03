@@ -1,0 +1,17 @@
+/* ============================ Rating ============================ */
+.lui-rating { display: inline-flex; align-items: center; gap: 9px; }
+.lui-rating:focus-visible { outline: none; border-radius: var(--r-sm); box-shadow: var(--ring); }
+
+.lui-rating-sterren { display: inline-flex; gap: 2px; }
+
+.lui-rating-ster { position: relative; display: inline-block; flex: none; cursor: pointer; }
+.lui-rating[data-readonly] .lui-rating-ster { cursor: default; }
+
+.lui-rating-leeg { display: block; color: var(--border-strong); }
+.lui-rating-vol {
+  position: absolute; inset: 0; overflow: hidden; color: var(--amber);
+  transition: width var(--dur-fast) var(--ease);
+}
+.lui-rating-vol svg { fill: currentColor; }
+
+.lui-rating-caption { font-size: 12.5px; color: var(--text-3); }

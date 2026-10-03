@@ -1,0 +1,66 @@
+/* ============================ Tour ============================ */
+.lui-tour { position: fixed; inset: 0; z-index: var(--z-overlay); }
+
+.lui-tour-overlay {
+  position: absolute; inset: 0; background: rgba(2, 6, 23, .62);
+  animation: lui-tour-in var(--dur) var(--ease-out);
+}
+
+.lui-tour-ring {
+  position: absolute; pointer-events: none;
+  border: 2px solid var(--accent); border-radius: var(--r-sm);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 28%, transparent);
+  transition: top var(--dur) var(--ease-out), left var(--dur) var(--ease-out),
+    width var(--dur) var(--ease-out), height var(--dur) var(--ease-out);
+}
+
+.lui-tour-card {
+  position: absolute; z-index: 1; outline: none;
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 16px; border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface); box-shadow: var(--sh-lg);
+  transition: top var(--dur) var(--ease-out), left var(--dur) var(--ease-out);
+}
+
+.lui-tour-close {
+  position: absolute; top: 8px; inset-inline-end: 8px;
+  display: grid; place-items: center; width: 26px; height: 26px; padding: 0;
+  border: 0; border-radius: var(--r-xs); background: transparent;
+  color: var(--text-3); cursor: pointer;
+}
+.lui-tour-close:hover { background: var(--surface-3); color: var(--text); }
+.lui-tour-close:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-tour-title {
+  margin: 0; padding-inline-end: 26px;
+  font-size: var(--fs-md); font-weight: 650; color: var(--text);
+}
+.lui-tour-content { font-size: var(--fs-sm); color: var(--text-2); line-height: 1.55; }
+
+.lui-tour-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-top: 6px; padding-top: 10px; border-top: 1px solid var(--border);
+}
+.lui-tour-dots { display: flex; gap: 5px; }
+.lui-tour-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border-strong); }
+.lui-tour-dot[data-active] { background: var(--accent); width: 16px; border-radius: var(--r-full); }
+.lui-tour-count { font-size: var(--fs-xs); color: var(--text-3); font-variant-numeric: tabular-nums; }
+
+.lui-tour-actions { display: flex; gap: 6px; }
+.lui-tour-btn {
+  height: 30px; padding: 0 12px; border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text-2);
+  font: inherit; font-size: var(--fs-sm); font-weight: 600; cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-tour-btn:hover { background: var(--surface-2); color: var(--text); }
+.lui-tour-btn[data-primary] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.lui-tour-btn[data-primary]:hover { background: var(--accent-hover); color: var(--accent-fg); }
+.lui-tour-btn:focus-visible { outline: none; box-shadow: var(--ring); }
+
+@keyframes lui-tour-in { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-tour-overlay { animation: none; }
+  .lui-tour-ring, .lui-tour-card { transition: none; }
+}

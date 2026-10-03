@@ -1,0 +1,23 @@
+/* ============================ Pagination ============================ */
+.lui-pagination {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+}
+.lui-pagination-summary { font-size: 13px; color: var(--text-3); }
+.lui-pagination-controls { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+
+.lui-pagination-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-width: 34px; height: 34px; padding: 0 9px;
+  border: 1px solid transparent; background: transparent;
+  border-radius: var(--r-xs); cursor: pointer;
+  font: inherit; font-size: 13px; font-weight: 600; color: var(--text-2);
+  transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-pagination-btn:hover:not(:disabled) { background: var(--surface-3); color: var(--text); }
+.lui-pagination-btn:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-pagination-btn:disabled { opacity: .4; cursor: not-allowed; }
+.lui-pagination-btn-active {
+  background: var(--accent-tint); color: var(--accent-active); border-color: var(--accent-border);
+}
+.lui-pagination-gap { min-width: 24px; text-align: center; color: var(--text-3); font-size: 13px; }

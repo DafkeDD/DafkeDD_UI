@@ -1,0 +1,43 @@
+/* ============================ Alert ============================ */
+.lui-alert {
+  --lui-alert-color: var(--text-2);
+  --lui-alert-bg: var(--surface-2);
+  --lui-alert-border: var(--border);
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 15px;
+  background: var(--lui-alert-bg);
+  border: 1px solid var(--lui-alert-border);
+  border-radius: var(--r-md);
+}
+.lui-alert-accent { --lui-alert-color: var(--accent); --lui-alert-bg: var(--accent-tint); --lui-alert-border: var(--accent-border); }
+.lui-alert-green { --lui-alert-color: var(--green); --lui-alert-bg: var(--green-tint); --lui-alert-border: var(--green-border); }
+.lui-alert-amber { --lui-alert-color: var(--amber); --lui-alert-bg: var(--amber-tint); --lui-alert-border: var(--amber-border); }
+.lui-alert-red { --lui-alert-color: var(--red); --lui-alert-bg: var(--red-tint); --lui-alert-border: var(--red-border); }
+.lui-alert-blue { --lui-alert-color: var(--blue); --lui-alert-bg: var(--blue-tint); --lui-alert-border: var(--blue-border); }
+
+.lui-alert-icon { display: inline-flex; flex: none; color: var(--lui-alert-color); margin-top: 1px; }
+.lui-alert-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.lui-alert-title { font-size: 13.5px; font-weight: 650; color: var(--text); line-height: 1.35; }
+.lui-alert-text { font-size: 13.5px; color: var(--text-2); line-height: 1.55; }
+.lui-alert-action { display: flex; gap: 9px; margin-top: 6px; }
+.lui-alert-close {
+  flex: none; display: grid; place-items: center; width: 24px; height: 24px;
+  border: none; background: transparent; color: var(--text-3);
+  border-radius: var(--r-xs); cursor: pointer;
+}
+.lui-alert-close:hover { background: color-mix(in srgb, var(--text-3) 14%, transparent); color: var(--text); }
+
+/* ---------- Motion ---------- */
+.lui-alert { animation: lui-alert-in .38s var(--ease-out) both; }
+@keyframes lui-alert-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.lui-alert-icon { animation: lui-alert-icon .55s var(--ease-pop) .08s both; }
+@keyframes lui-alert-icon { from { transform: scale(.3) rotate(-30deg); opacity: 0; } to { transform: none; opacity: 1; } }
+.lui-alert-red .lui-alert-icon, .lui-alert-amber .lui-alert-icon {
+  animation: lui-alert-icon .55s var(--ease-pop) .08s both, lui-alert-wiggle .6s var(--ease) .6s both;
+}
+@keyframes lui-alert-wiggle {
+  0%, 100% { rotate: 0deg; } 20% { rotate: -12deg; } 40% { rotate: 10deg; } 60% { rotate: -6deg; } 80% { rotate: 3deg; }
+}
+.lui-alert-close { transition: background var(--dur-fast), color var(--dur-fast), transform var(--dur) var(--ease-pop); }
+.lui-alert-close:hover { transform: rotate(90deg); }
+.lui-alert-close:focus-visible { outline: none; box-shadow: var(--ring); }

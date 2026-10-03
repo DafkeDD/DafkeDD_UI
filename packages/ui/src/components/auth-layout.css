@@ -1,0 +1,129 @@
+/* ============================ AuthLayout ============================ */
+.lui-auth { min-height: 100vh; background: var(--bg); }
+
+.lui-auth-split { display: grid; grid-template-columns: 1fr 1fr; }
+.lui-auth-split.lui-auth-aside-right { direction: rtl; }
+.lui-auth-split.lui-auth-aside-right > * { direction: ltr; }
+
+.lui-auth-centered { display: grid; place-items: center; background: var(--bg-grad); }
+
+/* ---------- Zijpaneel ---------- */
+.lui-auth-aside {
+  position: relative; overflow: hidden;
+  padding: 48px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  color: var(--text-inv);
+  background: linear-gradient(150deg, var(--accent-hover) 0%, var(--accent) 45%, var(--accent-active) 100%);
+}
+.lui-auth-aside-ink {
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--accent-active) 26%, var(--text)) 0%,
+    var(--text) 60%,
+    color-mix(in srgb, var(--text) 82%, #000) 100%
+  );
+}
+.lui-auth-aside-inner { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 20px; height: 100%; justify-content: space-between; }
+
+.lui-auth-deco {
+  position: absolute; inset: 0; opacity: .5;
+  background-image:
+    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, .18), transparent 40%),
+    radial-gradient(circle at 10% 90%, rgba(255, 255, 255, .10), transparent 35%);
+}
+.lui-auth-grid {
+  position: absolute; inset: 0; opacity: .12;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .6) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .6) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: radial-gradient(circle at 70% 30%, black, transparent 70%);
+  mask-image: radial-gradient(circle at 70% 30%, black, transparent 70%);
+}
+
+/* ---------- Formulierkant ---------- */
+.lui-auth-main {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  padding: 40px 24px; min-width: 0;
+}
+.lui-auth-glow {
+  position: absolute; width: 460px; height: 460px; border-radius: var(--r-full);
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%);
+  top: -120px; left: -80px; pointer-events: none; filter: blur(20px);
+}
+.lui-auth-glow-two {
+  top: auto; left: auto; right: -110px; bottom: -140px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--violet) 18%, transparent), transparent 70%);
+}
+
+/* ---------- Kaart ---------- */
+.lui-auth-card {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 400px;
+  display: flex; flex-direction: column;
+}
+.lui-auth-centered .lui-auth-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-xl); box-shadow: var(--sh-lg);
+  padding: 32px;
+}
+.lui-auth-brand { display: flex; align-items: center; gap: 11px; margin-bottom: 26px; }
+.lui-auth-title { font-size: 26px; font-weight: 700; letter-spacing: -0.03em; color: var(--text); }
+.lui-auth-description { margin-top: 8px; font-size: 14.5px; color: var(--text-2); line-height: 1.55; }
+.lui-auth-body { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+.lui-auth-footer {
+  margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border);
+  font-size: 13.5px; color: var(--text-3); text-align: center;
+}
+
+/* ---------- Scheiding ---------- */
+.lui-auth-divider {
+  display: flex; align-items: center; gap: 12px;
+  color: var(--text-3); font-size: 12.5px; font-weight: 600;
+}
+.lui-auth-divider::before,
+.lui-auth-divider::after {
+  content: ""; flex: 1; height: 1px; background: var(--border);
+}
+
+/* ---------- SSO-knop ---------- */
+.lui-sso {
+  --lui-sso-color: var(--accent);
+  display: flex; align-items: center; gap: 13px; width: 100%;
+  padding: calc(12px * var(--density)) 15px;
+  background: var(--surface); border: 1px solid var(--border-strong);
+  border-radius: var(--r-md); cursor: pointer; text-align: left;
+  font: inherit; color: var(--text);
+  transition: border-color var(--dur-fast), background var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-sso:hover:not(:disabled) {
+  border-color: var(--lui-sso-color); background: var(--surface-hover); box-shadow: var(--sh-xs);
+}
+.lui-sso:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-sso:disabled { opacity: .6; cursor: not-allowed; }
+
+.lui-sso-icon {
+  display: grid; place-items: center; flex: none;
+  width: 36px; height: 36px; border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--lui-sso-color) 14%, transparent);
+  color: var(--lui-sso-color);
+}
+.lui-sso-icon svg { width: 19px; height: 19px; }
+.lui-sso-spin { animation: lui-spin 1s linear infinite; }
+
+.lui-sso-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.lui-sso-label { font-size: 14px; font-weight: 650; color: var(--text); }
+.lui-sso-description { font-size: 12px; color: var(--text-3); }
+.lui-sso-arrow { flex: none; color: var(--text-3); transition: transform var(--dur-fast); }
+.lui-sso:hover:not(:disabled) .lui-sso-arrow { transform: translateX(2px); color: var(--lui-sso-color); }
+
+@media (max-width: 900px) {
+  .lui-auth-split { grid-template-columns: 1fr; }
+  .lui-auth-aside { display: none; }
+}
+
+@media (max-width: 520px) {
+  .lui-auth-main { padding: 26px 18px; }
+  .lui-auth-centered .lui-auth-card { padding: 24px 20px; }
+  .lui-auth-title { font-size: 22px; }
+}

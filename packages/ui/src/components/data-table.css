@@ -1,0 +1,83 @@
+/* ============================ DataTable ============================ */
+.lui-datatable { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+
+.lui-datatable-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.lui-datatable-search { max-width: 280px; }
+.lui-datatable-clear {
+  display: grid; place-items: center; width: 20px; height: 20px; padding: 0;
+  border: 0; border-radius: var(--r-xs); background: transparent;
+  color: var(--text-3); cursor: pointer;
+}
+.lui-datatable-clear:hover { background: var(--surface-3); color: var(--text); }
+.lui-datatable-clear:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-datatable-selection {
+  display: flex; align-items: center; gap: 10px; margin-inline-start: auto;
+  padding: 4px 4px 4px 12px; border-radius: var(--r-full);
+  background: color-mix(in oklab, var(--accent) 10%, var(--surface));
+}
+.lui-datatable-count { font-size: var(--fs-sm); font-weight: 600; color: var(--accent); white-space: nowrap; }
+
+.lui-datatable-check { width: 1%; white-space: nowrap; }
+.lui-datatable-row-clickable { cursor: pointer; }
+.lui-datatable tr[data-selected] > td { background: color-mix(in oklab, var(--accent) 7%, transparent); }
+
+.lui-datatable-empty { padding: 8px 0 4px; }
+
+.lui-datatable-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+}
+.lui-datatable-summary { font-size: var(--fs-sm); color: var(--text-3); font-variant-numeric: tabular-nums; }
+
+/* Kolommen die onder een bepaalde breedte wegvallen. */
+@media (max-width: 640px) {
+  .lui-datatable [data-hide-below="640"] { display: none; }
+}
+@media (max-width: 860px) {
+  .lui-datatable [data-hide-below="860"] { display: none; }
+}
+@media (max-width: 1024px) {
+  .lui-datatable [data-hide-below="1024"] { display: none; }
+}
+
+/* ---------- balk ---------- */
+.lui-datatable-search { transition: max-width var(--dur) var(--ease-out); }
+.lui-datatable-search:focus-within { max-width: 340px; }
+.lui-datatable-actions { display: flex; align-items: center; gap: 8px; margin-inline-start: auto; }
+.lui-datatable-selection + .lui-datatable-actions { margin-inline-start: 0; }
+
+/* ---------- gekleurde kop ---------- */
+.lui-datatable[data-header="accent"] thead th {
+  background: var(--accent); color: var(--accent-fg); border-color: transparent;
+}
+.lui-datatable[data-header="accent"] thead th .lui-table-sort { color: inherit; opacity: .75; }
+.lui-datatable[data-header="accent"] thead th:first-child { border-start-start-radius: var(--r-sm); }
+.lui-datatable[data-header="accent"] thead th:last-child { border-start-end-radius: var(--r-sm); }
+.lui-datatable[data-header="accent"] thead .lui-checkbox-box {
+  border-color: color-mix(in oklab, var(--accent-fg) 70%, transparent);
+}
+
+/* ---------- oplichtende rij ---------- */
+.lui-datatable[data-hoverable] tbody tr { transition: background var(--dur-fast), box-shadow var(--dur-fast); }
+.lui-datatable[data-hoverable] tbody tr:hover > td { background: color-mix(in oklab, var(--accent) 5%, var(--surface)); }
+.lui-datatable[data-hoverable] tbody tr:hover > td:first-child {
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+/* ---------- ⋯-menu per rij ---------- */
+.lui-datatable-rowactions, .lui-datatable-rowactions-head { width: 1%; white-space: nowrap; }
+.lui-datatable-more {
+  display: inline-grid; place-items: center; width: 30px; height: 30px; padding: 0;
+  border: 1px solid var(--border); border-radius: 50%;
+  background: var(--surface); color: var(--text-3); cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-datatable-more:hover, .lui-datatable-more[aria-expanded="true"] {
+  background: var(--surface-2); color: var(--text); border-color: var(--border-strong);
+}
+.lui-datatable-more:focus-visible { outline: none; box-shadow: var(--ring); }
+/* Aangevinkt in een gekleurde kop: wit vakje met een accentvinkje, anders valt het weg. */
+.lui-datatable[data-header="accent"] thead .lui-checkbox-input:is(:checked, :indeterminate) + .lui-checkbox-box,
+.lui-datatable[data-header="accent"] thead .lui-checkbox[data-indeterminate] .lui-checkbox-box {
+  background: var(--accent-fg); border-color: var(--accent-fg); color: var(--accent);
+}

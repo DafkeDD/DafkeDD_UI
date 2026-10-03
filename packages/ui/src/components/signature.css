@@ -1,0 +1,34 @@
+/* ============================ Signature ============================ */
+.lui-signature { display: grid; gap: 8px; width: 100%; }
+
+.lui-signature-pad {
+  position: relative; width: 100%; overflow: hidden;
+  border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--surface);
+}
+.lui-signature[data-disabled] .lui-signature-pad { background: var(--surface-3); opacity: .7; }
+
+.lui-signature-canvas {
+  display: block; width: 100%; height: 100%;
+  touch-action: none; cursor: crosshair;
+}
+.lui-signature[data-disabled] .lui-signature-canvas { cursor: not-allowed; }
+
+.lui-signature-guide {
+  position: absolute; inset-inline: 22px; bottom: 26px;
+  display: grid; gap: 5px; pointer-events: none;
+}
+.lui-signature-line { display: block; height: 1px; background: var(--border-strong); }
+.lui-signature-hint { font-size: var(--fs-xs); color: var(--text-3); }
+
+.lui-signature-actions { display: flex; justify-content: flex-end; gap: 8px; }
+.lui-signature-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 30px; padding: 0 11px; border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text-2);
+  font: inherit; font-size: var(--fs-sm); cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-signature-btn:hover:not(:disabled) { background: var(--surface-2); color: var(--text); }
+.lui-signature-btn:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-signature-btn:disabled { opacity: .45; cursor: not-allowed; }

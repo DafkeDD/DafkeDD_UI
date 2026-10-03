@@ -1,0 +1,18 @@
+{
+  "name": "skeleton",
+  "title": "Skeleton",
+  "description": "Laadplaceholder met shimmer.",
+  "category": "Basis",
+  "dependencies": [],
+  "requires": [],
+  "files": [
+    {
+      "path": "components/skeleton.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"../lib/cn\";\n\nexport interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {\n  width?: number | string;\n  height?: number | string;\n  /** Ronde variant, bv. voor avatar-placeholders. */\n  circle?: boolean;\n  /** Aantal regels; handig voor tekstblokken. */\n  lines?: number;\n}\n\n/** Skeleton — laadplaceholder met shimmer. */\nexport const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(function Skeleton(\n  { width, height = 14, circle, lines, className, style, ...rest },\n  ref\n) {\n  if (lines && lines > 1) {\n    return (\n      <div ref={ref} className={cn(\"lui-skeleton-stack\", className)} {...rest}>\n        {Array.from({ length: lines }).map((_, index) => (\n          <div\n            key={index}\n            className=\"lui-skeleton\"\n            style={{ height, width: index === lines - 1 ? \"62%\" : \"100%\" }}\n          />\n        ))}\n      </div>\n    );\n  }\n\n  return (\n    <div\n      ref={ref}\n      className={cn(\"lui-skeleton\", circle && \"lui-skeleton-circle\", className)}\n      style={{ width: width ?? \"100%\", height, ...style }}\n      aria-hidden=\"true\"\n      {...rest}\n    />\n  );\n});\n"
+    },
+    {
+      "path": "components/skeleton.css",
+      "content": "/* ============================ Skeleton ============================ */\n.lui-skeleton {\n  background: linear-gradient(90deg, var(--surface-3) 25%, var(--surface-hover) 50%, var(--surface-3) 75%);\n  background-size: 200% 100%;\n  animation: lui-shimmer 1.4s infinite;\n  border-radius: var(--r-xs);\n  flex: none;\n}\n.lui-skeleton-circle { border-radius: var(--r-full); }\n.lui-skeleton-stack { display: flex; flex-direction: column; gap: 9px; width: 100%; }\n"
+    }
+  ]
+}

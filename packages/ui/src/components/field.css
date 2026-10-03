@@ -1,0 +1,49 @@
+/* ============================ Field ============================ */
+.lui-field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.lui-field-labelrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.lui-field-labelaction { font-size: var(--fs-sm); color: var(--text-3); }
+.lui-field-control { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.lui-field-hint { font-size: var(--fs-sm); color: var(--text-3); line-height: 1.45; }
+.lui-field-error { font-size: var(--fs-sm); color: var(--red); line-height: 1.45; font-weight: 550; }
+.lui-field-disabled { opacity: .6; }
+
+.lui-field-horizontal {
+  flex-direction: row; align-items: flex-start; gap: 20px;
+}
+.lui-field-horizontal .lui-field-labelrow { width: 200px; flex: none; padding-top: 11px; }
+.lui-field-horizontal .lui-field-control { flex: 1; }
+
+/* ---------- Zwevend label ---------- */
+/* Het label ligt over het veld en klimt naar de rand bij focus of inhoud.
+   :placeholder-shown doet het werk, dus het veld heeft een placeholder nodig
+   (desnoods een spatie) — geen JavaScript nodig om te weten of er iets staat. */
+.lui-field-floating .lui-field-control { position: relative; }
+.lui-field-floating .lui-field-floatlabel {
+  position: absolute; top: 0; inset-inline-start: 11px;
+  padding: 0 4px; pointer-events: none;
+  background: var(--surface); color: var(--text-3);
+  font-size: 12px; line-height: 1;
+  transform: translateY(-50%);
+  transition: transform var(--dur-fast) var(--ease), font-size var(--dur-fast), color var(--dur-fast);
+}
+/* Leeg en zonder focus: het label staat middenin het veld. Een telefoonveld is
+   nooit echt leeg — het landnummer staat er al — dus dat sluiten we uit, anders
+   valt het label over de landkiezer heen. */
+.lui-field-floating:not([data-filled])
+  .lui-field-control:has(:placeholder-shown:not(:focus)):not(:has(.lui-phone))
+  .lui-field-floatlabel {
+  top: calc(21px * var(--density));
+  font-size: var(--fs-base);
+  transform: translateY(-50%);
+  background: transparent;
+}
+.lui-field-floating .lui-field-control:focus-within .lui-field-floatlabel { color: var(--accent); }
+.lui-field-floating .lui-field-control:has([aria-invalid="true"]) .lui-field-floatlabel { color: var(--red); }
+
+/* De placeholder zelf blijft weg zolang het label er nog overheen ligt. */
+.lui-field-floating .lui-field-control :is(input, textarea)::placeholder { color: transparent; }
+.lui-field-floating .lui-field-control :is(input, textarea):focus::placeholder { color: var(--text-3); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-field-floating .lui-field-floatlabel { transition: none; }
+}

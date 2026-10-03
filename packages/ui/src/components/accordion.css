@@ -1,0 +1,77 @@
+/* ============================ Accordion ============================ */
+.lui-accordion { display: flex; flex-direction: column; min-width: 0; }
+
+.lui-accordion-bordered {
+  border: 1px solid var(--border); border-radius: var(--r-lg);
+  background: var(--surface); overflow: hidden;
+}
+.lui-accordion-bordered .lui-accordion-item + .lui-accordion-item { border-top: 1px solid var(--border); }
+
+.lui-accordion-separated { gap: 10px; }
+.lui-accordion-separated .lui-accordion-item {
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface); overflow: hidden;
+}
+.lui-accordion-separated .lui-accordion-item[data-state="open"] { border-color: var(--border-strong); }
+
+.lui-accordion-plain .lui-accordion-item + .lui-accordion-item { border-top: 1px solid var(--border); }
+
+.lui-accordion-trigger {
+  display: flex; align-items: center; gap: 11px; width: 100%;
+  padding: 15px 18px; border: none; background: transparent;
+  font: inherit; font-size: 14.5px; font-weight: 600; color: var(--text);
+  text-align: left; cursor: pointer; transition: background var(--dur-fast);
+}
+.lui-accordion-trigger:hover { background: var(--surface-2); }
+.lui-accordion-trigger:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-accordion-icon { display: inline-flex; color: var(--text-3); flex: none; }
+.lui-accordion-label { flex: 1; min-width: 0; }
+.lui-accordion-caret { flex: none; color: var(--text-3); transition: transform var(--dur); }
+.lui-accordion-trigger[data-state="open"] .lui-accordion-caret { transform: rotate(180deg); }
+.lui-accordion-item[data-disabled] .lui-accordion-trigger { opacity: .5; cursor: not-allowed; }
+
+/* De hoogte groeit echt mee, met grid-template-rows van 0fr naar 1fr.
+   Zo hoeft de hoogte niet gemeten te worden en werkt het ook als de inhoud
+   onderweg verandert. */
+.lui-accordion-content {
+  display: grid; grid-template-rows: 0fr; opacity: 0;
+  transition: grid-template-rows var(--dur-slow) var(--ease), opacity var(--dur) var(--ease);
+}
+.lui-accordion-content[data-state="open"] { grid-template-rows: 1fr; opacity: 1; }
+.lui-accordion-content-wrap { overflow: hidden; min-height: 0; }
+.lui-accordion-content[data-state="closed"] .lui-accordion-content-wrap {
+  visibility: hidden;
+  transition: visibility 0s linear var(--dur-slow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-accordion-content { transition: none; }
+}
+.lui-accordion-content-inner {
+  padding: 0 18px 17px; font-size: 13.5px; color: var(--text-2); line-height: 1.6;
+}
+
+/* ---------- Kaartvariant ---------- */
+/* Elk item is een eigen kaart met een icoonvlakje en een tweede regel; open
+   licht hij op met de accentkleur in plaats van alleen open te klappen. */
+.lui-accordion-card { display: grid; gap: 10px; border: 0; }
+.lui-accordion-card .lui-accordion-item {
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface); overflow: hidden;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.lui-accordion-card .lui-accordion-item:hover { border-color: var(--border-strong); }
+.lui-accordion-card .lui-accordion-item:has([data-state="open"]) {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 12%, transparent);
+}
+.lui-accordion-card .lui-accordion-trigger { padding: 13px 15px; align-items: flex-start; }
+.lui-accordion-card .lui-accordion-icon {
+  display: grid; place-items: center; width: 30px; height: 30px; flex: none;
+  border-radius: var(--r-sm);
+  background: color-mix(in oklab, var(--accent) 12%, transparent); color: var(--accent);
+}
+.lui-accordion-card .lui-accordion-content { padding-inline: 15px; }
+
+.lui-accordion-text { display: grid; gap: 2px; min-width: 0; flex: 1; text-align: start; }
+.lui-accordion-description { font-size: 12.5px; font-weight: 400; color: var(--text-3); }

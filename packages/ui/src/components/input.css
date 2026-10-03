@@ -1,0 +1,44 @@
+/* ============================ Input ============================ */
+.lui-input {
+  width: 100%; height: calc(42px * var(--density)); padding: 0 13px;
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  font-size: var(--fs-base); outline: none;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
+}
+.lui-input::placeholder { color: var(--text-3); }
+.lui-input:hover:not(:disabled):not(:focus) { border-color: var(--text-3); }
+.lui-input:focus { border-color: var(--accent); box-shadow: var(--ring); }
+.lui-input:disabled { background: var(--surface-3); color: var(--text-2); cursor: not-allowed; }
+.lui-input-invalid { border-color: var(--red); }
+.lui-input-invalid:focus { border-color: var(--red); box-shadow: var(--ring-red); }
+
+.lui-input-sm { height: calc(34px * var(--density)); padding: 0 10px; font-size: 13px; border-radius: var(--r-xs); }
+.lui-input-lg { height: calc(48px * var(--density)); padding: 0 15px; font-size: var(--fs-md); border-radius: var(--r-md); }
+
+/* ---------- Wrapper met prefix/suffix/addon ---------- */
+.lui-input-wrap {
+  position: relative; display: flex; align-items: stretch; width: 100%;
+}
+.lui-input-wrap .lui-input { border-radius: var(--r-sm); }
+.lui-input-wrap-sm .lui-input { border-radius: var(--r-xs); }
+.lui-input-wrap-lg .lui-input { border-radius: var(--r-md); }
+
+.lui-input-affix {
+  position: absolute; top: 0; bottom: 0; display: flex; align-items: center;
+  color: var(--text-3); pointer-events: none; font-size: 13px;
+}
+.lui-input-affix svg { width: 16px; height: 16px; }
+.lui-input-prefix { left: 12px; }
+.lui-input-suffix { right: 12px; pointer-events: auto; }
+.lui-input-has-prefix { padding-left: 36px; }
+.lui-input-has-suffix { padding-right: 36px; }
+
+.lui-input-wrap .lui-input-addon {
+  display: inline-flex; align-items: center; padding: 0 12px;
+  background: var(--surface-3); border: 1px solid var(--border-strong); border-left: none;
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  color: var(--text-3); font-size: 13px; font-family: var(--mono); white-space: nowrap;
+}
+.lui-input-wrap:has(.lui-input-addon) .lui-input { border-radius: var(--r-sm) 0 0 var(--r-sm); }
+.lui-input-wrap-invalid .lui-input-addon { border-color: var(--red); }

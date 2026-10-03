@@ -1,0 +1,33 @@
+/* ============================ Card ============================ */
+.lui-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  display: flex; flex-direction: column;
+  min-width: 0;
+}
+.lui-card-interactive {
+  cursor: pointer;
+  transition: border-color var(--dur), box-shadow var(--dur), transform var(--dur);
+}
+.lui-card-interactive:hover {
+  border-color: var(--border-strong); box-shadow: var(--sh-md); transform: translateY(-2px);
+}
+.lui-card-interactive:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.lui-card-header {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 20px 22px 0;
+}
+.lui-card-header > :first-child { flex: 1; min-width: 0; }
+.lui-card-title { font-size: var(--fs-lg); font-weight: 650; letter-spacing: -0.02em; color: var(--text); }
+.lui-card-description { font-size: 13.5px; color: var(--text-3); margin-top: 4px; line-height: 1.5; }
+.lui-card-action { flex: none; display: flex; align-items: center; gap: 8px; }
+.lui-card-content { padding: calc(18px * var(--density)) 22px; flex: 1; min-width: 0; }
+.lui-card-header + .lui-card-content { padding-top: 16px; }
+.lui-card-footer {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 22px 20px; margin-top: auto;
+}
+.lui-card-flush .lui-card-content { padding: 0; }

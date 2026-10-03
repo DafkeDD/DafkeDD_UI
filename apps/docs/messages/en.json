@@ -1,0 +1,169 @@
+{
+  "metadata": {
+    "title": "Dafke UI",
+    "description": "A fully custom React component library based on the Dafke UI design. No shadcn, no Radix, no external UI dependencies."
+  },
+  "nav": {
+    "subtitle": "Design system",
+    "search": "Search component…",
+    "start": "Getting started",
+    "intro": "Introduction",
+    "installation": "Installation",
+    "theming": "Theme & tokens",
+    "results": "{count} results",
+    "new": "new",
+    "updated": "updated"
+  },
+  "categories": {
+    "basis": "Basics",
+    "forms": "Forms",
+    "overlays": "Overlays",
+    "navigation": "Navigation",
+    "scheduling": "Date & scheduling",
+    "data": "Data",
+    "feedback": "Feedback",
+    "layout": "Layout",
+    "motion": "Motion"
+  },
+  "shell": {
+    "docs": "Documentation",
+    "openNav": "Open navigation",
+    "language": "Language"
+  },
+  "home": {
+    "badge": "{count} components · fully custom code",
+    "titleLine1": "Your own component library,",
+    "titleLine2": "built on the Dafke UI design.",
+    "intro": "Works like shadcn — same composition, same copy-paste approach — but without a single line of code from shadcn, Radix or any other UI library. Everything lives in your own repo.",
+    "ctaComponents": "Browse the components",
+    "ctaInstall": "Installation",
+    "allTitle": "Everything inside",
+    "allDescription": "From button to command palette, from table to donut chart.",
+    "features": {
+      "zeroDeps": {
+        "title": "Zero UI dependencies",
+        "text": "No shadcn, no Radix, no Headless UI. Every component — focus trap, positioning and keyboard navigation included — is written right here."
+      },
+      "tokens": {
+        "title": "Every color from one source",
+        "text": "Every color, radius and shadow comes from the Dafke UI design. Components use tokens only, never a hardcoded hex."
+      },
+      "copyPaste": {
+        "title": "Copy-paste, your code",
+        "text": "Just like shadcn: `npx dafke-ui add button` copies the source into your project. You own the components and change them whenever you like."
+      },
+      "theme": {
+        "title": "Light and dark",
+        "text": "One ThemeProvider, two complete palettes. Everything follows along, charts and overlays included."
+      }
+    }
+  },
+  "component": {
+    "install": "Installation",
+    "copies": "Copies",
+    "and": "and",
+    "andTakes": "and brings along",
+    "along": "with it.",
+    "intoProject": " into your project.",
+    "notes": "Good to know"
+  },
+  "props": {
+    "prop": "Prop",
+    "type": "Type",
+    "default": "Default",
+    "description": "Description"
+  },
+  "preview": {
+    "preview": "Preview",
+    "code": "Code",
+    "missing": "Demo “{key}” not found."
+  },
+  "intro": {
+    "badge": "Introduction",
+    "lead": "A React component library of our own, built from the Dafke UI design. The API feels like shadcn — composition with sub-components, <code>asChild</code>, controlled and uncontrolled — but there is not a single line of external UI code in it. No shadcn, no Radix, no Headless UI, no cva, no clsx: everything lives in <code>packages/ui/src</code>.",
+    "buildTitle": "How it grew",
+    "buildBadge": "{done}/{total} steps",
+    "buildDesc": "The library grows step by step. Each step adds components and their docs.",
+    "getTitle": "What you get",
+    "getComponents": "{count} components",
+    "getComponentsText": "All on the same tokens, and more arrive with every step.",
+    "getPrimitives": "Our own primitives",
+    "getPrimitivesText": "cn(), variants(), Slot and hooks — written here.",
+    "getTheme": "Light + dark",
+    "getThemeText": "Two complete palettes, one ThemeProvider.",
+    "getA11y": "Accessible",
+    "getA11yText": "ARIA roles, keyboard navigation and visible focus on every interactive component.",
+    "rulesTitle": "Rules of this design system",
+    "rule1Title": "Every colour comes from the Dafke UI design",
+    "rule1Body": "Components use CSS variables only (<code>var(--accent)</code>, <code>var(--surface)</code>, …). Want to recolour? Change <code>tokens.css</code> and the whole library follows.",
+    "rule2Title": "One class prefix",
+    "rule2Body": "Every class starts with <code>lui-</code>, so nothing collides with existing CSS in your projects.",
+    "rule3Title": "Tailwind is only the engine",
+    "rule3Body": "Tailwind v4 provides the reset and the utilities for your own markup. The components themselves are plain CSS classes — no utility soup, fully editable.",
+    "overviewTitle": "Overview",
+    "cta": "Go to installation"
+  },
+  "install": {
+    "badge": "Getting started",
+    "title": "Installation",
+    "lead": "Dafke UI works in any React project with a bundler (Next.js, Vite, Remix). Two ways: copy components with the CLI, or use the monorepo directly.",
+    "s1Title": "1 · Run the monorepo locally",
+    "s1Text": "This is the documentation site you are looking at, with all the source files next to it.",
+    "s1Structure": "Structure: <code>packages/ui</code> (the library), <code>packages/cli</code> (the add CLI), <code>apps/docs</code> (this site) and <code>registry/</code> (generated JSON).",
+    "s2Title": "2 · Put components into an existing project",
+    "stepInit": "tokens + basics",
+    "stepAdd": "copy a component",
+    "stepImport": "import",
+    "stepImportDesc": "css + component",
+    "s2Init": "<code>init</code> creates <code>dafke-ui.json</code> with your paths and copies the shared files (tokens, base CSS, <code>cn()</code>, <code>variants()</code>, Slot, Portal, hooks and the icon set).",
+    "npmTitle": "Not on npm yet?",
+    "npmBody": "Link the CLI once from this monorepo with <code>cd packages/cli && npm link</code>. After that <code>dafke-ui init</code> works in every project on your machine and the CLI finds the registry by itself. Or pass a path or URL with <code>--registry</code>, for example the raw URL of <code>registry/index.json</code> on GitHub.",
+    "s2Index": "The CLI also maintains <code>components/ui/index.ts</code>, so you import everything through <code>@/components/ui</code>. Internal helpers (<code>cn</code>, <code>hooks</code>, <code>anchor</code> …) are deliberately left out; import those directly, e.g. <code>@/components/ui/cn</code>.",
+    "s2Update": "<code>update</code> pulls the latest version of everything already in your project and installs the components that have been added to the registry since. Files you changed yourself stay as they are — they are skipped unless you pass <code>--force</code>. Preview what would happen with <code>--dry-run</code>, or stick to what you have with <code>--only-installed</code>. The CLI keeps <code>dafke-ui.lock.json</code> for this; commit that file.",
+    "s3Title": "3 · Load the CSS",
+    "s3Text": "Import one stylesheet into your global CSS. The order does not matter; everything uses cascade-free classes.",
+    "twTitle": "Tailwind is not required",
+    "twBody": "The components do not need Tailwind — they use their own <code>lui-</code> classes. Tailwind v4 is there only for the reset and for utilities in your own markup. If you do use Tailwind, also import <code>tailwind.css</code>: the same tokens then exist as utilities (<code>bg-accent</code>, <code>rounded-lg</code>). Without Tailwind, leave that file out.",
+    "s4Title": "4 · Providers",
+    "s4Text": "Two providers go once at the top of your app: theme and notifications.",
+    "fontsTitle": "Fonts",
+    "fontsText": "The design uses <strong>Hanken Grotesk</strong> for text and <strong>JetBrains Mono</strong> for code. Load them from Google Fonts, or change <code>--font</code> and <code>--mono</code> in <code>tokens.css</code>.",
+    "reqTitle": "Requirements",
+    "req1": "React 18 or 19",
+    "req2": "Node 20 or higher (for the CLI)",
+    "req3": "A bundler that handles CSS imports (Next.js, Vite, …)",
+    "req4": "No UI or utility library at all — deliberately left out"
+  },
+  "theming": {
+    "badge": "Foundation",
+    "title": "Theme & tokens",
+    "lead": "Every colour in this library comes from one file: <code>tokens.css</code>. Components never write a hex value — they only use variables. Change a token and the whole UI follows, in light and dark.",
+    "sourceTitle": "Source: the Dafke UI design",
+    "sourceBody": "The values below are taken verbatim from the admin panel design. Need a second brand? Copy the <code>:root</code> block and override it under your own selector, for example <code>[data-brand=\"client-x\"]</code>.",
+    "dark": "dark",
+    "radiusTitle": "Radius & shadow",
+    "radius": "Radius",
+    "shadow": "Shadow",
+    "recolorTitle": "Recolouring",
+    "recolorText": "Changing one variable is enough to recolour the whole library:",
+    "densityTitle": "Density",
+    "densityText": "Besides light and dark, the library has one scale knob: <code>--density</code>. Every height and padding is written as <code>calc(Npx * var(--density))</code>, so compact and roomy immediately carry through buttons, fields, tables, lists and calendars — without touching a single component.",
+    "densityProvider": "<code>ThemeProvider</code> sets <code>data-density</code> on <code>&lt;html&gt;</code> and remembers the choice; <code>DensityToggle</code> is the ready-made switch and <code>ThemeScript</code> restores it before the first paint.",
+    "allTitle": "All tokens",
+    "token": "Token",
+    "light": "Light",
+    "darkCol": "Dark"
+  },
+  "tokenGroups": {
+    "accent": "Accent",
+    "accentDesc": "The teal accent colour of the Dafke UI design and its tints.",
+    "surfaces": "Surfaces",
+    "surfacesDesc": "Backgrounds, cards and borders.",
+    "text": "Text",
+    "textDesc": "Three text levels plus the inverse colour.",
+    "status": "Status",
+    "statusDesc": "Every status has a colour, a tint and a border.",
+    "dataviz": "Data visualisation",
+    "datavizDesc": "Six series for charts, derived from the same colours."
+  }
+}

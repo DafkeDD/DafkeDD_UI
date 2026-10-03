@@ -1,0 +1,64 @@
+/* ============================ Kanban ============================ */
+.lui-kanban {
+  display: flex; gap: 14px; width: 100%;
+  overflow-x: auto; padding-bottom: 4px; align-items: flex-start;
+}
+
+.lui-kanban-column {
+  flex: 1 1 0; min-width: 220px; display: flex; flex-direction: column; gap: 10px;
+  padding: 12px; border: 1px solid var(--border); border-radius: var(--r-md);
+  background: var(--surface-2);
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-kanban-column[data-over] { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 6%, var(--surface-2)); }
+.lui-kanban-column[data-locked] { opacity: .75; }
+
+.lui-kanban-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.lui-kanban-title { font-size: var(--fs-sm); font-weight: 650; color: var(--text); }
+.lui-kanban-badge {
+  flex: none; min-width: 22px; padding: 1px 7px; border-radius: var(--r-full);
+  background: var(--surface-3); color: var(--text-2);
+  font-size: 11.5px; font-weight: 650; text-align: center; font-variant-numeric: tabular-nums;
+}
+.lui-kanban-badge[data-over-limit] { background: color-mix(in oklab, var(--red) 18%, var(--surface)); color: var(--red); }
+
+.lui-kanban-list { display: flex; flex-direction: column; gap: 8px; min-height: 40px; }
+
+.lui-kanban-card {
+  position: relative; display: flex; flex-direction: column; gap: 4px;
+  padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--r-sm);
+  background: var(--surface); box-shadow: var(--sh-sm);
+  cursor: grab; user-select: none;
+  transition: box-shadow var(--dur-fast), transform var(--dur-fast), opacity var(--dur-fast);
+}
+.lui-kanban-card:hover { box-shadow: var(--sh-md); }
+.lui-kanban-card:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-kanban-card[data-dragging] { opacity: .45; cursor: grabbing; }
+.lui-kanban-card[aria-disabled="true"] { cursor: default; opacity: .6; }
+.lui-kanban-card[data-tone]::before {
+  content: ""; position: absolute; inset-block: 8px; inset-inline-start: 0;
+  width: 3px; border-radius: var(--r-full); background: var(--accent);
+}
+.lui-kanban-card[data-tone="green"]::before { background: var(--green); }
+.lui-kanban-card[data-tone="amber"]::before { background: var(--amber); }
+.lui-kanban-card[data-tone="red"]::before { background: var(--red); }
+.lui-kanban-card[data-tone="blue"]::before { background: var(--blue); }
+.lui-kanban-card[data-tone="violet"]::before { background: var(--violet); }
+
+.lui-kanban-card-title { font-size: var(--fs-sm); font-weight: 600; color: var(--text); }
+.lui-kanban-card-desc { font-size: 12.5px; color: var(--text-3); }
+.lui-kanban-card-foot { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+
+.lui-kanban-drop {
+  display: block; height: 3px; border-radius: var(--r-full);
+  background: var(--accent);
+}
+.lui-kanban-empty {
+  margin: 0; padding: 14px 0; text-align: center;
+  font-size: 12.5px; color: var(--text-3);
+}
+.lui-kanban-foot { margin-top: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lui-kanban-card { transition: none; }
+}

@@ -1,0 +1,50 @@
+/* ============================ Command ============================ */
+.lui-command { display: flex; flex-direction: column; min-height: 0; }
+
+.lui-command-input-wrap {
+  display: flex; align-items: center; gap: 11px;
+  padding: 14px 16px; border-bottom: 1px solid var(--border); flex: none;
+}
+.lui-command-input-icon { display: inline-flex; color: var(--text-3); flex: none; }
+.lui-command-input {
+  flex: 1; min-width: 0; border: none; outline: none; background: transparent;
+  font: inherit; font-size: var(--fs-md); color: var(--text);
+}
+.lui-command-input::placeholder { color: var(--text-3); }
+
+.lui-command-list {
+  overflow-y: auto; overscroll-behavior: contain;
+  padding: 6px; max-height: 380px; min-height: 0;
+}
+.lui-command-empty { padding: 34px 16px; text-align: center; font-size: 13.5px; color: var(--text-3); }
+
+.lui-command-group + .lui-command-group { margin-top: 4px; }
+.lui-command-group-heading {
+  padding: 8px 10px 5px; font-size: 11px; font-weight: 650;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--text-3);
+}
+
+.lui-command-item {
+  display: flex; align-items: center; gap: 11px; width: 100%;
+  padding: 9px 11px; border: none; background: transparent;
+  border-radius: var(--r-sm); font: inherit; font-size: var(--fs-base);
+  color: var(--text); text-align: left; cursor: pointer;
+}
+.lui-command-item[data-active] { background: var(--accent-tint); color: var(--accent-active); }
+.lui-command-item[data-active] .lui-command-item-icon { color: var(--accent); }
+.lui-command-item[data-disabled] { opacity: .45; cursor: not-allowed; }
+.lui-command-item-icon { display: inline-flex; color: var(--text-3); flex: none; }
+.lui-command-item-icon svg { width: 17px; height: 17px; }
+.lui-command-item-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lui-command-item-shortcut { flex: none; font-size: 11.5px; color: var(--text-3); font-family: var(--mono); }
+
+.lui-command-separator { height: 1px; background: var(--border); margin: 5px 6px; }
+.lui-command-footer {
+  display: flex; align-items: center; gap: 14px; flex: none;
+  padding: 10px 14px; border-top: 1px solid var(--border);
+  font-size: var(--fs-sm); color: var(--text-3); background: var(--surface-2);
+}
+
+.lui-command-dialog .lui-dialog-body,
+.lui-command-dialog { padding: 0; }
+.lui-command-dialog { overflow: hidden; }

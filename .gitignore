@@ -1,0 +1,12 @@
+node_modules
+.next
+dist
+out
+*.tsbuildinfo
+.DS_Store
+.env*
+*.tar.gz
+
+# knowledge-graph output (graphify)
+graphify-out
+.tmp-tests

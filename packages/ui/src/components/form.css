@@ -1,0 +1,10 @@
+/* ============================ Form ============================ */
+.lui-form { display: flex; flex-direction: column; }
+.lui-form-sm { gap: 10px; }
+.lui-form-md { gap: 16px; }
+.lui-form-lg { gap: 22px; }
+
+.lui-form-actions { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+.lui-form-actions-end { justify-content: flex-end; }
+.lui-form-actions-start { justify-content: flex-start; }
+.lui-form-actions-between { justify-content: space-between; }

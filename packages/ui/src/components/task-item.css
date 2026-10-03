@@ -1,0 +1,107 @@
+/* ============================ TaskItem ============================ */
+.lui-tasklist { display: flex; flex-direction: column; min-width: 0; }
+.lui-tasklist-bordered {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); box-shadow: var(--sh-sm); overflow: hidden;
+}
+.lui-tasklist > .lui-task + .lui-task { border-top: 1px solid var(--border); }
+
+.lui-task {
+  --lui-task-color: var(--text-3);
+  position: relative;
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: calc(13px * var(--density)) 16px calc(13px * var(--density)) 18px;
+  background: var(--surface); min-width: 0;
+  transition: background var(--dur-fast), opacity var(--dur), transform var(--dur);
+}
+.lui-task-clickable { cursor: pointer; }
+.lui-task-clickable:hover { background: var(--surface-hover); }
+
+.lui-task[data-removing] {
+  opacity: 0; transform: translateX(24px);
+  pointer-events: none;
+}
+
+/* ---------- Prioriteitsstreepje ---------- */
+.lui-task-prio {
+  position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px;
+  border-radius: 0 3px 3px 0; background: var(--lui-task-color);
+}
+.lui-task-prio-none { --lui-task-color: transparent; }
+.lui-task-prio-low { --lui-task-color: var(--blue); }
+.lui-task-prio-normal { --lui-task-color: var(--amber); }
+.lui-task-prio-high { --lui-task-color: var(--red); }
+
+/* ---------- Afvinken ---------- */
+.lui-task-check {
+  position: relative; flex: none; display: grid; place-items: center;
+  width: 22px; height: 22px; margin-top: 1px;
+  border: 1.5px solid var(--border-strong); border-radius: var(--r-full);
+  background: var(--surface); color: var(--accent-fg); cursor: pointer;
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+.lui-task-check svg { opacity: 0; transform: scale(.5); transition: opacity var(--dur-fast), transform var(--dur-fast); }
+.lui-task-check:hover { border-color: var(--accent); }
+.lui-task-check:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-task[data-done] .lui-task-check { background: var(--accent); border-color: var(--accent); }
+.lui-task[data-done] .lui-task-check svg { opacity: 1; transform: none; }
+
+/* ---------- Tekst ---------- */
+.lui-task-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.lui-task-title {
+  font-size: 14px; font-weight: 550; color: var(--text); line-height: 1.4;
+  word-break: break-word;
+}
+.lui-task[data-done] .lui-task-title { color: var(--text-3); text-decoration: line-through; }
+
+.lui-task-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.lui-task-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 2px 8px; border-radius: var(--r-full);
+  background: var(--surface-3); border: 1px solid var(--border);
+  font-size: 11.5px; font-weight: 600; color: var(--text-3); white-space: nowrap;
+}
+.lui-task-tag svg { width: 13px; height: 13px; }
+.lui-task-tag-dot { width: 7px; height: 7px; border-radius: var(--r-full); flex: none; }
+.lui-task-tag-accent { background: var(--accent-tint); border-color: var(--accent-border); color: var(--accent-active); }
+.lui-task-tag-green { background: var(--green-tint); border-color: var(--green-border); color: var(--green); }
+.lui-task-tag-amber { background: var(--amber-tint); border-color: var(--amber-border); color: var(--amber); }
+.lui-task-tag-red { background: var(--red-tint); border-color: var(--red-border); color: var(--red); }
+.lui-task-tag-blue { background: var(--blue-tint); border-color: var(--blue-border); color: var(--blue); }
+.lui-task-tag-violet { background: var(--violet-tint); border-color: var(--violet-border); color: var(--violet); }
+
+.lui-task-progress {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 11.5px; font-weight: 600; color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.lui-task-progress-bar {
+  display: block; width: 46px; height: 4px;
+  background: var(--surface-3); border-radius: var(--r-full); overflow: hidden;
+}
+.lui-task-progress-bar i {
+  display: block; height: 100%; background: var(--accent);
+  border-radius: inherit; transition: width var(--dur) var(--ease-out);
+}
+
+/* ---------- Acties ---------- */
+.lui-task-actions {
+  flex: none; display: flex; align-items: center; gap: 2px;
+  opacity: 0; transition: opacity var(--dur-fast);
+}
+.lui-task:hover .lui-task-actions,
+.lui-task:focus-within .lui-task-actions { opacity: 1; }
+
+.lui-task-action {
+  display: grid; place-items: center; width: 30px; height: 30px;
+  border: none; background: transparent; border-radius: var(--r-xs);
+  color: var(--text-3); cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.lui-task-action:hover { background: var(--surface-3); color: var(--text); }
+.lui-task-action:focus-visible { outline: none; box-shadow: var(--ring); }
+.lui-task-action-danger:hover { background: var(--red-tint); color: var(--red); }
+
+@media (max-width: 560px) {
+  .lui-task-actions { opacity: 1; }
+}

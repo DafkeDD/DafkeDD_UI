@@ -1,0 +1,169 @@
+{
+  "metadata": {
+    "title": "Dafke UI",
+    "description": "Eine vollständig eigene React-Component-Library auf Basis des Dafke UI-Designs. Kein shadcn, kein Radix, keine externen UI-Abhängigkeiten."
+  },
+  "nav": {
+    "subtitle": "Design System",
+    "search": "Komponente suchen…",
+    "start": "Erste Schritte",
+    "intro": "Einführung",
+    "installation": "Installation",
+    "theming": "Theme & Tokens",
+    "results": "{count} Treffer",
+    "new": "neu",
+    "updated": "aktualisiert"
+  },
+  "categories": {
+    "basis": "Basis",
+    "forms": "Formulare",
+    "overlays": "Overlays",
+    "navigation": "Navigation",
+    "scheduling": "Datum & Planung",
+    "data": "Daten",
+    "feedback": "Feedback",
+    "layout": "Layout",
+    "motion": "Motion"
+  },
+  "shell": {
+    "docs": "Dokumentation",
+    "openNav": "Navigation öffnen",
+    "language": "Sprache"
+  },
+  "home": {
+    "badge": "{count} Komponenten · vollständig eigener Code",
+    "titleLine1": "Deine eigene Component-Library,",
+    "titleLine2": "gebaut auf dem Dafke UI-Design.",
+    "intro": "Funktioniert wie shadcn — dieselbe Komposition, derselbe Copy-and-paste-Ansatz — aber ohne eine einzige Zeile Code von shadcn, Radix oder irgendeiner anderen UI-Library. Alles liegt in deinem eigenen Repo.",
+    "ctaComponents": "Komponenten ansehen",
+    "ctaInstall": "Installation",
+    "allTitle": "Alles, was drinsteckt",
+    "allDescription": "Vom Button bis zur Befehlspalette, von der Tabelle bis zum Donut-Diagramm.",
+    "features": {
+      "zeroDeps": {
+        "title": "Null UI-Abhängigkeiten",
+        "text": "Kein shadcn, kein Radix, kein Headless UI. Jede Komponente — inklusive Focus-Trap, Positionierung und Tastaturnavigation — ist hier selbst geschrieben."
+      },
+      "tokens": {
+        "title": "Alle Farben aus einer Quelle",
+        "text": "Jede Farbe, jeder Radius und jeder Schatten kommt aus dem Dafke UI-Design. Komponenten nutzen ausschließlich Tokens, nie einen fest codierten Hex-Wert."
+      },
+      "copyPaste": {
+        "title": "Copy-and-paste, dein Code",
+        "text": "Wie bei shadcn: `npx dafke-ui add button` kopiert die Quelle in dein Projekt. Die Komponenten gehören dir und du passt sie an, wann du willst."
+      },
+      "theme": {
+        "title": "Hell und dunkel",
+        "text": "Ein ThemeProvider, zwei vollständige Paletten. Alles schaltet mit, bis hin zu Diagrammen und Overlays."
+      }
+    }
+  },
+  "component": {
+    "install": "Installation",
+    "copies": "Kopiert",
+    "and": "und",
+    "andTakes": "und nimmt",
+    "along": "mit.",
+    "intoProject": " in dein Projekt.",
+    "notes": "Gut zu wissen"
+  },
+  "props": {
+    "prop": "Prop",
+    "type": "Typ",
+    "default": "Standard",
+    "description": "Beschreibung"
+  },
+  "preview": {
+    "preview": "Vorschau",
+    "code": "Code",
+    "missing": "Demo „{key}“ nicht gefunden."
+  },
+  "intro": {
+    "badge": "Einführung",
+    "lead": "Eine eigene React-Component-Library, aufgebaut aus dem Dafke UI-Design. Die API fühlt sich an wie shadcn — Komposition mit Unterkomponenten, <code>asChild</code>, controlled und uncontrolled — aber es steckt keine einzige Zeile fremder UI-Code darin. Kein shadcn, kein Radix, kein Headless UI, kein cva, kein clsx: alles liegt in <code>packages/ui/src</code>.",
+    "buildTitle": "Aufbau",
+    "buildBadge": "{done}/{total} Schritte",
+    "buildDesc": "Die Library wächst Schritt für Schritt. Jeder Schritt bringt Komponenten und ihre Doku.",
+    "getTitle": "Was du bekommst",
+    "getComponents": "{count} Komponenten",
+    "getComponentsText": "Alle mit denselben Tokens, und mit jedem Schritt kommen welche dazu.",
+    "getPrimitives": "Eigene Primitive",
+    "getPrimitivesText": "cn(), variants(), Slot und Hooks — selbst geschrieben.",
+    "getTheme": "Hell + dunkel",
+    "getThemeText": "Zwei vollständige Paletten, ein ThemeProvider.",
+    "getA11y": "Zugänglich",
+    "getA11yText": "ARIA-Rollen, Tastaturnavigation und sichtbarer Fokus auf jeder interaktiven Komponente.",
+    "rulesTitle": "Regeln dieses Design Systems",
+    "rule1Title": "Alle Farben kommen aus dem Dafke UI-Design",
+    "rule1Body": "Komponenten verwenden ausschließlich CSS-Variablen (<code>var(--accent)</code>, <code>var(--surface)</code>, …). Umfärben? Passe <code>tokens.css</code> an und die ganze Library zieht mit.",
+    "rule2Title": "Ein Klassenpräfix",
+    "rule2Body": "Jede Klasse beginnt mit <code>lui-</code>, damit nichts mit bestehendem CSS in deinen Projekten kollidiert.",
+    "rule3Title": "Tailwind ist nur die Engine",
+    "rule3Body": "Tailwind v4 liefert den Reset und die Utilities für dein eigenes Markup. Die Komponenten selbst sind normale CSS-Klassen — keine Utility-Suppe, dafür voll anpassbar.",
+    "overviewTitle": "Übersicht",
+    "cta": "Zur Installation"
+  },
+  "install": {
+    "badge": "Erste Schritte",
+    "title": "Installation",
+    "lead": "Dafke UI läuft in jedem React-Projekt mit Bundler (Next.js, Vite, Remix). Zwei Wege: Komponenten mit der CLI kopieren, oder das Monorepo direkt verwenden.",
+    "s1Title": "1 · Das Monorepo lokal starten",
+    "s1Text": "Das ist die Dokumentationsseite, die du gerade siehst, mit allen Quelldateien daneben.",
+    "s1Structure": "Aufbau: <code>packages/ui</code> (die Library), <code>packages/cli</code> (die add-CLI), <code>apps/docs</code> (diese Seite) und <code>registry/</code> (generiertes JSON).",
+    "s2Title": "2 · Komponenten in ein bestehendes Projekt holen",
+    "stepInit": "Tokens + Basis",
+    "stepAdd": "Komponente kopieren",
+    "stepImport": "importieren",
+    "stepImportDesc": "CSS + Komponente",
+    "s2Init": "<code>init</code> legt <code>dafke-ui.json</code> mit deinen Pfaden an und kopiert die gemeinsamen Dateien (Tokens, Basis-CSS, <code>cn()</code>, <code>variants()</code>, Slot, Portal, Hooks und das Icon-Set).",
+    "npmTitle": "Noch nicht auf npm?",
+    "npmBody": "Dann verlinke die CLI einmalig aus diesem Monorepo mit <code>cd packages/cli && npm link</code>. Danach funktioniert <code>dafke-ui init</code> in jedem Projekt auf deinem Rechner und die CLI findet die Registry von selbst. Oder gib mit <code>--registry</code> einen Pfad oder eine URL mit, etwa die Raw-URL von <code>registry/index.json</code> auf GitHub.",
+    "s2Index": "Die CLI pflegt außerdem <code>components/ui/index.ts</code>, sodass du alles über <code>@/components/ui</code> importierst. Interne Hilfsdateien (<code>cn</code>, <code>hooks</code>, <code>anchor</code> …) stehen bewusst nicht darin; importiere sie direkt, z. B. <code>@/components/ui/cn</code>.",
+    "s2Update": "<code>update</code> holt die neueste Fassung von allem, was schon in deinem Projekt liegt, und installiert gleich die Komponenten, die inzwischen in die Registry gekommen sind. Dateien, die du selbst angepasst hast, bleiben stehen — sie werden übersprungen, außer du gibst <code>--force</code> mit. Sieh mit <code>--dry-run</code> vorher, was passieren würde, oder bleib mit <code>--only-installed</code> bei dem, was du hast. Dafür pflegt die CLI <code>dafke-ui.lock.json</code>; commite diese Datei mit.",
+    "s3Title": "3 · CSS einbinden",
+    "s3Text": "Importiere ein einziges Stylesheet in dein globales CSS. Die Reihenfolge spielt keine Rolle; alles läuft über kaskadenfreie Klassen.",
+    "twTitle": "Tailwind ist nicht Pflicht",
+    "twBody": "Die Komponenten brauchen Tailwind nicht — sie nutzen eigene <code>lui-</code>Klassen. Tailwind v4 ist nur für den Reset und für Utilities in deinem eigenen Markup da. Nutzt du Tailwind, importiere zusätzlich <code>tailwind.css</code>: Dann gibt es dieselben Tokens als Utilities (<code>bg-accent</code>, <code>rounded-lg</code>). Ohne Tailwind lässt du die Datei weg.",
+    "s4Title": "4 · Provider",
+    "s4Text": "Zwei Provider setzt du einmal ganz oben in deine App: Theme und Meldungen.",
+    "fontsTitle": "Schriften",
+    "fontsText": "Das Design nutzt <strong>Hanken Grotesk</strong> für Text und <strong>JetBrains Mono</strong> für Code. Lade sie über Google Fonts, oder passe <code>--font</code> und <code>--mono</code> in <code>tokens.css</code> an.",
+    "reqTitle": "Voraussetzungen",
+    "req1": "React 18 oder 19",
+    "req2": "Node 20 oder höher (für die CLI)",
+    "req3": "Ein Bundler, der CSS-Importe versteht (Next.js, Vite, …)",
+    "req4": "Keine einzige UI- oder Utility-Library — die fehlen mit Absicht"
+  },
+  "theming": {
+    "badge": "Fundament",
+    "title": "Theme & Tokens",
+    "lead": "Jede Farbe dieser Library kommt aus einer Datei: <code>tokens.css</code>. Komponenten schreiben nie einen Hex-Wert — sie nutzen nur Variablen. Ändere ein Token und die ganze Oberfläche zieht mit, hell wie dunkel.",
+    "sourceTitle": "Quelle: das Dafke UI-Design",
+    "sourceBody": "Die Werte unten sind exakt aus dem Admin-Panel-Design übernommen. Du willst eine zweite Marke? Kopiere den <code>:root</code>-Block und überschreibe ihn unter einem eigenen Selektor, etwa <code>[data-brand=\"kunde-x\"]</code>.",
+    "dark": "dunkel",
+    "radiusTitle": "Radius & Schatten",
+    "radius": "Radius",
+    "shadow": "Schatten",
+    "recolorTitle": "Umfärben",
+    "recolorText": "Eine einzige Variable genügt, um die ganze Library umzufärben:",
+    "densityTitle": "Dichte",
+    "densityText": "Neben Hell und Dunkel hat die Library einen Skalenregler: <code>--density</code>. Jede Höhe und jedes Padding steht als <code>calc(Npx * var(--density))</code>, also wirken kompakt und luftig sofort in Buttons, Feldern, Tabellen, Listen und Kalendern — ohne eine einzige Komponente anzufassen.",
+    "densityProvider": "<code>ThemeProvider</code> setzt <code>data-density</code> auf <code>&lt;html&gt;</code> und merkt sich die Wahl; <code>DensityToggle</code> ist der fertige Schalter und <code>ThemeScript</code> stellt sie vor dem ersten Paint wieder her.",
+    "allTitle": "Alle Tokens",
+    "token": "Token",
+    "light": "Hell",
+    "darkCol": "Dunkel"
+  },
+  "tokenGroups": {
+    "accent": "Akzent",
+    "accentDesc": "Die Teal-Akzentfarbe des Dafke UI-Designs und ihre Abstufungen.",
+    "surfaces": "Flächen",
+    "surfacesDesc": "Hintergründe, Karten und Ränder.",
+    "text": "Text",
+    "textDesc": "Drei Textebenen plus die Inversfarbe.",
+    "status": "Status",
+    "statusDesc": "Jeder Status hat eine Farbe, eine Tönung und einen Rand.",
+    "dataviz": "Datenvisualisierung",
+    "datavizDesc": "Sechs Reihen für Diagramme, aus denselben Farben abgeleitet."
+  }
+}

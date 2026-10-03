@@ -1,0 +1,26 @@
+/* ============================ Text ============================ */
+/* :where() geeft deze standaardwaarden specificiteit 0. Zo winnen de typografische
+   helpers uit base.css (.lui-h1, .lui-display, .lui-eyebrow …) altijd, ongeacht
+   in welke volgorde de stylesheets geladen worden. */
+:where(.lui-text) { margin: 0; color: var(--text); font-size: var(--fs-base); line-height: 1.6; }
+.lui-text.lui-display, .lui-text.lui-h1, .lui-text.lui-h2, .lui-text.lui-h3 { line-height: 1.15; }
+
+.lui-text-sm { font-size: var(--fs-sm); }
+.lui-text-caption { font-size: var(--fs-xs); color: var(--text-3); line-height: 1.45; }
+
+.lui-text-muted { color: var(--text-2); }
+.lui-text-subtle { color: var(--text-3); }
+.lui-text-accent { color: var(--accent); }
+.lui-text-green { color: var(--green); }
+.lui-text-amber { color: var(--amber); }
+.lui-text-red { color: var(--red); }
+.lui-text-inverse { color: var(--text-inv); }
+
+.lui-text-medium { font-weight: 500; }
+.lui-text-semibold { font-weight: 650; }
+.lui-text-bold { font-weight: 750; }
+
+.lui-text-center { text-align: center; }
+.lui-text-right { text-align: right; }
+
+.lui-text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

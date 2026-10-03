@@ -1,0 +1,26 @@
+/* ============================ Badge ============================ */
+.lui-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  height: 22px; padding: 0 9px; border-radius: var(--r-full);
+  font-size: 12px; font-weight: 600; letter-spacing: -0.005em;
+  border: 1px solid transparent; white-space: nowrap;
+}
+.lui-badge svg { width: 12px; height: 12px; flex: none; }
+.lui-badge-sm { height: 19px; padding: 0 7px; font-size: 11px; }
+.lui-badge-dot { width: 7px; height: 7px; border-radius: var(--r-full); background: currentColor; flex: none; }
+
+.lui-badge-neutral { background: var(--surface-3); color: var(--text-2); border-color: var(--border); }
+.lui-badge-accent { background: var(--accent-tint); color: var(--accent-active); border-color: var(--accent-border); }
+.lui-badge-green { background: var(--green-tint); color: var(--green); border-color: var(--green-border); }
+.lui-badge-amber { background: var(--amber-tint); color: var(--amber); border-color: var(--amber-border); }
+.lui-badge-red { background: var(--red-tint); color: var(--red); border-color: var(--red-border); }
+.lui-badge-blue { background: var(--blue-tint); color: var(--blue); border-color: var(--blue-border); }
+.lui-badge-violet { background: var(--violet-tint); color: var(--violet); border-color: var(--violet-border); }
+
+/* ---------- Pulserend bolletje ---------- */
+.lui-badge-dot { position: relative; }
+.lui-badge-dot[data-pulse]::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; background: currentColor;
+  animation: lui-badge-ping 1.5s var(--ease-out) infinite;
+}
+@keyframes lui-badge-ping { from { transform: scale(1); opacity: .55; } 75%, to { transform: scale(2.6); opacity: 0; } }
