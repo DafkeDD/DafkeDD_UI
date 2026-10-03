@@ -6,7 +6,6 @@
  * maakt automatisch release vX.Y.Z.
  */
 import { readFileSync, writeFileSync } from "node:fs";
-import { execSync } from "node:child_process";
 
 const files = ["package.json", "packages/ui/package.json", "packages/cli/package.json", "apps/docs/package.json"];
 const arg = process.argv[2];
@@ -28,6 +27,12 @@ for (const file of files) {
   json.version = next;
   writeFileSync(file, JSON.stringify(json, null, 2) + "\n");
 }
-// package-lock.json meenemen zonder iets te installeren.
-execSync("npm install --package-lock-only --ignore-scripts --no-audit --no-fund", { stdio: "inherit" });
+// package-lock.json gericht bijwerken. Geen `npm install`: verschillende npm-versies
+// herschrijven anders de hele lockfile.
+const lock = JSON.parse(readFileSync("package-lock.json", "utf8"));
+lock.version = next;
+for (const key of ["", "packages/ui", "packages/cli", "apps/docs"]) {
+  if (lock.packages?.[key]) lock.packages[key].version = next;
+}
+writeFileSync("package-lock.json", JSON.stringify(lock, null, 2) + "\n");
 console.log(`Versie ${root.version} → ${next}`);

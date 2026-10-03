@@ -58,4 +58,14 @@ describe("library-structuur", () => {
     }
     expect(fout).toEqual([]);
   });
+
+  it("de aantallen in de README kloppen met de library", () => {
+    const readme = readFileSync(join(src, "../../../README.md"), "utf8");
+    const kern = bestanden("components", ".tsx").length;
+    const motion = bestanden("motion", ".tsx").length;
+    const registry = JSON.parse(readFileSync(join(src, "../../../registry/index.json"), "utf8"));
+    expect(readme).toContain(`${registry.components.length} componenten ·`);
+    expect(readme).toContain(`components/   ${kern} componenten`);
+    expect(readme).toContain(`motion/       ${motion} componenten`);
+  });
 });
