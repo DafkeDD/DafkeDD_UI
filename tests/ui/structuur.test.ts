@@ -59,13 +59,25 @@ describe("library-structuur", () => {
     expect(fout).toEqual([]);
   });
 
-  it("de aantallen in de README kloppen met de library", () => {
-    const readme = readFileSync(join(src, "../../../README.md"), "utf8");
+  it.each([
+    ["README.md", "components", "components"],
+    ["README.nl.md", "componenten", "componenten"],
+  ])("de aantallen in %s kloppen met de library", (bestand, woord) => {
+    const readme = readFileSync(join(src, "../../..", bestand), "utf8");
     const kern = bestanden("components", ".tsx").length;
     const motion = bestanden("motion", ".tsx").length;
     const registry = JSON.parse(readFileSync(join(src, "../../../registry/index.json"), "utf8"));
-    expect(readme).toContain(`${registry.components.length} componenten ·`);
-    expect(readme).toContain(`components/   ${kern} componenten`);
-    expect(readme).toContain(`motion/       ${motion} componenten`);
+    expect(readme).toContain(`${registry.components.length} ${woord} ·`);
+    expect(readme).toContain(`components/   ${kern} ${woord}`);
+    expect(readme).toContain(`motion/       ${motion} ${woord}`);
+  });
+
+  it("de Engelse en Nederlandse README verwijzen naar elkaar en hebben dezelfde hoofdstukken", () => {
+    const en = readFileSync(join(src, "../../../README.md"), "utf8");
+    const nl = readFileSync(join(src, "../../../README.nl.md"), "utf8");
+    expect(en).toContain("(README.nl.md)");
+    expect(nl).toContain("(README.md)");
+    const koppen = (tekst: string) => tekst.match(/^##? /gm)?.length ?? 0;
+    expect(koppen(en)).toBe(koppen(nl));
   });
 });
