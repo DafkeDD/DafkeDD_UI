@@ -19,6 +19,10 @@ Instructies voor Claude (en andere AI-assistenten) die in deze repo werken.
 2. `git commit -am "chore: release vX.Y.Z"` en `git push` (naar developer).
 3. Pull request `developer → main` openen en mergen (`gh pr create --base main --head developer --fill`).
 4. De workflow maakt tag `vX.Y.Z` + release. Bestaat de tag al, dan wordt er niets gereleased.
+5. Daarna `developer` gelijkzetten met `main` (fast-forward, geen extra merge-commit):
+   `git switch developer && git pull --ff-only origin main && git push`.
+   De GitHub-melding "main had recent pushes → Compare & pull request" negeren:
+   nooit een pull request `main → developer` openen.
 
 Maak nooit zelf tags of releases met de hand; dat doet de workflow.
 
