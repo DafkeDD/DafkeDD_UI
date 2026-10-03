@@ -5,7 +5,7 @@ Werkt zoals shadcn/ui — dezelfde compositie, dezelfde copy-paste-aanpak — ma
 code van shadcn, Radix, Headless UI, cva of clsx**. Alles staat in `packages/ui/src`.
 
 ```
-104 componenten · 4 talen · 2 thema's · 3 dichtheden · 0 UI-dependencies in de kern
+161 componenten · 4 talen · 2 thema's · 3 dichtheden · 0 UI-dependencies in de kern
 ```
 
 | Categorie | Aantal | Waarvoor |
@@ -49,8 +49,8 @@ dafke-ui/
 ├─ packages/
 │  ├─ ui/                 De library
 │  │  └─ src/
-│  │     ├─ components/   92 componenten (.tsx + .css per component)
-│  │     ├─ motion/       11 componenten achter @dafke/ui/motion (optioneel)
+│  │     ├─ components/   138 componenten (.tsx + .css per component)
+│  │     ├─ motion/       23 componenten achter @dafke/ui/motion (optioneel)
 │  │     ├─ lib/          cn, variants, Slot, Portal, hooks, positionering, datums
 │  │     ├─ icons/        eigen icon set (één path per glyph)
 │  │     └─ styles/       tokens.css + base.css + index.css
@@ -78,7 +78,7 @@ npx dafke-ui add button card dialog # componenten kopiëren (+ afhankelijkheden)
 npx dafke-ui add --all              # alles in één keer
 npx dafke-ui update                 # alles bijwerken + nieuwe componenten erbij
 npx dafke-ui list                   # overzicht
-npx dafke-ui add button --registry https://raw.githubusercontent.com/<jij>/<repo>/main/registry/index.json
+npx dafke-ui add button --registry https://raw.githubusercontent.com/DafkeDD/DafkeDD_UI/main/registry/index.json
 ```
 
 De CLI schrijft naar `components/ui/` (instelbaar in `dafke-ui.json`), herschrijft de imports naar

@@ -14,15 +14,23 @@ import { join } from "node:path";
 
 const root = join(__dirname, "../..");
 const cli = join(root, "packages/cli/bin/dafke-ui.mjs");
-const tmpRoot = join(root, ".tmp-tests");
-mkdirSync(tmpRoot, { recursive: true });
+// Binnen de repo (zodat TypeScript react uit node_modules vindt), maar in een eigen
+// submap per run: testbestanden draaien parallel en mogen elkaars map niet wissen.
+mkdirSync(join(root, ".tmp-tests"), { recursive: true });
+const tmpRoot = mkdtempSync(join(root, ".tmp-tests", "cli-run-"));
 
 let dir = "";
 beforeEach(() => {
   dir = mkdtempSync(join(tmpRoot, "cli-"));
   writeFileSync(join(dir, "package.json"), '{ "name": "testproject", "private": true }\n');
 });
-afterAll(() => rmSync(tmpRoot, { recursive: true, force: true }));
+afterAll(() => {
+  try {
+    rmSync(tmpRoot, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
+  } catch {
+    // Opruimen mag een test nooit doen falen (virusscanner, open handles op Windows).
+  }
+});
 
 function run(...args: string[]) {
   const r = spawnSync(process.execPath, [cli, ...args], {
