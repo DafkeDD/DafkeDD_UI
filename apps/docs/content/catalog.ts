@@ -2184,6 +2184,7 @@ export const COMPONENTS: ComponentEntry[] = [
     notes: [
       "Props-gestuurd: geef de velden van useEid() uit @dafkedd/eid door, bv. <EidStatus phase={eid.phase} reader={eid.reader} error={eid.error} onRead={eid.read} />. De library zelf hangt niet van @dafkedd/eid af.",
       "Bij no-bridge en bridge-outdated verschijnen de downloadknoppen; de knop voor het besturingssysteem van de bezoeker wordt primair.",
+      "Vaste links naar de nieuwste versie: https://github.com/DafkeDD/DafkeDD_EID/releases/latest/download/dafke-eid-setup-windows-x64.exe (Windows-setup) en https://github.com/DafkeDD/DafkeDD_EID/releases/latest/download/dafke-eid-macos-arm64 (macOS Apple Silicon; Intel: dafke-eid-macos-x64).",
       "role=\"status\" met aria-live, zodat een schermlezer elke fasewissel meldt.",
     ],
     isNew: true,
