@@ -3837,6 +3837,391 @@
       }
     ]
   },
+  "EidCardIdentity": {
+    "extends": "",
+    "props": [
+      {
+        "name": "firstNames",
+        "required": true,
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "lastName",
+        "required": true,
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "nationalNumber",
+        "required": false,
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "dateOfBirth",
+        "required": false,
+        "type": "{ year: number; month?: number; day?: number } | null",
+        "description": "Geboortedatum; jaar alleen, of jaar en maand, komt voor."
+      },
+      {
+        "name": "placeOfBirth",
+        "required": false,
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "gender",
+        "required": false,
+        "type": "\"male\" | \"female\" | \"unknown\" | string",
+        "description": ""
+      },
+      {
+        "name": "nationality",
+        "required": false,
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "cardNumber",
+        "required": false,
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "validUntil",
+        "required": false,
+        "type": "string",
+        "description": "ISO-datum, bv. \"2031-05-14\"."
+      }
+    ]
+  },
+  "EidCardAddress": {
+    "extends": "",
+    "props": [
+      {
+        "name": "streetAndNumber",
+        "required": true,
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "zipCode",
+        "required": true,
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "municipality",
+        "required": true,
+        "type": "string",
+        "description": ""
+      }
+    ]
+  },
+  "EidCardPhoto": {
+    "extends": "",
+    "props": [
+      {
+        "name": "mimeType",
+        "required": true,
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "data",
+        "required": true,
+        "type": "Uint8Array",
+        "description": ""
+      }
+    ]
+  },
+  "EidCardProps": {
+    "extends": "React.HTMLAttributes<HTMLDivElement>",
+    "props": [
+      {
+        "name": "identity",
+        "required": true,
+        "type": "EidCardIdentity",
+        "description": ""
+      },
+      {
+        "name": "address",
+        "required": false,
+        "type": "EidCardAddress | null",
+        "description": ""
+      },
+      {
+        "name": "photo",
+        "required": false,
+        "type": "string | EidCardPhoto | null",
+        "description": "Foto als URL (bv. data-URL) of zoals @dafkedd/eid ze geeft."
+      },
+      {
+        "name": "masked",
+        "required": false,
+        "type": "boolean",
+        "description": "Gevoelige velden afgeschermd tonen. Standaard `true`."
+      },
+      {
+        "name": "defaultMasked",
+        "required": false,
+        "type": "boolean",
+        "description": "",
+        "default": "true"
+      },
+      {
+        "name": "onMaskedChange",
+        "required": false,
+        "type": "(masked: boolean) => void",
+        "description": ""
+      },
+      {
+        "name": "revealable",
+        "required": false,
+        "type": "boolean",
+        "description": "Toont de knop om alles te tonen of weer af te schermen. Standaard `true`.",
+        "default": "true"
+      },
+      {
+        "name": "locale",
+        "required": false,
+        "type": "string",
+        "description": "Taal voor datums. Standaard \"nl-BE\".",
+        "default": "\"nl-BE\""
+      },
+      {
+        "name": "footer",
+        "required": false,
+        "type": "React.ReactNode",
+        "description": "Extra inhoud onderaan, bv. knoppen."
+      }
+    ]
+  },
+  "EidPinDialogProps": {
+    "extends": "",
+    "props": [
+      {
+        "name": "open",
+        "required": false,
+        "type": "boolean",
+        "description": ""
+      },
+      {
+        "name": "onOpenChange",
+        "required": false,
+        "type": "(open: boolean) => void",
+        "description": ""
+      },
+      {
+        "name": "onSubmit",
+        "required": true,
+        "type": "(pin: string) => void",
+        "description": "Krijgt de PIN; geef hem meteen door aan `login()` van `useEidLogin()`."
+      },
+      {
+        "name": "status",
+        "required": false,
+        "type": "\"idle\" | \"signing\" | \"done\" | \"error\"",
+        "description": "`status` van `useEidLogin()`: tijdens \"signing\" is het formulier vergrendeld.",
+        "default": "\"idle\""
+      },
+      {
+        "name": "error",
+        "required": false,
+        "type": "{ code?: string; message: string } | null",
+        "description": "`error` van `useEidLogin()`."
+      },
+      {
+        "name": "triesLeft",
+        "required": false,
+        "type": "number | null",
+        "description": "Resterende pogingen na een verkeerde PIN."
+      },
+      {
+        "name": "reader",
+        "required": false,
+        "type": "string | null",
+        "description": "Naam van de kaartlezer."
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "React.ReactNode",
+        "description": "",
+        "default": "\"Aanmelden met je eID\""
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "React.ReactNode",
+        "description": "",
+        "default": "\"Typ de PIN-code van je identiteitskaart. Die gaat rechtstreeks naar de kaart.\""
+      },
+      {
+        "name": "minLength",
+        "required": false,
+        "type": "number",
+        "description": "Kortste PIN. Standaard 4.",
+        "default": "4"
+      },
+      {
+        "name": "maxLength",
+        "required": false,
+        "type": "number",
+        "description": "Langste PIN. Standaard 12.",
+        "default": "12"
+      },
+      {
+        "name": "className",
+        "required": false,
+        "type": "string",
+        "description": "",
+        "default": "\"lui-eid-pin-icon\""
+      }
+    ]
+  },
+  "EidReaderOption": {
+    "extends": "",
+    "props": [
+      {
+        "name": "name",
+        "required": true,
+        "type": "string",
+        "description": "",
+        "default": "\"scan\""
+      },
+      {
+        "name": "cardPresent",
+        "required": true,
+        "type": "boolean",
+        "description": ""
+      }
+    ]
+  },
+  "EidReaderPickerProps": {
+    "extends": "Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\" | \"defaultValue\">",
+    "props": [
+      {
+        "name": "readers",
+        "required": true,
+        "type": "EidReaderOption[]",
+        "description": ""
+      },
+      {
+        "name": "value",
+        "required": false,
+        "type": "string | null",
+        "description": "Gekozen lezer (naam)."
+      },
+      {
+        "name": "onValueChange",
+        "required": false,
+        "type": "(name: string) => void",
+        "description": ""
+      },
+      {
+        "name": "requireCard",
+        "required": false,
+        "type": "boolean",
+        "description": "Lezers zonder kaart niet kiesbaar maken."
+      },
+      {
+        "name": "emptyText",
+        "required": false,
+        "type": "React.ReactNode",
+        "description": "Tekst als er geen lezers zijn.",
+        "default": "\"Geen kaartlezer gevonden.\""
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "type": "boolean",
+        "description": ""
+      }
+    ]
+  },
+  "EidStatusText": {
+    "extends": "",
+    "props": [
+      {
+        "name": "title",
+        "required": true,
+        "type": "React.ReactNode",
+        "description": ""
+      },
+      {
+        "name": "text",
+        "required": false,
+        "type": "React.ReactNode",
+        "description": ""
+      }
+    ]
+  },
+  "EidStatusDownloads": {
+    "extends": "",
+    "props": [
+      {
+        "name": "windows",
+        "required": false,
+        "type": "string",
+        "description": "Link naar het installatiebestand voor Windows."
+      },
+      {
+        "name": "mac",
+        "required": false,
+        "type": "string",
+        "description": "Link naar het installatiebestand voor macOS."
+      }
+    ]
+  },
+  "EidStatusProps": {
+    "extends": "Omit<React.HTMLAttributes<HTMLDivElement>, \"title\">",
+    "props": [
+      {
+        "name": "phase",
+        "required": true,
+        "type": "EidPhase",
+        "description": ""
+      },
+      {
+        "name": "reader",
+        "required": false,
+        "type": "string | null",
+        "description": "Naam van de kaartlezer die gebruikt wordt."
+      },
+      {
+        "name": "error",
+        "required": false,
+        "type": "{ code?: string; message: string } | null",
+        "description": "Fout uit `useEid()`; de melding komt onder de titel."
+      },
+      {
+        "name": "downloads",
+        "required": false,
+        "type": "EidStatusDownloads",
+        "description": "Downloadlinks voor de eID-bridge; getoond als die ontbreekt of verouderd is."
+      },
+      {
+        "name": "onRead",
+        "required": false,
+        "type": "() => void",
+        "description": "Toont een knop \"Kaart lezen\" bij `ready` en \"Opnieuw\" bij `error`."
+      },
+      {
+        "name": "labels",
+        "required": false,
+        "type": "Partial<Record<EidPhase, EidStatusText>>",
+        "description": "Eigen teksten per fase."
+      },
+      {
+        "name": "compact",
+        "required": false,
+        "type": "boolean",
+        "description": "Eén regel, zonder uitleg en knoppen."
+      }
+    ]
+  },
   "EmptyStateProps": {
     "extends": "Omit<React.HTMLAttributes<HTMLDivElement>, \"title\">",
     "props": [

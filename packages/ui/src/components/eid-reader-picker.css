@@ -1,0 +1,11 @@
+/* ============================ EidReaderPicker ============================ */
+.lui-eid-readers { display: grid; gap: 8px; }
+.lui-eid-readers-name {
+  display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-family: var(--mono); font-size: 12.5px;
+}
+.lui-eid-readers-empty {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px; border: 1px dashed var(--border-strong); border-radius: var(--r-md);
+  color: var(--text-3); font-size: 13.5px;
+}

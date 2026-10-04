@@ -1,0 +1,21 @@
+{
+  "name": "eid-reader-picker",
+  "title": "EidReaderPicker",
+  "description": "Kies tussen meerdere kaartlezers, met per lezer of er een kaart in zit.",
+  "category": "eID",
+  "dependencies": [
+    "badge",
+    "radio-group"
+  ],
+  "requires": [],
+  "files": [
+    {
+      "path": "components/eid-reader-picker.tsx",
+      "content": "\"use client\";\nimport * as React from \"react\";\nimport { cn } from \"../lib/cn\";\nimport { Icon } from \"../icons/icon\";\nimport { Badge } from \"./badge\";\nimport { RadioGroup, Radio } from \"./radio-group\";\n\n/** Zoals `readers` uit `useEid()`. */\nexport interface EidReaderOption {\n  name: string;\n  cardPresent: boolean;\n}\n\nexport interface EidReaderPickerProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\" | \"defaultValue\"> {\n  readers: EidReaderOption[];\n  /** Gekozen lezer (naam). */\n  value?: string | null;\n  onValueChange?: (name: string) => void;\n  /** Lezers zonder kaart niet kiesbaar maken. */\n  requireCard?: boolean;\n  /** Tekst als er geen lezers zijn. */\n  emptyText?: React.ReactNode;\n  disabled?: boolean;\n}\n\n/**\n * EidReaderPicker — kies tussen meerdere kaartlezers; per lezer zie je of er een kaart in zit.\n * Geef `readers` en `reader` uit `useEid()` door.\n */\nexport const EidReaderPicker = React.forwardRef<HTMLDivElement, EidReaderPickerProps>(function EidReaderPicker(\n  { readers, value, onValueChange, requireCard, emptyText = \"Geen kaartlezer gevonden.\", disabled, className, ...rest },\n  ref\n) {\n  if (readers.length === 0) {\n    return (\n      <div ref={ref} className={cn(\"lui-eid-readers\", \"lui-eid-readers-empty\", className)} {...rest}>\n        <Icon name=\"scan\" size={18} />\n        <span>{emptyText}</span>\n      </div>\n    );\n  }\n\n  return (\n    <RadioGroup\n      ref={ref}\n      aria-label=\"Kaartlezer\"\n      value={value === null ? \"\" : value}\n      onValueChange={onValueChange}\n      disabled={disabled}\n      className={cn(\"lui-eid-readers\", className)}\n      {...rest}\n    >\n      {readers.map((reader) => (\n        <Radio\n          key={reader.name}\n          card\n          value={reader.name}\n          disabled={requireCard && !reader.cardPresent}\n          label={<span className=\"lui-eid-readers-name\">{reader.name}</span>}\n          description={\n            <Badge size=\"sm\" tone={reader.cardPresent ? \"green\" : \"neutral\"} dot>\n              {reader.cardPresent ? \"Kaart aanwezig\" : \"Geen kaart\"}\n            </Badge>\n          }\n        />\n      ))}\n    </RadioGroup>\n  );\n});\n"
+    },
+    {
+      "path": "components/eid-reader-picker.css",
+      "content": "/* ============================ EidReaderPicker ============================ */\n.lui-eid-readers { display: grid; gap: 8px; }\n.lui-eid-readers-name {\n  display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;\n  font-family: var(--mono); font-size: 12.5px;\n}\n.lui-eid-readers-empty {\n  display: flex; align-items: center; gap: 10px;\n  padding: 14px; border: 1px dashed var(--border-strong); border-radius: var(--r-md);\n  color: var(--text-3); font-size: 13.5px;\n}\n"
+    }
+  ]
+}

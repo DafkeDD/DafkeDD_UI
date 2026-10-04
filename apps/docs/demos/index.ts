@@ -63,6 +63,11 @@ import DownloadbuttonBasic from "./downloadbutton-basic";
 import DrawerBasic from "./drawer-basic";
 import DropdownBasic from "./dropdown-basic";
 import EditableBasic from "./editable-basic";
+import EidCardBasic from "./eid-card-basic";
+import EidPinDialogBasic from "./eid-pin-dialog-basic";
+import EidReaderPickerBasic from "./eid-reader-picker-basic";
+import EidStatusCompact from "./eid-status-compact";
+import EidStatusPhases from "./eid-status-phases";
 import EmptyBasic from "./empty-basic";
 import EntityHeaderBasic from "./entity-header-basic";
 import FabBasic from "./fab-basic";
@@ -251,6 +256,11 @@ export const DEMOS: Record<string, ComponentType> = {
   "drawer-basic": DrawerBasic,
   "dropdown-basic": DropdownBasic,
   "editable-basic": EditableBasic,
+  "eid-card-basic": EidCardBasic,
+  "eid-pin-dialog-basic": EidPinDialogBasic,
+  "eid-reader-picker-basic": EidReaderPickerBasic,
+  "eid-status-compact": EidStatusCompact,
+  "eid-status-phases": EidStatusPhases,
   "empty-basic": EmptyBasic,
   "entity-header-basic": EntityHeaderBasic,
   "fab-basic": FabBasic,

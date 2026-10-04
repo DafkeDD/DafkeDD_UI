@@ -1,0 +1,38 @@
+/* ============================ EidCard ============================ */
+.lui-eid-card {
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-xs);
+  max-width: 460px;
+}
+.lui-eid-card-head { display: flex; align-items: center; gap: 14px; }
+.lui-eid-card-photo {
+  flex: none; display: grid; place-items: center;
+  width: 64px; height: 80px; overflow: hidden;
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-3);
+}
+.lui-eid-card-photo img { width: 100%; height: 100%; object-fit: cover; transition: filter var(--dur) var(--ease); }
+.lui-eid-card-photo img[data-blurred] { filter: blur(6px) saturate(.6); }
+.lui-eid-card-name { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.lui-eid-card-name strong { font-size: var(--fs-lg); font-weight: 650; color: var(--text); line-height: 1.3; }
+.lui-eid-card-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3);
+}
+.lui-eid-card-nn { font-family: var(--mono); font-size: 12.5px; color: var(--text-2); letter-spacing: .02em; }
+.lui-eid-card-toggle { flex: none; align-self: flex-start; }
+.lui-eid-card-fields .lui-kv-value { font-variant-numeric: tabular-nums; }
+.lui-eid-card-footer { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }
+
+/* ---------- Motion ---------- */
+.lui-eid-card { animation: lui-eid-card-in .4s var(--ease-out) both; }
+@keyframes lui-eid-card-in { from { opacity: 0; transform: translateY(6px) scale(.99); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .lui-eid-card { animation: none; }
+  .lui-eid-card-photo img { transition: none; }
+}
