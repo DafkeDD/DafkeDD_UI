@@ -73,7 +73,6 @@ export const COMPONENTS: ComponentEntry[] = [
       "Met asChild rendert de knop jouw eigen element — bijvoorbeeld een link of next/link — met behoud van alle stijl en states.",
       "Geef bij asChild precies één element mee (<a>, <Link>). De knop zet icon, iconRight en de laadspinner ín dat element; tekst of meerdere elementen geven in development een foutmelding in de console.",
     ],
-    isUpdated: true,
   },
   {
     slug: "badge",
@@ -1347,7 +1346,6 @@ export const COMPONENTS: ComponentEntry[] = [
       "Alleen de bovenste kaart is aan te raken; de kaarten eronder zijn decor, dus je klikt nooit per ongeluk de verkeerde aan.",
       "Met expanded klapt de stapel uit naar een gewone lijst, bijvoorbeeld in een meldingenpaneel.",
     ],
-    isUpdated: true,
   },
   {
     slug: "fx-button",
@@ -1393,7 +1391,6 @@ export const COMPONENTS: ComponentEntry[] = [
       "Het label rolt verticaal van de ene stap naar de volgende in plaats van te verspringen.",
       "Draait op dezelfde useAction-machine als de andere actieknoppen.",
     ],
-    isUpdated: true,
   },
   {
     slug: "liquid-upload-button",
@@ -1424,7 +1421,6 @@ export const COMPONENTS: ComponentEntry[] = [
       "error zet de lopende stap op rood met een eigen bericht en optionele actie; de markering kleurt mee.",
       "Het component gebruikt een container query: wordt het smaller dan ±400px, dan schuift de status onder de titel.",
     ],
-    isNew: true,
   },
   {
     slug: "swipe-actions",
@@ -1441,7 +1437,6 @@ export const COMPONENTS: ComponentEntry[] = [
       "Leg de veilige actie rechts (leading) en de destructieve links (trailing); hint laat nieuwe gebruikers één keer zien dat er iets achter zit.",
       "Liever een ongedaan-maken-melding dan een bevestigingsdialoog: de rij klapt dicht en onAction loopt, jij houdt het item nog even vast.",
     ],
-    isNew: true,
   },
   {
     slug: "countdown",
