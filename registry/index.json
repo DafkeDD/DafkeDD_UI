@@ -1,6 +1,6 @@
 {
   "name": "dafke-ui",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "style": "dafke",
   "shared": [
     {
@@ -2152,6 +2152,68 @@
       "files": [
         "motion/motion-segmented.tsx",
         "motion/motion.css"
+      ]
+    },
+    {
+      "name": "eid-status",
+      "title": "EidStatus",
+      "description": "Waar de eID-flow staat: programma ontbreekt, geen lezer, geen kaart, lezen of klaar.",
+      "category": "eID",
+      "dependencies": [
+        "button",
+        "spinner"
+      ],
+      "requires": [],
+      "files": [
+        "components/eid-status.tsx",
+        "components/eid-status.css"
+      ]
+    },
+    {
+      "name": "eid-card",
+      "title": "EidCard",
+      "description": "Gegevens van een gelezen eID, met gevoelige velden standaard afgeschermd.",
+      "category": "eID",
+      "dependencies": [
+        "button",
+        "key-value"
+      ],
+      "requires": [],
+      "files": [
+        "components/eid-card.tsx",
+        "components/eid-card.css"
+      ]
+    },
+    {
+      "name": "eid-pin-dialog",
+      "title": "EidPinDialog",
+      "description": "PIN-venster voor aanmelden met de eID, met resterende pogingen.",
+      "category": "eID",
+      "dependencies": [
+        "button",
+        "dialog",
+        "field",
+        "input"
+      ],
+      "requires": [],
+      "files": [
+        "components/eid-pin-dialog.tsx",
+        "components/eid-pin-dialog.css"
+      ]
+    },
+    {
+      "name": "eid-reader-picker",
+      "title": "EidReaderPicker",
+      "description": "Kies tussen meerdere kaartlezers, met per lezer of er een kaart in zit.",
+      "category": "eID",
+      "dependencies": [
+        "badge",
+        "radio-group"
+      ],
+      "requires": [],
+      "files": [
+        "components/eid-reader-picker.tsx",
+        "components/eid-reader-picker.css"
       ]
     }
   ]

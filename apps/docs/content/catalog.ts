@@ -42,6 +42,7 @@ export const CATEGORIES = [
   "Feedback",
   "Layout",
   "AI",
+  "eID",
   "Motion",
 ] as const;
 
@@ -72,7 +73,6 @@ export const COMPONENTS: ComponentEntry[] = [
       "Met asChild rendert de knop jouw eigen element — bijvoorbeeld een link of next/link — met behoud van alle stijl en states.",
       "Geef bij asChild precies één element mee (<a>, <Link>). De knop zet icon, iconRight en de laadspinner ín dat element; tekst of meerdere elementen geven in development een foutmelding in de console.",
     ],
-    isUpdated: true,
   },
   {
     slug: "badge",
@@ -1346,7 +1346,6 @@ export const COMPONENTS: ComponentEntry[] = [
       "Alleen de bovenste kaart is aan te raken; de kaarten eronder zijn decor, dus je klikt nooit per ongeluk de verkeerde aan.",
       "Met expanded klapt de stapel uit naar een gewone lijst, bijvoorbeeld in een meldingenpaneel.",
     ],
-    isUpdated: true,
   },
   {
     slug: "fx-button",
@@ -1392,7 +1391,6 @@ export const COMPONENTS: ComponentEntry[] = [
       "Het label rolt verticaal van de ene stap naar de volgende in plaats van te verspringen.",
       "Draait op dezelfde useAction-machine als de andere actieknoppen.",
     ],
-    isUpdated: true,
   },
   {
     slug: "liquid-upload-button",
@@ -1423,7 +1421,6 @@ export const COMPONENTS: ComponentEntry[] = [
       "error zet de lopende stap op rood met een eigen bericht en optionele actie; de markering kleurt mee.",
       "Het component gebruikt een container query: wordt het smaller dan ±400px, dan schuift de status onder de titel.",
     ],
-    isNew: true,
   },
   {
     slug: "swipe-actions",
@@ -1440,7 +1437,6 @@ export const COMPONENTS: ComponentEntry[] = [
       "Leg de veilige actie rechts (leading) en de destructieve links (trailing); hint laat nieuwe gebruikers één keer zien dat er iets achter zit.",
       "Liever een ongedaan-maken-melding dan een bevestigingsdialoog: de rij klapt dicht en onAction loopt, jij houdt het item nog even vast.",
     ],
-    isNew: true,
   },
   {
     slug: "countdown",
@@ -2172,6 +2168,68 @@ export const COMPONENTS: ComponentEntry[] = [
     demos: [{ key: "motionsegmented-basic", title: "Meeschuivende indicator", description: "Zelfde API als Segmented." }],
     props: ["MotionSegmentedProps"],
     notes: ["Dezelfde props als Segmented; layoutId alleen nodig als er meerdere naast elkaar staan."],
+  },
+  {
+    slug: "eid-status",
+    name: "EidStatus",
+    description: "Waar de eID-flow staat: programma ontbreekt, geen lezer, geen kaart, lezen of klaar.",
+    category: "eID",
+    files: ["eid-status.tsx", "eid-status.css"],
+    dependsOn: ["button", "spinner"],
+    demos: [
+      { key: "eid-status-phases", title: "Alle fases", align: "block" },
+      { key: "eid-status-compact", title: "Compact", description: "Eén regel, bv. in een kop of zijbalk.", align: "block" },
+    ],
+    props: ["EidStatusProps", "EidStatusDownloads"],
+    notes: [
+      "Props-gestuurd: geef de velden van useEid() uit @dafkedd/eid door, bv. <EidStatus phase={eid.phase} reader={eid.reader} error={eid.error} onRead={eid.read} />. De library zelf hangt niet van @dafkedd/eid af.",
+      "Bij no-bridge en bridge-outdated verschijnen de downloadknoppen; de knop voor het besturingssysteem van de bezoeker wordt primair.",
+      "role=\"status\" met aria-live, zodat een schermlezer elke fasewissel meldt.",
+    ],
+    isNew: true,
+  },
+  {
+    slug: "eid-card",
+    name: "EidCard",
+    description: "Gegevens van een gelezen eID, met gevoelige velden standaard afgeschermd.",
+    category: "eID",
+    files: ["eid-card.tsx", "eid-card.css"],
+    dependsOn: ["button", "key-value"],
+    demos: [{ key: "eid-card-basic", title: "Afgeschermd en volledig", align: "block" }],
+    props: ["EidCardProps", "EidCardIdentity", "EidCardAddress"],
+    notes: [
+      "Rijksregisternummer, kaartnummer, geboortedag, straat en foto staan standaard afgeschermd; de gebruiker kiest zelf om ze te tonen.",
+      "photo neemt een URL of het { mimeType, data }-object uit @dafkedd/eid; de data-URL wordt in de browser gemaakt en nergens bewaard.",
+    ],
+    isNew: true,
+  },
+  {
+    slug: "eid-pin-dialog",
+    name: "EidPinDialog",
+    description: "PIN-venster voor aanmelden met de eID, met resterende pogingen.",
+    category: "eID",
+    files: ["eid-pin-dialog.tsx", "eid-pin-dialog.css"],
+    dependsOn: ["button", "dialog", "field", "input"],
+    demos: [{ key: "eid-pin-dialog-basic", title: "Aanmelden", description: "Probeer 1234; een andere PIN telt een poging af." }],
+    props: ["EidPinDialogProps"],
+    notes: [
+      "Koppel aan useEidLogin(): onSubmit={(pin) => login({ nonce, pin })} met status, error en triesLeft van dezelfde hook.",
+      "De PIN staat alleen in het veld zolang je typt: na versturen, sluiten of openen wordt het leeggemaakt.",
+      "Tijdens het ondertekenen kan het venster niet sluiten, zodat er geen half afgebroken aanmelding achterblijft.",
+    ],
+    isNew: true,
+  },
+  {
+    slug: "eid-reader-picker",
+    name: "EidReaderPicker",
+    description: "Kies tussen meerdere kaartlezers, met per lezer of er een kaart in zit.",
+    category: "eID",
+    files: ["eid-reader-picker.tsx", "eid-reader-picker.css"],
+    dependsOn: ["badge", "radio-group"],
+    demos: [{ key: "eid-reader-picker-basic", title: "Twee lezers", align: "block" }],
+    props: ["EidReaderPickerProps"],
+    notes: ["Geef readers en reader uit useEid() door; de gekozen naam gaat als reader-optie naar <EidProvider> of login()."],
+    isNew: true,
   },
 ];
 

@@ -7,7 +7,7 @@ It works like shadcn/ui — same composition, same copy-paste approach — but *
 of code from shadcn, Radix, Headless UI, cva or clsx**. Everything lives in `packages/ui/src`.
 
 ```
-161 components · 4 languages · 2 themes · 3 densities · 0 UI dependencies in the core
+165 components · 4 languages · 2 themes · 3 densities · 0 UI dependencies in the core
 ```
 
 | Category | Count | For |
@@ -51,7 +51,7 @@ dafke-ui/
 ├─ packages/
 │  ├─ ui/                 The library
 │  │  └─ src/
-│  │     ├─ components/   138 components (.tsx + .css per component)
+│  │     ├─ components/   142 components (.tsx + .css per component)
 │  │     ├─ motion/       23 components behind @dafke/ui/motion (optional)
 │  │     ├─ lib/          cn, variants, Slot, Portal, hooks, positioning, dates
 │  │     ├─ icons/        in-house icon set (one path per glyph)
